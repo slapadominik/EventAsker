@@ -33,3 +33,25 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+
+#Ignore template from facebook/react github
+
+node_modules
+*~
+.grunt
+_SpecRunner.html
+__benchmarks__
+remote-repo/
+coverage/
+flow-coverage/
+.module-cache
+fixtures/dom/public/react-dom.js
+fixtures/dom/public/react.js
+test/the-files-to-test.generated.js
+*.log*
+chrome-user-data
+*.sublime-project
+*.sublime-workspace
+.idea
+*.iml
+*.swo
