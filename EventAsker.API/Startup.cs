@@ -24,6 +24,7 @@ namespace EventAsker.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,7 +34,7 @@ namespace EventAsker.API
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseMvc();
         }
     }
