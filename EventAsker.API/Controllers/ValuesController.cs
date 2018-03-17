@@ -11,9 +11,10 @@ namespace EventAsker.API.Controllers
     {
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            string[] values = new string[] { "value1", "value2" };
+            return Ok(values);
         }
 
         // GET api/values/5
