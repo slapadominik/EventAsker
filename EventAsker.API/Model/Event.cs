@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace EventAsker.API.Model
@@ -19,5 +20,9 @@ namespace EventAsker.API.Model
 
         public int CityId {get; set;}
         public City City {get; set;}
+
+        public ICollection<Lecture> Lectures { get; set; }
+
+        public ICollection<Question> Questions { get; set; }
     }
 }
