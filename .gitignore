@@ -55,3 +55,6 @@ chrome-user-data
 .idea
 *.iml
 *.swo
+
+*.sln
+launchSettings.json
