@@ -79,11 +79,108 @@ namespace EventAsker.API.Migrations
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("EventAsker.API.Model.Lecture", b =>
+                {
+                    b.Property<int>("LectureId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.Property<DateTime>("EndTime");
+
+                    b.Property<int>("EventId");
+
+                    b.Property<int>("LecturerId");
+
+                    b.Property<DateTime>("StartTime");
+
+                    b.Property<string>("Topic")
+                        .IsRequired();
+
+                    b.HasKey("LectureId");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("LecturerId");
+
+                    b.ToTable("Lecture");
+                });
+
+            modelBuilder.Entity("EventAsker.API.Model.Lecturer", b =>
+                {
+                    b.Property<int>("LecturerId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Company");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.HasKey("LecturerId");
+
+                    b.ToTable("Lecturer");
+                });
+
+            modelBuilder.Entity("EventAsker.API.Model.Question", b =>
+                {
+                    b.Property<int>("QuestionId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AuthorName");
+
+                    b.Property<string>("Email");
+
+                    b.Property<int>("EventId");
+
+                    b.Property<int>("LecturerId");
+
+                    b.Property<string>("QuestionContent")
+                        .IsRequired();
+
+                    b.HasKey("QuestionId");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("LecturerId");
+
+                    b.ToTable("Question");
+                });
+
             modelBuilder.Entity("EventAsker.API.Model.Event", b =>
                 {
                     b.HasOne("EventAsker.API.Model.City", "City")
                         .WithMany("Events")
                         .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("EventAsker.API.Model.Lecture", b =>
+                {
+                    b.HasOne("EventAsker.API.Model.Event", "Event")
+                        .WithMany("Lectures")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("EventAsker.API.Model.Lecturer", "Lecturer")
+                        .WithMany("Lectures")
+                        .HasForeignKey("LecturerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("EventAsker.API.Model.Question", b =>
+                {
+                    b.HasOne("EventAsker.API.Model.Event", "Event")
+                        .WithMany("Questions")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("EventAsker.API.Model.Lecturer", "Lecturer")
+                        .WithMany("Questions")
+                        .HasForeignKey("LecturerId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
