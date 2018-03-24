@@ -34,5 +34,14 @@ namespace EventAsker.API.Services
             _context.Add(newEvent);
             _context.SaveChanges();
         }
+
+        public void DeleteEvent(DeleteEventDto dto)
+        {
+            var eventToDelete = _context.Events
+                .Single(e => e.EventId == dto.EventId);
+
+            _context.Events.Remove(eventToDelete);
+            _context.SaveChanges();
+        }
     }
 }

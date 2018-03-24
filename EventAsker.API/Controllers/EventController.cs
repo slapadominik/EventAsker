@@ -30,5 +30,18 @@ namespace EventAsker.API.Controllers
 
             return Ok(dto);
         }
+
+        [HttpDelete]
+        [Route("DeleteEvent")]
+        public IActionResult DeleteEvent(int eventId)
+        {
+            var deleteEventDto = new DeleteEventDto
+            {
+                EventId = eventId
+            };
+            _eventService.DeleteEvent(deleteEventDto);
+
+            return Ok(deleteEventDto);
+        }
     }
 }
