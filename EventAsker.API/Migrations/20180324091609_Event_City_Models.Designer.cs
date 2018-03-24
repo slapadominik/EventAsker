@@ -11,33 +11,15 @@ using System;
 namespace EventAsker.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180324091609_Event_City_Models")]
+    partial class Event_City_Models
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("EventAsker.API.Model.Admin", b =>
-                {
-                    b.Property<int>("AdminId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<byte[]>("PasswordHash")
-                        .IsRequired();
-
-                    b.Property<byte[]>("PasswordSalt")
-                        .IsRequired();
-
-                    b.Property<string>("Username")
-                        .IsRequired();
-
-                    b.HasKey("AdminId");
-
-                    b.ToTable("Admins");
-                });
 
             modelBuilder.Entity("EventAsker.API.Model.City", b =>
                 {
