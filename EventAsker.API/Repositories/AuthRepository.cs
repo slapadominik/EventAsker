@@ -2,7 +2,9 @@ using System;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using EventAsker.API.Context;
+using EventAsker.API.Dtos;
 using EventAsker.API.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace EventAsker.API.Repositories
 {
@@ -14,15 +16,12 @@ namespace EventAsker.API.Repositories
             _context=context;
         }
 
-        public async Task<Admin> Login(string username, string password)
+        public async Task<Admin> AddAsync(AdminDto adminDto)
         {
-            throw new System.NotImplementedException();
-        }
+            Admin admin = new Admin(){Username = adminDto.Username};
 
-        public async Task<Admin> Register(Admin admin, string password)
-        {
             byte[] passwordHash, passwordSalt;
-            GeneratePasswordHashAndSalt(password, out passwordHash, out passwordSalt);
+            GeneratePasswordHashAndSalt(adminDto.Password, out passwordHash, out passwordSalt);
 
             admin.PasswordHash = passwordHash;
             admin.PasswordSalt = passwordSalt;
@@ -33,18 +32,27 @@ namespace EventAsker.API.Repositories
             return admin;
         }
 
-
-        public async Task<bool> UserExists(string username)
+        public async Task<Admin> GetAdminAsync(string username)
         {
-            throw new System.NotImplementedException();
+            return await _context.Admins.FirstOrDefaultAsync(x => x.Username == username);
         }
 
-         private void GeneratePasswordHashAndSalt(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        public async Task<bool> UserExistsAsync(string username)
+        {
+            if (await _context.Admins.AnyAsync(x => x.Username ==username)){
+                return true;
+            }
+            return false;
+        }
+
+        private void GeneratePasswordHashAndSalt(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (HMACSHA512 hmac = new HMACSHA512()){
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
         }
+
+        
     }
 }
