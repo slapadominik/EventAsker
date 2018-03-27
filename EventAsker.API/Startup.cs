@@ -31,6 +31,8 @@ namespace EventAsker.API
             services.AddMvc();
             services.AddCors();
             services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IAuthService, AuthService>();
             services.AddTransient<IEventService, EventService>();
             services.AddTransient<IEventRepository, EventRepository>();
         }
