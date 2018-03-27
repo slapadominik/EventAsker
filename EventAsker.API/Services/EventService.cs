@@ -7,41 +7,27 @@ using EventAsker.API.Context;
 using EventAsker.API.Dtos;
 using EventAsker.API.Interfaces;
 using EventAsker.API.Model;
+using EventAsker.API.Repositories;
 
 namespace EventAsker.API.Services
 {
     public class EventService : IEventService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IEventRepository _repository;
 
-        public EventService(ApplicationDbContext context)
+        public EventService(IEventRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public void AddEvent(AddEventDto dto)
         {
-            var newEvent = new Event
-            {
-                Name = dto.Name,
-                Street = dto.Street,
-                Date = DateTime.ParseExact(dto.Date, "dd/MM/yyyy", null),
-                Description = dto.Description,
-                AudienceKey = dto.AudienceKey,
-                CityId = dto.CityId,
-            };
-
-            _context.Add(newEvent);
-            _context.SaveChanges();
+            _repository.AddEvent(dto);
         }
 
         public void DeleteEvent(DeleteEventDto dto)
         {
-            var eventToDelete = _context.Events
-                .Single(e => e.EventId == dto.EventId);
-
-            _context.Events.Remove(eventToDelete);
-            _context.SaveChanges();
+            _repository.DeleteEvent(dto);
         }
     }
 }

@@ -18,8 +18,7 @@ namespace EventAsker.API.Controllers
             _eventService = eventService;
         }
 
-        [HttpPost]
-        [Route("AddEvent")]
+        [HttpPost("AddEvent")]
         public IActionResult AddEvent([FromBody]AddEventDto dto)
         {
             if (dto == null)
@@ -31,8 +30,7 @@ namespace EventAsker.API.Controllers
             return Ok(dto);
         }
 
-        [HttpDelete]
-        [Route("DeleteEvent")]
+        [HttpDelete("DeleteEvent")]
         public IActionResult DeleteEvent(int eventId)
         {
             var deleteEventDto = new DeleteEventDto

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EventAsker.API.Context;
 using EventAsker.API.Interfaces;
+using EventAsker.API.Repositories;
 using EventAsker.API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,7 @@ namespace EventAsker.API
             services.AddCors();
             services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IEventService, EventService>();
+            services.AddTransient<IEventRepository, EventRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
