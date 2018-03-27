@@ -21,10 +21,9 @@ namespace EventAsker.API.Controllers
         [HttpPost("AddEvent")]
         public IActionResult AddEvent([FromBody]AddEventDto dto)
         {
-            if (dto == null)
-            {
-                return BadRequest();
-            }
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             _eventService.AddEvent(dto);
 
             return Ok(dto);
