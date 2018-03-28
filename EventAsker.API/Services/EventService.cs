@@ -20,6 +20,11 @@ namespace EventAsker.API.Services
             _repository = repository;
         }
 
+        public List<EventDto> GetEvents()
+        {
+           return _repository.GetEvents();
+        }
+
         public void AddEvent(AddEventDto dto)
         {
             _repository.AddEvent(dto);

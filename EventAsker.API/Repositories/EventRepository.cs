@@ -16,6 +16,44 @@ namespace EventAsker.API.Repositories
         {
             _context = context;
         }
+
+        public List<EventDto> GetEvents()
+        {
+            var eventList = _context.Events
+                .Select(e => new EventDto()
+                {
+                    AudienceKey = e.AudienceKey,
+                    Name = e.Name,
+                    Street = e.Street,
+                    CityId = e.CityId,
+                    Date = e.Date,
+                    Description = e.Description,
+                    EventId = e.EventId,
+                    Lectures = e.Lectures.Select(l => new LectureDto()
+                    {
+                        Description = l.Description,
+                        EventId = l.EventId,
+                        EndTime = l.EndTime,
+                        StartTime = l.StartTime,
+                        LectureId = l.LectureId,
+                        LecturerId = l.LecturerId,
+                        Topic = l.Topic
+                    }).ToList(),
+                    Questions = e.Questions.Select(q => new QuestionDto()
+                    {
+                        EventId = q.EventId,
+                        LecturerId = q.LecturerId,
+                        AuthorName = q.AuthorName,
+                        Email = q.Email,
+                        QuestionContent = q.QuestionContent,
+                        QuestionId = q.QuestionId
+                    }).ToList()
+
+                }).ToList();
+
+            return eventList;
+        }
+
         public void AddEvent(AddEventDto dto)
         {
             var newEvent = new Event

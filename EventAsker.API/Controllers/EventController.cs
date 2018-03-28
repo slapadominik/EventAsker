@@ -18,6 +18,14 @@ namespace EventAsker.API.Controllers
             _eventService = eventService;
         }
 
+        [HttpGet("GetEvents")]
+        public IActionResult GetEvents()
+        {
+            var eventList = _eventService.GetEvents();
+
+            return Ok(eventList);
+        }
+
         [HttpPost("AddEvent")]
         public IActionResult AddEvent([FromBody]AddEventDto dto)
         {

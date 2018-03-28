@@ -8,6 +8,7 @@ namespace EventAsker.API.Interfaces
 {
     public interface IEventService
     {
+        List<EventDto> GetEvents();
         void AddEvent(AddEventDto dto);
         void DeleteEvent(DeleteEventDto dto);
     }
