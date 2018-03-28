@@ -12,9 +12,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="container">
+        <div className="row">
+          <div className="col-xs-10 col-xs-offset-1">
         <p>Hello, click the button to console.log values fetched from API.</p>
         <button onClick={this.getValues}>Get Values!</button>
+          </div>
+        </div>
       </div>
     );
   }
