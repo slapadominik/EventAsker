@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace EventAsker.API.Dtos
+﻿namespace EventAsker.API.Dtos
 {
     public class QuestionDto
     {
@@ -12,6 +7,6 @@ namespace EventAsker.API.Dtos
         public string AuthorName { get; set; }
         public string Email { get; set; }
         public int EventId { get; set; }
-        public int LecturerId { get; set; }
+        public int LecturerId{ get; set; }
     }
 }

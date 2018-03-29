@@ -1,15 +1,13 @@
 ﻿using System;
 
-namespace EventAsker.API.Dtos
+namespace EventAsker.API.ViewModels
 {
-    public class LectureDto
+    public class LectureViewModel
     {
-        public int LectureId { get; set; }
         public string Topic { get; set; }
         public string Description { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public int EventId { get; set; }
-        public LecturerDto Lecturer { get; set; }
+        public LecturerViewModel LecturerViewModel { get; set; }
     }
 }

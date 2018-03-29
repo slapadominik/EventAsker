@@ -25,7 +25,11 @@ namespace EventAsker.API.Repositories
                     AudienceKey = e.AudienceKey,
                     Name = e.Name,
                     Street = e.Street,
-                    CityId = e.CityId,
+                    City = new CityDto()
+                    {
+                        CityId = e.City.CityId,
+                        CityName = e.City.CityName
+                    },
                     Date = e.Date,
                     Description = e.Description,
                     EventId = e.EventId,
@@ -36,7 +40,13 @@ namespace EventAsker.API.Repositories
                         EndTime = l.EndTime,
                         StartTime = l.StartTime,
                         LectureId = l.LectureId,
-                        LecturerId = l.LecturerId,
+                        Lecturer = new LecturerDto()
+                        {
+                            FirstName = l.Lecturer.FirstName,
+                            LastName = l.Lecturer.LastName,
+                            Company = l.Lecturer.Company,
+                            LecturerId = l.LecturerId
+                        },
                         Topic = l.Topic
                     }).ToList(),
                     Questions = e.Questions.Select(q => new QuestionDto()
