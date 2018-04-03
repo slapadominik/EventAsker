@@ -3,6 +3,7 @@ using EventAsker.API.Dtos;
 using EventAsker.API.Model;
 using EventAsker.API.Repositories;
 using EventAsker.API.Services;
+using EventAsker.API.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventAsker.API.Controllers
@@ -25,8 +26,8 @@ namespace EventAsker.API.Controllers
                 ModelState.AddModelError("Username", "Username is already taken");
                 return BadRequest(ModelState);
             }
-            
-            return Ok();
+            AdminViewModel adminViewModel = new AdminViewModel(){AdminUsername = admin.Username};
+            return Ok(adminViewModel);
         }
         
     }

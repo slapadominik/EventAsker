@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
+import Header from "./components/Header";
+import Home from './components/Home';
+import RegisterForm from './components/RegisterForm';
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom';
+import LoginForm from './components/LoginForm';
 
 class App extends Component {
 
@@ -12,14 +20,15 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-xs-10 col-xs-offset-1">
-        <p>Hello, click the button to console.log values fetched from API.</p>
-        <button onClick={this.getValues}>Get Values!</button>
+        <Router> 
+          <div className="container">
+          <Header/>
+    
+            <Route exact path="/" component={Home} />
+            <Route path="/register" component={RegisterForm} />
+            <Route path="/login" component={LoginForm} />
           </div>
-        </div>
-      </div>
+        </Router>    
     );
   }
 }
