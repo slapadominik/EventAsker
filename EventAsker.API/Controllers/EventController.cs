@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EventAsker.API.Dtos;
 using EventAsker.API.Interfaces;
+using EventAsker.API.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventAsker.API.Controllers
@@ -34,7 +35,16 @@ namespace EventAsker.API.Controllers
 
             _eventService.AddEvent(dto);
 
-            return Ok(dto);
+            var addEventViewModel = new AddEventViewModel
+            {
+                Name = dto.Name,
+                Description = dto.Description,
+                Date = dto.Date,
+                Street = dto.Street,
+                AudienceKey = dto.AudienceKey
+            };
+
+            return Ok(addEventViewModel);
         }
 
         [HttpDelete("DeleteEvent")]
