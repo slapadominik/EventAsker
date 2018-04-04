@@ -16,6 +16,9 @@ export default class LoginForm extends Component {
             success: false,
             nameSuccess: ''
         };
+
+        this.handleUserInput = this.handleUserInput.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleUserInput = (e) => {
@@ -23,7 +26,7 @@ export default class LoginForm extends Component {
         this.showInputError(e.target.name);
     }
 
-   handleSubmit = (e) => {
+    handleSubmit = (e) => {
         e.preventDefault();
 
         console.log('state', JSON.stringify(this.state));
@@ -47,8 +50,6 @@ export default class LoginForm extends Component {
             });
         }
     }
-
-    
 
     showFormErrors(){
         const inputs = document.querySelectorAll('input');
@@ -109,7 +110,7 @@ export default class LoginForm extends Component {
     render(){
         return(
             <form noValidate>
-                <div className="form-group">
+                <div className="form-group col-md-6">
                     <label id="nameLabel">Name</label>
                     <input 
                         className="form-control"
@@ -121,7 +122,7 @@ export default class LoginForm extends Component {
                         required/>
                     <div className="error" id="nameError"/>
                 </div>
-                <div className="form-group">
+                <div className="form-group col-md-6">
                     <label id="descriptionLabel">Description</label>
                     <input 
                         className="form-control"
@@ -133,7 +134,7 @@ export default class LoginForm extends Component {
                         required/>
                     <div className="error" id="descriptionError"/>
                 </div>
-                <div className="form-group">
+                <div className="form-group col-md-6">
                     <label id="dateLabel">Date</label>
                     <input 
                         className="form-control"
@@ -146,7 +147,7 @@ export default class LoginForm extends Component {
                         required/>
                     <div className="error" id="dateError"/>
                 </div>
-                <div className="form-group">
+                <div className="form-group col-md-6">
                     <label id="streetLabel">Place</label>
                     <input 
                         className="form-control"
@@ -158,7 +159,7 @@ export default class LoginForm extends Component {
                         required/>
                     <div className="error" id="streetError"/>
                 </div>
-                <div className="form-group">
+                <div className="form-group col-md-6">
                     <label id="audienceKeyLabel">Audience Key</label>
                     <input 
                         className="form-control"
@@ -170,11 +171,13 @@ export default class LoginForm extends Component {
                         required/>
                     <div className="error" id="audienceKeyError"/>
                 </div>
-                <button id="sumbitBtn" className="btn btn-primary" disabled={!this.showFormErrors()} onClick={this.handleSubmit}>Add Event</button>
+                <div className="col-md-2">
+                    <button id="sumbitBtn" className="btn btn-primary" disabled={!this.showFormErrors()} onClick={this.handleSubmit}>Add Event</button>
+                </div>
                 <div className="note">
                     <h6>{this.state.success ? 'Added Event '.concat(this.state.nameSuccess) : ''}</h6>
                 </div>
-            </form>       
+            </form>    
         );
     }
 }
