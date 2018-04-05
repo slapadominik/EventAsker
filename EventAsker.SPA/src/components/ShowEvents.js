@@ -34,7 +34,7 @@ export default class ShowEvents extends Component {
         return(
             <div >
                <h2>EVENTY:</h2>
-               <div ref="accordion">
+               <div >
                     {this.renderEvents()}
                 </div>
             </div>
