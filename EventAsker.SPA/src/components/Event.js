@@ -18,7 +18,7 @@ export default class Header extends Component {
     
     deleteEvent = () =>
     {
-        return fetch('http://localhost:51743/api/Event/DeleteEvent?Id='+this.props.eventId, {
+        return fetch('http://localhost:3372/api/Event/DeleteEvent?eventId='+this.props.eventId, {
             method: 'DELETE',
             headers: {
             Accept: 'application/json',

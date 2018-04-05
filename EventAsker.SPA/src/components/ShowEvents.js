@@ -10,7 +10,7 @@ export default class ShowEvents extends Component {
     }
 
     componentDidMount(){
-        this.getEvents('http://localhost:51743/api/Event/GetEvents');
+        this.getEvents('http://localhost:3372/api/Event/GetEvents');
     }
 
     
