@@ -15,9 +15,6 @@ export default class LoginForm extends Component {
       success: false,
       nameSuccess: ""
     };
-
-    this.handleUserInput = this.handleUserInput.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleUserInput = e => {
