@@ -30,21 +30,21 @@ export default class Header extends Component {
 
     render(){
         return(
-<div class = "card">
+<div className = "card">
       <span>
       <h5>
         {this.props.eventName} 
         </h5> 
         <h6>{this.props.eventDate} {this.props.eventId}</h6>
-      <button class="btn btn-alert-primary">
+      <button className="btn btn-alert-primary">
            DESCRIPTION
       </button>
-      <button class="btn btn-danger" onClick={this.deleteEvent}>
+      <button className="btn btn-danger" onClick={this.deleteEvent}>
           Delete
       </button>
       </span> 
 
-      <div class="card-body">
+      <div className="card-body">
         Street: {this.props.eventStreet}
         Description: {this.props.eventDescription}
       </div>

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "./AddEventForm.css";
+import axios from 'axios';
+import { BASE_URL } from '../constants';
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -34,14 +36,14 @@ export default class LoginForm extends Component {
       this.setState({ nameSuccess: this.state.name });
 
       this.clearInputs();
-      this.makeRequest("http://localhost:3372/api/event/addevent", {
-        name: this.state.name,
-        description: this.state.description,
-        date: this.state.date,
-        street: this.state.street,
-        audienceKey: this.state.audienceKey,
-        cityId: this.state.cityId
-      });
+      axios.post(BASE_URL+'/event/addevent', {
+          name: this.state.name,
+          description: this.state.description,
+          date: this.state.date,
+          street: this.state.street,
+          audienceKey: this.state.audienceKey,
+          cityId: this.state.cityId
+        });
     }
   };
 
@@ -87,17 +89,6 @@ export default class LoginForm extends Component {
       date: "",
       street: "",
       audienceKey: ""
-    });
-  }
-
-  makeRequest(url, opts) {
-    return fetch(url, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(opts)
     });
   }
 
