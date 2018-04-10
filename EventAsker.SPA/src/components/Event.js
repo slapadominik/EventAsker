@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
+import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import '../index.css';
+import "./Event.css";
 
 
 export default class Header extends Component {
     
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
+        this.toggle = this.toggle.bind(this);
         this.state = {
             eventName: 'Spotkanko',
             eventDescription: 'januszowe',
             eventStreet: 'poziomkowa',
             eventCity: 'Wawa',
-            eventDate: '21/11/1999'
-
+            eventDate: '21/11/1999',
+            eventLectures: [],
+            eventQustions: [],
+            collapse: false
         }
     }
     
+    toggle(){
+        this.setState({collapse: !this.state.collapse});
+    }
     deleteEvent = () =>
     {
         return fetch('http://localhost:51743/api/Event/DeleteEvent?eventId='+this.props.eventId, {
@@ -30,29 +38,38 @@ export default class Header extends Component {
 
     render(){
         return(
-                <div class = "card">
-                    <div>
-                    <h5>{this.props.eventName} </h5> 
+            <div class = "card">
+                
+                <div>
+                    <h3>{this.props.eventName}</h3> 
                     <h6>{this.props.eventCity}</h6>
                     <h6>{this.props.eventDate}</h6>
-
-                    <button class="btn btn-alert-primary" >
+                </div>
+                
+                <div>   
+                    <button class="btn btn-primary" onClick={this.toggle} style={{ marginBottom: '1rem' }} >
                         DESCRIPTION
                     </button>
-                    </div>
-                    
-                <div align="right">
                     <button class="btn btn-danger" onClick={this.deleteEvent}>
                         Delete
                     </button>
                 </div>
                 
-
-                    <div class="card-body">
-                        <h6>Street:</h6> <p>{this.props.eventStreet}</p>
-                        <h6>Description: </h6> <p>{this.props.eventDescription}</p>
-                    </div>
-                </div>
+                
+                <Collapse isOpen={this.state.collapse}>
+                    <Card>
+                        <CardBody>
+                        <h6>Street: </h6> <p>{this.props.eventStreet}</p>
+                        <div class="desc">
+                            <h6>Description: </h6> 
+                            <p>{this.props.eventDescription}</p>
+                        </div>
+                        <h6>Lectures: </h6> <p>{this.props.eventLectures}</p>
+                        <h6>Questions: </h6> <p>{this.props.eventQustions}</p>
+                        </CardBody>
+                    </Card>
+                </Collapse>
+            </div>
         );
     }
 }
