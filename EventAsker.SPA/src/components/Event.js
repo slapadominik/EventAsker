@@ -18,7 +18,7 @@ export default class Header extends Component {
     
     deleteEvent = () =>
     {
-        return fetch('http://localhost:3372/api/Event/DeleteEvent?eventId='+this.props.eventId, {
+        return fetch('http://localhost:51743/api/Event/DeleteEvent?eventId='+this.props.eventId, {
             method: 'DELETE',
             headers: {
             Accept: 'application/json',
@@ -30,25 +30,29 @@ export default class Header extends Component {
 
     render(){
         return(
-<div class = "card">
-      <span>
-      <h5>
-        {this.props.eventName} 
-        </h5> 
-        <h6>{this.props.eventDate} {this.props.eventId}</h6>
-      <button class="btn btn-alert-primary">
-           DESCRIPTION
-      </button>
-      <button class="btn btn-danger" onClick={this.deleteEvent}>
-          Delete
-      </button>
-      </span> 
+                <div class = "card">
+                    <div>
+                    <h5>{this.props.eventName} </h5> 
+                    <h6>{this.props.eventCity}</h6>
+                    <h6>{this.props.eventDate}</h6>
 
-      <div class="card-body">
-        Street: {this.props.eventStreet}
-        Description: {this.props.eventDescription}
-      </div>
-</div>
+                    <button class="btn btn-alert-primary" >
+                        DESCRIPTION
+                    </button>
+                    </div>
+                    
+                <div align="right">
+                    <button class="btn btn-danger" onClick={this.deleteEvent}>
+                        Delete
+                    </button>
+                </div>
+                
+
+                    <div class="card-body">
+                        <h6>Street:</h6> <p>{this.props.eventStreet}</p>
+                        <h6>Description: </h6> <p>{this.props.eventDescription}</p>
+                    </div>
+                </div>
         );
     }
 }

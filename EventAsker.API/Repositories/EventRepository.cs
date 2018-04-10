@@ -52,7 +52,13 @@ namespace EventAsker.API.Repositories
                     Questions = e.Questions.Select(q => new QuestionDto()
                     {
                         EventId = q.EventId,
-                        LecturerId = q.LecturerId,
+                        Lecturer = new LecturerDto()
+                        {
+                            FirstName = q.Lecturer.FirstName,
+                            LastName = q.Lecturer.LastName,
+                            Company = q.Lecturer.Company,
+                            LecturerId = q.LecturerId
+                        },
                         AuthorName = q.AuthorName,
                         Email = q.Email,
                         QuestionContent = q.QuestionContent,
