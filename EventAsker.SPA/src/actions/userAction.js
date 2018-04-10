@@ -1,7 +1,7 @@
 import axios from 'axios';
-import setAuthorizationToken from './authorizationToken';
+import setAuthorizationToken from '../helpers/authorizationToken';
 import {BASE_URL} from '../constants';
-import { SET_CURRENT_USER } from '../reducers/types';
+import { SET_CURRENT_USER } from './types';
 import jwt from 'jsonwebtoken';
 
 export const setCurrentUser = (user) => {
@@ -14,7 +14,8 @@ export const setCurrentUser = (user) => {
 export const login = (data) => {
     return dispatch => {
         return axios.post(BASE_URL+ '/auth/login', data).then(response => {
-            const token = response.data.tokenString;
+            console.log(response);
+            const token = response.data;
             localStorage.setItem('jwtToken', token);
             setAuthorizationToken(token);
             dispatch(setCurrentUser(jwt.decode(token)));

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { login } from '../helpers/authManager';
+import { login } from '../actions/userAction';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -52,7 +52,6 @@ class LoginForm extends Component {
     }
 
 }
-
 
 LoginForm.propTypes = {
     login: PropTypes.func.isRequired

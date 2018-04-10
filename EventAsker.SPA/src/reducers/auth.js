@@ -1,4 +1,4 @@
-import {SET_CURRENT_USER} from './types';
+import {SET_CURRENT_USER} from '../actions/types';
 import isEmpty from 'lodash/isEmpty';
 
 const initialState = {

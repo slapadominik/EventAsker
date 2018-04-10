@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Event from './Event';
 import axios from 'axios';
+import {BASE_URL} from '../constants';
 
 export default class ShowEvents extends Component { 
     constructor(){
@@ -11,7 +12,7 @@ export default class ShowEvents extends Component {
     }
 
     componentDidMount(){
-        this.getEvents('http://localhost:5000/api/Event/GetEvents');
+        this.getEvents(BASE_URL+'/Event/GetEvents');
     }
 
     

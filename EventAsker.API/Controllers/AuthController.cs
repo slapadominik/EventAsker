@@ -48,7 +48,7 @@ namespace EventAsker.API.Controllers
 
             string tokenString = _service.BuildToken(adminLoginDto);
 
-            return Ok( new { tokenString });
+            return new OkObjectResult(tokenString);
         }
         
     }
