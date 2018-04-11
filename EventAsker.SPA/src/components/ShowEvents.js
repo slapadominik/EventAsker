@@ -30,14 +30,14 @@ export default class ShowEvents extends Component {
     renderEvents = () => {
         return(
             this.state.events.map(
-                (event) => <Event eventName= {event.name} eventDescription= {event.description} eventStreet = {event.street} eventCity ={event.city.cityName} eventId = {event.eventId} eventDate = {event.date}/>)
+                (event) => <Event eventName= {event.name} eventDescription= {event.description} eventStreet = {event.street} eventCity ={event.city.cityName} eventId = {event.eventId} eventDate = {event.date} eventLectures = {event.lectures} eventQuestions = {event.questions}/>)
         );
     }
 
     render(){
         return(
             <div >
-               <h2>EVENTY:</h2>
+               <h2>EVENTS:</h2>
                <div >
                     {this.renderEvents()}
                 </div>
