@@ -1,18 +1,25 @@
 using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using EventAsker.API.Dtos;
 using EventAsker.API.Model;
 using EventAsker.API.Repositories;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
 namespace EventAsker.API.Services
 {
     public class AuthService : IAuthService
     {
         private IAuthRepository _repository;
-
-        public AuthService(IAuthRepository repository){
+        private IConfiguration _config; 
+        
+        public AuthService(IAuthRepository repository, IConfiguration config){
             this._repository = repository;
+            _config = config;
         }
 
 
@@ -48,6 +55,23 @@ namespace EventAsker.API.Services
             return await _repository.AddAsync(adminDto);           
         }
 
-         
+        public string BuildToken(AdminLoginDto adminLoginDto)
+        {
+            Claim[] claims = new Claim[] {
+                new Claim(ClaimTypes.NameIdentifier, adminLoginDto.AdminId.ToString()),
+                new Claim(ClaimTypes.Name, adminLoginDto.Username)
+            };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                _config["Jwt:Issuer"],
+                _config["Jwt:Issuer"],
+                claims,
+                expires: DateTime.Now.AddMinutes(30),
+                signingCredentials: creds);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
     }
 }

@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using EventAsker.API.Dtos;
 using EventAsker.API.Interfaces;
 using EventAsker.API.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventAsker.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class EventController : Controller
     {
@@ -19,6 +21,7 @@ namespace EventAsker.API.Controllers
             _eventService = eventService;
         }
 
+        [AllowAnonymous]
         [HttpGet("GetEvents")]
         public IActionResult GetEvents()
         {

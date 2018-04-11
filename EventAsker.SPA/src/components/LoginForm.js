@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { login } from '../actions/userAction';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-export default class LoginForm extends Component {
+
+class LoginForm extends Component {
 
     constructor(props) {
         super(props);
@@ -20,9 +24,11 @@ export default class LoginForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const inputs = this.state.username + ' ' + this.state.password;
-        console.log(inputs)
+        this.props.login(this.state).then(
+            response => this.context.router.history.push('/')
+        );
     }
+
     render(){
         return(
             <div>
@@ -42,8 +48,16 @@ export default class LoginForm extends Component {
                 <input type="submit" value="Login"/>
                 </form>
             </div>
-            
         );
     }
 
 }
+
+LoginForm.propTypes = {
+    login: PropTypes.func.isRequired
+}
+
+LoginForm.contextTypes = {
+    router: PropTypes.object.isRequired
+}
+export default connect(null, { login } ) (LoginForm);

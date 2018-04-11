@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Event from './Event';
+import axios from 'axios';
+import {BASE_URL} from '../constants';
 
 export default class ShowEvents extends Component { 
     constructor(){
@@ -10,17 +12,19 @@ export default class ShowEvents extends Component {
     }
 
     componentDidMount(){
-        this.getEvents('http://localhost:3372/api/Event/GetEvents');
+        this.getEvents(BASE_URL+'/Event/GetEvents');
     }
 
     
     getEvents(url){
-        return fetch(url)
-        .then(response => response.json())
-        .then(data => 
-            this.setState({
-              events: data
-              }))
+        return axios.get(url)
+            .then(response => {
+                this.setState({
+                    events: response.data
+                });
+                }
+            );
+            
     }
 
     renderEvents = () => {

@@ -8,6 +8,8 @@ namespace EventAsker.API.Services
     {
          Task<Admin> RegisterAsync(AdminDto adminDto);
          Task<Admin> LoginAsync (AdminDto adminDto);
+
+         string BuildToken(AdminLoginDto adminLoginDto);
          
     }
 }

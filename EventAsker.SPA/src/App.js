@@ -13,13 +13,6 @@ import AddEventForm from './components/AddEventForm';
 
 class App extends Component {
 
-  getValues = async(e) => {
-      e.preventDefault();
-      const api_call = await fetch("http://localhost:5000/api/values");
-      const data = await api_call.json();
-      console.log(data);
-  }
-
   render() {
     return (
         <Router> 
