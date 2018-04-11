@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {BASE_URL} from '../constants'
 
 export default class RegisterForm extends Component {
     constructor(props) {
@@ -24,7 +25,7 @@ export default class RegisterForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.clearInputs();
-        this.makeRequest('http://localhost:5000/api/auth/register', 
+        this.makeRequest(BASE_URL+'/auth/register', 
             {username: this.state.username, password: this.state.password})
             .then(response => this.handleResponse(response));
     }

@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import '../index.css';
+
 import "./Event.css";
+import axios from 'axios'
+import { BASE_URL } from '../constants';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 
-export default class Header extends Component {
+class Event extends Component {
     
     constructor(props){
         super(props);
@@ -18,6 +23,7 @@ export default class Header extends Component {
             eventLectures: [],
             eventQustions: [],
             collapse: false
+
         }
     }
     
@@ -26,18 +32,18 @@ export default class Header extends Component {
     }
     deleteEvent = () =>
     {
-        return fetch('http://localhost:51743/api/Event/DeleteEvent?eventId='+this.props.eventId, {
-            method: 'DELETE',
-            headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            },
-            body: {},
-        }).then(window.location.reload())
+
+        return axios.delete(BASE_URL+'/Event/DeleteEvent', { params: {eventId: this.props.eventId}}).then(window.location.reload());
+
     }
 
     render(){
+        const { isAuthenticated } = this.props.auth;
+        const deleteButton = (
+            <button className="btn btn-danger" onClick={this.deleteEvent}>Delete</button>
+        );
         return(
+
             <div class = "card">
                 
                 <div>
@@ -50,9 +56,7 @@ export default class Header extends Component {
                     <button class="btn btn-primary" onClick={this.toggle} style={{ marginBottom: '1rem' }} >
                         DESCRIPTION
                     </button>
-                    <button class="btn btn-danger" onClick={this.deleteEvent}>
-                        Delete
-                    </button>
+                    {isAuthenticated ? deleteButton : null}
                 </div>
                 
                 
@@ -69,7 +73,18 @@ export default class Header extends Component {
                         </CardBody>
                     </Card>
                 </Collapse>
+
             </div>
         );
     }
 }
+
+Event.propTypes = {
+    auth: PropTypes.object.isRequired
+}
+function mapStateToProps(state) {
+    return {
+        auth: state.auth
+    };
+}
+export default connect(mapStateToProps)(Event);
