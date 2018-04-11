@@ -5,6 +5,7 @@ namespace EventAsker.API.ViewModels
 {
     public class EventViewModel
     {
+        public int EventId { get; set; }
         public string Name { get; set; }
         public string Street { get; set; }
         public DateTime Date { get; set; }
