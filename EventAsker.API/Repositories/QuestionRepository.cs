@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using EventAsker.API.Context;
 using EventAsker.API.Dtos;
 using EventAsker.API.Model;
@@ -10,25 +11,20 @@ namespace EventAsker.API.Repositories
     public class QuestionRepository : IQuestionRepository
     {
         private readonly ApplicationDbContext _context;
+        private IMapper _mapper;
 
-        public QuestionRepository(ApplicationDbContext context){
+        public QuestionRepository(ApplicationDbContext context, IMapper mapper){
             _context = context;
+            _mapper = mapper;
         }
-        public async void AddQuestionAsync(QuestionDto questionDto, int lecturerId)
+        public async void AddQuestionAsync(AddQuestionDto questionDto)
         {
-            Question question = new Question(){
-                QuestionId = questionDto.QuestionId,
-                QuestionContent = questionDto.QuestionContent,
-                AuthorName = questionDto.AuthorName,
-                Email = questionDto.Email,
-                EventId = questionDto.EventId,
-                Lecturer= _context.Lecturer.SingleOrDefault(x => x.LecturerId == lecturerId)
-            };
+            Question question = _mapper.Map<Question>(questionDto);
             await _context.Question.AddAsync(question);
             await _context.SaveChangesAsync();
         }
 
-        public async void DeleteQuestionAsync(QuestionDto questionDto)
+        public async void DeleteQuestionAsync(DeleteQuestionDto questionDto)
         {
             Question question = await _context.Question.SingleOrDefaultAsync(q => q.QuestionId == questionDto.QuestionId);
             _context.Question.Remove(question);
@@ -37,32 +33,13 @@ namespace EventAsker.API.Repositories
 
         public IEnumerable<QuestionDto> GetAllQuestions()
         {
-            return _context.Question.Select(q => MapQuestionToDto(q)).ToList();
+            return _context.Question.Select(q => _mapper.Map<QuestionDto>(q)).ToList();
         }
 
         public IEnumerable<QuestionDto> GetQuestionsByEventId(int eventId)
         {
-            return _context.Question.Where(q => q.EventId == eventId).Select(x => MapQuestionToDto(x)).ToList();
+            return _context.Question.Where(q => q.EventId == eventId).Select(x => _mapper.Map<QuestionDto>(x)).ToList();
         }
 
-        private QuestionDto MapQuestionToDto(Question question){
-             return new QuestionDto(){
-                QuestionId = question.QuestionId,
-                QuestionContent = question.QuestionContent,
-                AuthorName = question.AuthorName,
-                Email = question.Email,
-                EventId = question.EventId,
-                Lecturer = MapLecturerToDto(_context.Question.FirstOrDefault(x => x.LecturerId == question.LecturerId).Lecturer)
-            };
-        }
-
-        private LecturerDto MapLecturerToDto(Lecturer lecturer){
-            return new LecturerDto(){
-                LecturerId = lecturer.LecturerId,
-                FirstName = lecturer.FirstName,
-                LastName = lecturer.LastName,
-                Company = lecturer.Company
-            };
-        }
     }
 }

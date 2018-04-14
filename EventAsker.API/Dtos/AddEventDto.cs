@@ -1,4 +1,3 @@
-﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace EventAsker.API.Dtos
@@ -15,5 +14,6 @@ namespace EventAsker.API.Dtos
         public string Description { get; set; }
         public string AudienceKey { get; set; }
         public int CityId { get; set; }
+        
     }
 }
