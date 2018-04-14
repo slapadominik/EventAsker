@@ -10,6 +10,7 @@ import {
 import LoginForm from './components/LoginForm';
 import ShowEvents from './components/ShowEvents';
 import AddEventForm from './components/AddEventForm';
+import AddQuestionForm from './components/AddQuestionForm';
 
 class App extends Component {
 
@@ -24,6 +25,7 @@ class App extends Component {
             <Route path="/login" component={LoginForm} />
             <Route path="/events" component={ShowEvents} />
             <Route path="/addEvent" component={AddEventForm} />
+            <Route path="/addQuestion" component={AddQuestionForm} />
           </div>
         </Router>    
     );
