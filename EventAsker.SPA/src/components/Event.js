@@ -23,7 +23,6 @@ class Event extends Component {
             eventLectures: [],
             eventQustions: [],
             collapse: false
-
         }
     }
     
@@ -32,9 +31,7 @@ class Event extends Component {
     }
     deleteEvent = () =>
     {
-
         return axios.delete(BASE_URL+'/Event/DeleteEvent', { params: {eventId: this.props.eventId}}).then(window.location.reload());
-
     }
 
     render(){
@@ -44,7 +41,7 @@ class Event extends Component {
         );
         return(
 
-            <div class = "card">
+            <div className = "card">
                 
                 <div>
                     <h3>{this.props.eventName}</h3> 
@@ -53,7 +50,7 @@ class Event extends Component {
                 </div>
                 
                 <div>   
-                    <button class="btn btn-primary" onClick={this.toggle} style={{ marginBottom: '1rem' }} >
+                    <button className="btn btn-primary" onClick={this.toggle} style={{ marginBottom: '1rem' }} >
                         DESCRIPTION
                     </button>
                     {isAuthenticated ? deleteButton : null}
@@ -64,7 +61,7 @@ class Event extends Component {
                     <Card>
                         <CardBody>
                         <h6>Street: </h6> <p>{this.props.eventStreet}</p>
-                        <div class="desc">
+                        <div className="desc">
                             <h6>Description: </h6> 
                             <p>{this.props.eventDescription}</p>
                         </div>

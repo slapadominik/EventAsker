@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using EventAsker.API.Dtos;
 using EventAsker.API.Model;
 using EventAsker.API.Repositories;
@@ -17,8 +18,10 @@ namespace EventAsker.API.Controllers
     public class AuthController : Controller
     {
         private IAuthService _service;
-        public AuthController(IAuthService service){
+        private IMapper _mapper;
+        public AuthController(IAuthService service, IMapper mapper){
             _service = service;
+            _mapper = mapper;
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] AdminDto adminDto){
@@ -31,7 +34,7 @@ namespace EventAsker.API.Controllers
                 ModelState.AddModelError("Username", "Username is already taken");
                 return BadRequest(ModelState);
             }
-            AdminViewModel adminViewModel = new AdminViewModel(){AdminUsername = admin.Username};
+            AdminViewModel adminViewModel = _mapper.Map<AdminViewModel>(admin);
             return Ok(adminViewModel);
         }
 
@@ -41,11 +44,7 @@ namespace EventAsker.API.Controllers
             if (admin == null)
                 return Unauthorized();
                 
-            AdminLoginDto adminLoginDto = new AdminLoginDto(){
-                AdminId = admin.AdminId,
-                Username = admin.Username
-            };
-
+            AdminLoginDto adminLoginDto = _mapper.Map<AdminLoginDto>(admin);
             string tokenString = _service.BuildToken(adminLoginDto);
 
             return new OkObjectResult(tokenString);

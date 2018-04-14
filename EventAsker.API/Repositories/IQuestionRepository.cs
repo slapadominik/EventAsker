@@ -5,8 +5,8 @@ namespace EventAsker.API.Repositories
 {
     public interface IQuestionRepository
     {
-        void AddQuestionAsync(QuestionDto question, int lecturerId);
-        void DeleteQuestionAsync(QuestionDto question);
+        void AddQuestionAsync(AddQuestionDto question);
+        void DeleteQuestionAsync(DeleteQuestionDto question);
         IEnumerable<QuestionDto> GetQuestionsByEventId(int eventId);
         IEnumerable<QuestionDto> GetAllQuestions();
          

@@ -14,15 +14,15 @@ namespace EventAsker.API.Services
             _repository = repository;
         }
         
-        public void AddQuestionAsync(QuestionDto questionDto, int lecturerId)
+        public void AddQuestionAsync(AddQuestionDto questionDto)
         {
             if (questionDto == null)
                 throw new InvalidOperationException("Question mustn't be null");
             
-            _repository.AddQuestionAsync(questionDto, lecturerId);
+            _repository.AddQuestionAsync(questionDto);
         }
 
-        public void DeleteQuestionAsync(QuestionDto questionDto)
+        public void DeleteQuestionAsync(DeleteQuestionDto questionDto)
         {
             if (questionDto == null)
                 throw new InvalidOperationException("Question mustn't be null");

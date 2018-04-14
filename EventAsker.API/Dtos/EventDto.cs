@@ -14,7 +14,8 @@ namespace EventAsker.API.Dtos
 
         public CityDto City{ get; set; }
 
-        public List<LectureDto> Lectures { get; set; }
-        public List<QuestionDto> Questions { get; set; }
+        public ICollection<LectureDto> Lectures { get; set; }
+        public ICollection<QuestionDto> Questions { get; set; }
+
     }
 }

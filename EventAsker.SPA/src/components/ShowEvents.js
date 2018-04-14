@@ -19,6 +19,7 @@ export default class ShowEvents extends Component {
     getEvents(url){
         return axios.get(url)
             .then(response => {
+                console.log(response);
                 this.setState({
                     events: response.data
                 });
@@ -30,7 +31,7 @@ export default class ShowEvents extends Component {
     renderEvents = () => {
         return(
             this.state.events.map(
-                (event) => <Event eventName= {event.name} eventDescription= {event.description} eventStreet = {event.street} eventCity ={event.city.cityName} eventId = {event.eventId} eventDate = {event.date} eventLectures = {event.lectures} eventQuestions = {event.questions}/>)
+                (event) => <Event eventName= {event.name} eventDescription= {event.description} eventStreet = {event.street} eventCity ={event.city} eventId = {event.eventId} eventDate = {event.date} eventLectures = {event.lectures} eventQuestions = {event.questions}/>)
         );
     }
 
