@@ -124,6 +124,7 @@ export default class AddQuestionForm extends Component {
                 value={this.state.authorName}
                 onChange={this.handleUserInput}
               />
+              <div className="error" id="nameError" />
             </div>
             <div className="col-md-3">
               <label id="emailLabel">Email</label>
