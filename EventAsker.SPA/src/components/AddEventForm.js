@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "./AddEventForm.css";
+import "./Form.css";
 import axios from 'axios';
 import { BASE_URL } from '../constants';
 
-export default class LoginForm extends Component {
+export default class AddEventForm extends Component {
   constructor(props) {
     super(props);
 
@@ -96,7 +96,7 @@ export default class LoginForm extends Component {
     return (
       <form noValidate>
         <div className="form-group col-md-6">
-          <label id="nameLabel">Name</label>
+          <label id="nameLabel">Name<span style={{color: 'red'}}>*</span></label>
           <input
             className="form-control"
             type="text"
@@ -109,7 +109,7 @@ export default class LoginForm extends Component {
           <div className="error" id="nameError" />
         </div>
         <div className="form-group col-md-6">
-          <label id="descriptionLabel">Description</label>
+          <label id="descriptionLabel">Description<span style={{color: 'red'}}>*</span></label>
           <input
             className="form-control"
             type="text"
@@ -122,7 +122,7 @@ export default class LoginForm extends Component {
           <div className="error" id="descriptionError" />
         </div>
         <div className="form-group col-md-6">
-          <label id="dateLabel">Date</label>
+          <label id="dateLabel">Date<span style={{color: 'red'}}>*</span></label>
           <input
             className="form-control"
             type="text"
@@ -136,7 +136,7 @@ export default class LoginForm extends Component {
           <div className="error" id="dateError" />
         </div>
         <div className="form-group col-md-6">
-          <label id="streetLabel">Place</label>
+          <label id="streetLabel">Place<span style={{color: 'red'}}>*</span></label>
           <input
             className="form-control"
             type="text"
@@ -149,7 +149,7 @@ export default class LoginForm extends Component {
           <div className="error" id="streetError" />
         </div>
         <div className="form-group col-md-6">
-          <label id="audienceKeyLabel">Audience Key</label>
+          <label id="audienceKeyLabel">Audience Key<span style={{color: 'red'}}>*</span></label>
           <input
             className="form-control"
             type="text"
