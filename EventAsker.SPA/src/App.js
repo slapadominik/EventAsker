@@ -24,8 +24,9 @@ class App extends Component {
             <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/events" component={ShowEvents} />
-            <Route path="/addEvent" component={AddEventForm} />
-            <Route path="/addQuestion" component={AddQuestionForm} />
+            <Route path="/addEvent" component={AddEventForm}/>
+            <Route path="/addQuestion/:id" component={AddQuestionForm} />  
+      
           </div>
         </Router>    
     );

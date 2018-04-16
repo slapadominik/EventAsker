@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using EventAsker.API.Dtos;
 using EventAsker.API.Repositories;
 
@@ -14,20 +15,20 @@ namespace EventAsker.API.Services
             _repository = repository;
         }
         
-        public void AddQuestionAsync(AddQuestionDto questionDto)
+        public async Task AddQuestionAsync(AddQuestionDto questionDto)
         {
             if (questionDto == null)
                 throw new InvalidOperationException("Question mustn't be null");
             
-            _repository.AddQuestionAsync(questionDto);
+            await _repository.AddQuestionAsync(questionDto);
         }
 
-        public void DeleteQuestionAsync(DeleteQuestionDto questionDto)
+        public async Task DeleteQuestionAsync(DeleteQuestionDto questionDto)
         {
             if (questionDto == null)
                 throw new InvalidOperationException("Question mustn't be null");
             
-            _repository.DeleteQuestionAsync(questionDto);
+            await _repository.DeleteQuestionAsync(questionDto);
         }
 
         public IEnumerable<QuestionDto> GetAllQuestions()

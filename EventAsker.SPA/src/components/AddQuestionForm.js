@@ -2,8 +2,18 @@ import React, { Component } from "react";
 import "./Form.css";
 import axios from "axios";
 import { BASE_URL } from "../constants";
+import PropTypes from "prop-types";
+import Notifications, { success, error, warning, info, removeAll } from 'react-notification-system-redux';
+import {connect} from 'react-redux';
 
-export default class AddQuestionForm extends Component {
+const notificationOpts = {
+  title: 'Thank you for your question!',
+  message: 'We hope that your lecturer\'s answer will satisfy you.',
+  position: 'tc',
+  autoDismiss: 3,
+};
+
+class AddQuestionForm extends Component {
   constructor(props) {
     super(props);
 
@@ -15,7 +25,6 @@ export default class AddQuestionForm extends Component {
       success: false
     };
   }
-
   handleUserInput = e => {
     this.setState({ [e.target.name]: e.target.value });
     this.showInputError(e.target.name);
@@ -23,25 +32,34 @@ export default class AddQuestionForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-
-    console.log("state", JSON.stringify(this.state));
-    console.log("props", JSON.stringify(this.props));
-
     if (!this.showFormErrors()) {
       this.setState({ success: false });
     } else {
       this.setState({ success: true });
 
       this.clearInputs();
-      axios.post(BASE_URL+'/event/addQuestion', {
+      axios.post(BASE_URL+'/question/addQuestion', {
           QuestionContent: this.state.question,
           AuthorName: this.state.authorName,
           Email: this.state.email,
-          EventId: this.props.eventId,
+          EventId: this.props.match.params.id,
           LecturerId: this.state.lecturerId,
-        });
+        })
+        .then(response => {
+          this.addNotification();
+        })
     }
   };
+
+  dispatchNotification = (fn, timeout) =>{
+    setTimeout(() => {
+      this.context.store.dispatch(fn(notificationOpts));
+    }, timeout);
+  }
+
+  addNotification = ()=>{
+    this.dispatchNotification(success, 250);
+  }
 
   showFormErrors = () => {
     const textarea = document.getElementsByName("question");
@@ -89,6 +107,7 @@ export default class AddQuestionForm extends Component {
   }
 
   render() {
+    const {notifications} = this.props;
     return (
       <div className="containter">
         <form noValidate>
@@ -124,7 +143,7 @@ export default class AddQuestionForm extends Component {
                 value={this.state.authorName}
                 onChange={this.handleUserInput}
               />
-              <div className="error" id="nameError" />
+              <div className="error" id="authorNameError" />
             </div>
             <div className="col-md-3">
               <label id="emailLabel">Email</label>
@@ -148,7 +167,7 @@ export default class AddQuestionForm extends Component {
                 onClick={this.handleSubmit}
               >
                 Ask
-              </button>
+              </button>             
             </div>
             <div className="note">
               <h6>
@@ -158,8 +177,21 @@ export default class AddQuestionForm extends Component {
               </h6>
             </div>
           </div>
-        </form>
+        </form>    
+        <Notifications notifications={notifications} />
       </div>
     );
   }
 }
+
+AddQuestionForm.contextTypes = {
+  store: PropTypes.object
+};
+
+AddQuestionForm.propTypes = {
+  notifications: PropTypes.array
+};
+
+export default connect(
+  state => ({ notifications: state.notifications })
+)(AddQuestionForm);

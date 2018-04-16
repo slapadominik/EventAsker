@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using EventAsker.API.Context;
 using EventAsker.API.Dtos;
@@ -17,14 +18,14 @@ namespace EventAsker.API.Repositories
             _context = context;
             _mapper = mapper;
         }
-        public async void AddQuestionAsync(AddQuestionDto questionDto)
+        public async Task AddQuestionAsync(AddQuestionDto questionDto)
         {
             Question question = _mapper.Map<Question>(questionDto);
             await _context.Question.AddAsync(question);
             await _context.SaveChangesAsync();
         }
 
-        public async void DeleteQuestionAsync(DeleteQuestionDto questionDto)
+        public async Task DeleteQuestionAsync(DeleteQuestionDto questionDto)
         {
             Question question = await _context.Question.SingleOrDefaultAsync(q => q.QuestionId == questionDto.QuestionId);
             _context.Question.Remove(question);
