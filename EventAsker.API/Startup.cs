@@ -40,6 +40,8 @@ namespace EventAsker.API
             services.AddScoped<IAuthService, AuthService>();
             services.AddTransient<IEventService, EventService>();
             services.AddTransient<IEventRepository, EventRepository>();
+            services.AddTransient<IQuestionRepository, QuestionRepository>();
+            services.AddTransient<IQuestionService, QuestionService>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters{

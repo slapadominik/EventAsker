@@ -44,6 +44,7 @@ class Event extends Component {
         Delete
       </button>
     );
+    const location = '/addQuestion/'+this.props.eventId;
 
     return (
       <div className="row-flex card">
@@ -56,7 +57,7 @@ class Event extends Component {
           <button className="btn btn-primary" onClick={this.toggle}>
             Description
           </button>
-        <LinkButton to="/addQuestion">Ask Question</LinkButton>
+        <LinkButton to={location}>Ask Question</LinkButton>
           {isAuthenticated ? deleteButton : null}
         </div>
 

@@ -31,15 +31,6 @@ namespace EventAsker.API.Repositories
 
         public void AddEvent(AddEventDto dto)
         {
-            // var newEvent = new Event
-            // {
-            //     Name = dto.Name,
-            //     Street = dto.Street,
-            //     Date = DateTime.ParseExact(dto.Date, "dd/MM/yyyy", null),
-            //     Description = dto.Description,
-            //     AudienceKey = dto.AudienceKey,
-            //     CityId = dto.CityId,
-            // };
             var newEvent = _mapper.Map<Event>(dto);
 
             _context.Add(newEvent);

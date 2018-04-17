@@ -1,12 +1,13 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using EventAsker.API.Dtos;
 
 namespace EventAsker.API.Services
 {
     public interface IQuestionService
     {
-        void AddQuestionAsync(AddQuestionDto question);
-        void DeleteQuestionAsync(DeleteQuestionDto question);
+        Task AddQuestionAsync(AddQuestionDto question);
+        Task DeleteQuestionAsync(DeleteQuestionDto question);
         IEnumerable<QuestionDto> GetQuestionsByEventId(int eventId);
         IEnumerable<QuestionDto> GetAllQuestions();
     }
