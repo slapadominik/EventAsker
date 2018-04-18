@@ -14,13 +14,8 @@ namespace EventAsker.API.ViewModels
 
         public string City {get; set;}
 
-        public List<LectureViewModel> Lectures { get; set; }
-        public List<QuestionViewModel> Questions { get; set; }
+        public ICollection<LecturerViewModel> Lectures { get; set; }
+        public ICollection<QuestionViewModel> Questions { get; set; }
 
-        public EventViewModel()
-        {
-            Lectures = new List<LectureViewModel>();
-            Questions = new List<QuestionViewModel>();
-        }
     }
 }
