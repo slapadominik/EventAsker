@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 
 const notificationOpts = {
   title: 'Thank you for your question!',
-  message: 'We hope that your lecturer\'s answer will satisfy you.',
+  message: 'We hope that lecturer\'s answer will satisfy you.',
   position: 'tc',
   autoDismiss: 3,
 };

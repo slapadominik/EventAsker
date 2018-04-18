@@ -27,5 +27,11 @@ namespace EventAsker.API.Controllers
         public IActionResult GetQuestions(){
             return Ok(_serivce.GetAllQuestions());
         }
+
+        [HttpGet("GetQuestions/{id}")]
+        public IActionResult GetQuestions(int id){
+            return Ok(_serivce.GetQuestionsByEventId(id));
+        }
+
     }
 }

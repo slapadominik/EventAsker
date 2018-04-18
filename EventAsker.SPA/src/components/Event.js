@@ -12,7 +12,6 @@ import LinkButton from "./LinkButton";
 class Event extends Component {
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
     this.state = {
       eventName: "Spotkanko",
       eventDescription: "januszowe",
@@ -21,12 +20,25 @@ class Event extends Component {
       eventDate: "21/11/1999",
       eventLectures: [],
       eventQustions: [],
-      collapse: false
+      collapse: false,
+      questionCollapse:false
     };
   }
 
-  toggle() {
+  mapQuestionsToListItems = () => {
+    return this.props.eventQuestions.map((question) => 
+      <div className="row-flex card">
+          <div><b>Autor</b>: {question.authorName} </div>
+          <div><b>Email</b>: {question.email}</div>
+          <div><b>Treść</b>: {question.questionContent}</div>
+      </div>);
+  }
+  toggle = () => {
     this.setState({ collapse: !this.state.collapse });
+  }
+
+  toggleQuestions = () => {
+    this.setState({ questionCollapse: !this.state.questionCollapse });
   }
 
   deleteEvent = () => {
@@ -40,9 +52,10 @@ class Event extends Component {
   render() {
     const { isAuthenticated } = this.props.auth;
     const deleteButton = (
-      <button className="btn btn-danger" onClick={this.deleteEvent}>
-        Delete
-      </button>
+      <div className="btn-group" role="group">
+      <button className="btn btn-danger" onClick={this.deleteEvent}>Delete</button>
+      <button className="btn btn-primary" onClick={this.toggleQuestions}>Questions</button>
+      </div>
     );
     const location = '/addQuestion/'+this.props.eventId;
 
@@ -70,7 +83,16 @@ class Event extends Component {
               </div>
               <h6>Street: </h6> <p>{this.props.eventStreet}</p>
               <h6>Lectures: </h6> <p>{this.props.eventLectures}</p>
-              <h6>Questions: </h6> <p>{this.props.eventQustions}</p>
+            </CardBody>
+          </Card>
+        </Collapse>
+        <Collapse isOpen={this.state.questionCollapse}>
+          <Card>
+            <CardBody>
+              <h6>Questions: </h6>
+              <div>
+                {this.mapQuestionsToListItems()}
+              </div>
             </CardBody>
           </Card>
         </Collapse>

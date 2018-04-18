@@ -23,7 +23,7 @@ namespace EventAsker.API.Repositories
         public List<EventDto> GetEvents()
         {
 
-            List<Event> eventList = _context.Events.Include("City").ToList();
+            List<Event> eventList = _context.Events.Include(e => e.City).Include(e => e.Questions).Include(e => e.Lectures).ToList();
             List<EventDto> eventListDto = new List<EventDto>();
             eventListDto = _mapper.Map<List<Event>,List<EventDto>>(eventList);
             return eventListDto;
