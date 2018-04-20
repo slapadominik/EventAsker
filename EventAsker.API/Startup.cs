@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Elmah.Io.AspNetCore;
 using EventAsker.API.Context;
 using EventAsker.API.Interfaces;
@@ -32,6 +33,7 @@ namespace EventAsker.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper();
             services.AddMvc();
             services.AddCors();
             services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -39,6 +41,8 @@ namespace EventAsker.API
             services.AddScoped<IAuthService, AuthService>();
             services.AddTransient<IEventService, EventService>();
             services.AddTransient<IEventRepository, EventRepository>();
+            services.AddTransient<IQuestionRepository, QuestionRepository>();
+            services.AddTransient<IQuestionService, QuestionService>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters{

@@ -27,6 +27,10 @@ class Header extends Component {
                 <li><Link to="/register">Register</Link></li> 
             </div>
         );
+
+        const addEvent = (
+            <li><Link to="/addEvent">Add Event</Link></li> 
+        );
     
         return(
             <nav className="navbar navbar-default">
@@ -38,7 +42,7 @@ class Header extends Component {
                             <li><Link to="/">Home</Link></li>
                             {isAuthenticated ? userLinks : guestLinks}                        
                             <li><Link to="/events">Events</Link></li>
-                            <li><Link to="/addEvent">Add Event</Link></li>                         
+                            {isAuthenticated ? addEvent : null}                      
                         </ul>
                  </div>
                 

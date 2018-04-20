@@ -11,6 +11,7 @@ import {
 import LoginForm from './components/LoginForm';
 import ShowEvents from './components/ShowEvents';
 import AddEventForm from './components/AddEventForm';
+import AddQuestionForm from './components/AddQuestionForm';
 import NotFound from './components/NotFound';
 
 class App extends Component {
@@ -25,7 +26,8 @@ class App extends Component {
             <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/events" component={ShowEvents} />
-            <Route path="/addEvent" component={AddEventForm} />
+            <Route path="/addEvent" component={AddEventForm}/>
+            <Route path="/addQuestion/:id" component={AddQuestionForm} />  
             <Route path="*" component={NotFound} />
           </Switch>
         </div>

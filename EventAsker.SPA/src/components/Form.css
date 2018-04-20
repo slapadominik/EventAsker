@@ -5,7 +5,12 @@ input.active:valid {
 input.active:invalid {
   box-shadow: 0 0 5px 1px red;
 }
-
+textarea.valid {
+  box-shadow: 0 0 5px 1px green;
+}
+textarea.invalid {
+  box-shadow: 0 0 5px 1px red;
+}
 .error {
   color: red;
   font-size: 12px;
@@ -14,4 +19,7 @@ input.active:invalid {
 .note {
   color: gray;
   margin: 8px 0;
+}
+.top-buffer {
+  margin-top: 15px;
 }

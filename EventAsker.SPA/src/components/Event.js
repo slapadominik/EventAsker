@@ -1,90 +1,112 @@
-import React, { Component } from 'react';
-import { Collapse, Button, CardBody, Card } from 'reactstrap';
-import '../index.css';
-
+import React, { Component } from "react";
+import { Collapse, Button, CardBody, Card } from "reactstrap";
+import "../index.css";
 import "./Event.css";
-import axios from 'axios'
-import { BASE_URL } from '../constants';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-
+import axios from "axios";
+import { BASE_URL } from "../constants";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import LinkButton from "./LinkButton";
 
 class Event extends Component {
-    
-    constructor(props){
-        super(props);
-        this.toggle = this.toggle.bind(this);
-        this.state = {
-            eventName: 'Spotkanko',
-            eventDescription: 'januszowe',
-            eventStreet: 'poziomkowa',
-            eventCity: 'Wawa',
-            eventDate: '21/11/1999',
-            eventLectures: [],
-            eventQustions: [],
-            collapse: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      eventName: "Spotkanko",
+      eventDescription: "januszowe",
+      eventStreet: "poziomkowa",
+      eventCity: "Wawa",
+      eventDate: "21/11/1999",
+      eventLectures: [],
+      eventQustions: [],
+      collapse: false,
+      questionCollapse:false
+    };
+  }
 
-        }
-    }
-    
-    toggle(){
-        this.setState({collapse: !this.state.collapse});
-    }
-    deleteEvent = () =>
-    {
+  mapQuestionsToListItems = () => {
+    return this.props.eventQuestions.map((question) => 
+      <div className="row-flex card">
+          <div><b>Autor</b>: {question.authorName} </div>
+          <div><b>Email</b>: {question.email}</div>
+          <div><b>Treść</b>: {question.questionContent}</div>
+      </div>);
+  }
+  toggle = () => {
+    this.setState({ collapse: !this.state.collapse });
+  }
 
-        return axios.delete(BASE_URL+'/Event/DeleteEvent', { params: {eventId: this.props.eventId}}).then(window.location.reload());
+  toggleQuestions = () => {
+    this.setState({ questionCollapse: !this.state.questionCollapse });
+  }
 
-    }
+  deleteEvent = () => {
+    return axios
+      .delete(BASE_URL + "/Event/DeleteEvent", {
+        params: { eventId: this.props.eventId }
+      })
+      .then(window.location.reload());
+  };
 
-    render(){
-        const { isAuthenticated } = this.props.auth;
-        const deleteButton = (
-            <button className="btn btn-danger" onClick={this.deleteEvent}>Delete</button>
-        );
-        return(
+  render() {
+    const { isAuthenticated } = this.props.auth;
+    const deleteButton = (
+      <div className="btn-group" role="group">
+      <button className="btn btn-danger" onClick={this.deleteEvent}>Delete</button>
+      <button className="btn btn-primary" onClick={this.toggleQuestions}>Questions</button>
+      </div>
+    );
+    const location = '/addQuestion/'+this.props.eventId;
 
-            <div class = "card">
-                
-                <div>
-                    <h3>{this.props.eventName}</h3> 
-                    <h6>{this.props.eventCity}</h6>
-                    <h6>{this.props.eventDate}</h6>
-                </div>
-                
-                <div>   
-                    <button class="btn btn-primary" onClick={this.toggle} style={{ marginBottom: '1rem' }} >
-                        DESCRIPTION
-                    </button>
-                    {isAuthenticated ? deleteButton : null}
-                </div>
-                
-                
-                <Collapse isOpen={this.state.collapse}>
-                    <Card>
-                        <CardBody>
-                        <h6>Street: </h6> <p>{this.props.eventStreet}</p>
-                        <div class="desc">
-                            <h6>Description: </h6> 
-                            <p>{this.props.eventDescription}</p>
-                        </div>
-                        <h6>Lectures: </h6> <p>{this.props.eventLectures}</p>
-                        <h6>Questions: </h6> <p>{this.props.eventQustions}</p>
-                        </CardBody>
-                    </Card>
-                </Collapse>
+    return (
+      <div className="row-flex card">
+        <div>
+          <h3>{this.props.eventName}</h3>
+          <h6>{this.props.eventCity}</h6>
+          <h6>{this.props.eventDate}</h6>
+        </div>
+        <div className="btn-group" role="group">
+          <button className="btn btn-primary" onClick={this.toggle}>
+            Description
+          </button>
+        <LinkButton to={location}>Ask Question</LinkButton>
+          {isAuthenticated ? deleteButton : null}
+        </div>
 
-            </div>
-        );
-    }
+        <Collapse isOpen={this.state.collapse}>
+          <Card>
+            <CardBody>
+              <div className="desc">
+                <h6>Description: </h6>
+                <p>{this.props.eventDescription}</p>
+              </div>
+              <h6>Street: </h6> <p>{this.props.eventStreet}</p>
+              <h6>Lectures: </h6> <p>{this.props.eventLectures}</p>
+            </CardBody>
+          </Card>
+        </Collapse>
+        <Collapse isOpen={this.state.questionCollapse}>
+          <Card>
+            <CardBody>
+              <h6>Questions: </h6>
+              <div>
+                {this.mapQuestionsToListItems()}
+              </div>
+            </CardBody>
+          </Card>
+        </Collapse>
+      </div>
+    );
+  }
 }
 
 Event.propTypes = {
-    auth: PropTypes.object.isRequired
-}
+  auth: PropTypes.object.isRequired
+};
 function mapStateToProps(state) {
-    return {
-        auth: state.auth
-    };
+  return {
+    auth: state.auth
+  };
 }
 export default connect(mapStateToProps)(Event);
