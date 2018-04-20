@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Collapse, Button, CardBody, Card } from "reactstrap";
+import { Collapse, CardBody, Card } from "reactstrap";
 import "../index.css";
 import "./Event.css";
 import axios from "axios";
@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import LinkButton from "./LinkButton";
+import Question from './Question';
 
 class Event extends Component {
   constructor(props) {
@@ -27,11 +28,8 @@ class Event extends Component {
 
   mapQuestionsToListItems = () => {
     return this.props.eventQuestions.map((question) => 
-      <div className="row-flex card">
-          <div><b>Autor</b>: {question.authorName} </div>
-          <div><b>Email</b>: {question.email}</div>
-          <div><b>Treść</b>: {question.questionContent}</div>
-      </div>);
+        <Question key={question.questionId} authorName={question.authorName} email={question.email} questionContent={question.questionContent} />
+      );
   }
   toggle = () => {
     this.setState({ collapse: !this.state.collapse });
@@ -40,20 +38,12 @@ class Event extends Component {
   toggleQuestions = () => {
     this.setState({ questionCollapse: !this.state.questionCollapse });
   }
-
-  deleteEvent = () => {
-    return axios
-      .delete(BASE_URL + "/Event/DeleteEvent", {
-        params: { eventId: this.props.eventId }
-      })
-      .then(window.location.reload());
-  };
-
+  
   render() {
     const { isAuthenticated } = this.props.auth;
     const deleteButton = (
       <div className="btn-group" role="group">
-      <button className="btn btn-danger" onClick={this.deleteEvent}>Delete</button>
+      <button className="btn btn-danger" onClick={() => this.props.onDelete(this.props.eventId)}>Delete</button>
       <button className="btn btn-primary" onClick={this.toggleQuestions}>Questions</button>
       </div>
     );

@@ -3,13 +3,13 @@ import "./Form.css";
 import axios from "axios";
 import { BASE_URL } from "../constants";
 import PropTypes from "prop-types";
-import Notifications, { success, error, warning, info, removeAll } from 'react-notification-system-redux';
+import Notifications, { success } from 'react-notification-system-redux';
 import {connect} from 'react-redux';
 
 const notificationOpts = {
   title: 'Thank you for your question!',
   message: 'We hope that lecturer\'s answer will satisfy you.',
-  position: 'tc',
+  position: 'tr',
   autoDismiss: 3,
 };
 
