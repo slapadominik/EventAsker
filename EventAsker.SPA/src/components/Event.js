@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Collapse, Button, CardBody, Card } from "reactstrap";
+import { Collapse, CardBody, Card } from "reactstrap";
 import "../index.css";
 import "./Event.css";
 import axios from "axios";
@@ -8,6 +8,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import LinkButton from "./LinkButton";
+import Question from "./Question";
+import DeleteModal from "./DeleteModal"
 
 class Event extends Component {
   constructor(props) {
@@ -21,43 +23,40 @@ class Event extends Component {
       eventLectures: [],
       eventQustions: [],
       collapse: false,
-      questionCollapse:false
+      questionCollapse: false,
+      modal:false
     };
   }
 
   mapQuestionsToListItems = () => {
-    return this.props.eventQuestions.map((question) => 
-      <div className="row-flex card">
-          <div><b>Autor</b>: {question.authorName} </div>
-          <div><b>Email</b>: {question.email}</div>
-          <div><b>Treść</b>: {question.questionContent}</div>
-      </div>);
-  }
+    return this.props.eventQuestions.map(question => (
+      <Question
+        key={question.questionId}
+        authorName={question.authorName}
+        email={question.email}
+        questionContent={question.questionContent}
+      />
+    ));
+  };
   toggle = () => {
     this.setState({ collapse: !this.state.collapse });
-  }
+  };
 
   toggleQuestions = () => {
     this.setState({ questionCollapse: !this.state.questionCollapse });
-  }
-
-  deleteEvent = () => {
-    return axios
-      .delete(BASE_URL + "/Event/DeleteEvent", {
-        params: { eventId: this.props.eventId }
-      })
-      .then(window.location.reload());
   };
 
   render() {
     const { isAuthenticated } = this.props.auth;
     const deleteButton = (
-      <div className="btn-group" role="group">
-      <button className="btn btn-danger" onClick={this.deleteEvent}>Delete</button>
-      <button className="btn btn-primary" onClick={this.toggleQuestions}>Questions</button>
-      </div>
+      <React.Fragment>
+        <DeleteModal eventId={this.props.eventId} isOpen={this.state.modal}/>
+        <button className="btn btn-primary" onClick={this.toggleQuestions}>
+          Questions
+        </button>
+      </React.Fragment>
     );
-    const location = '/addQuestion/'+this.props.eventId;
+    const location = "/addQuestion/" + this.props.eventId;
 
     return (
       <div className="row-flex card">
@@ -66,11 +65,11 @@ class Event extends Component {
           <h6>{this.props.eventCity}</h6>
           <h6>{this.props.eventDate}</h6>
         </div>
-        <div className="btn-group" role="group">
+        <div className="btn-group-justified" align="right" role="group">
           <button className="btn btn-primary" onClick={this.toggle}>
             Description
           </button>
-        <LinkButton to={location}>Ask Question</LinkButton>
+          <LinkButton to={location}>Ask Question</LinkButton>
           {isAuthenticated ? deleteButton : null}
         </div>
 
@@ -90,9 +89,7 @@ class Event extends Component {
           <Card>
             <CardBody>
               <h6>Questions: </h6>
-              <div>
-                {this.mapQuestionsToListItems()}
-              </div>
+              <div>{this.mapQuestionsToListItems()}</div>
             </CardBody>
           </Card>
         </Collapse>
