@@ -62,18 +62,32 @@ class AddQuestionForm extends Component {
   }
 
   showFormErrors = () => {
-    const textarea = document.getElementsByName("question");
+    const textareas = document.getElementsByName("question");
+    const inputs = document.getElementsByName("authorName");
     let isFormValid = true;
 
-    const isQuestionValid = this.showInputError("question");
-    if(!isQuestionValid){
-      isFormValid = false;
-      textarea[0].classList.add("invalid");
-    }
-    else{
-      textarea[0].classList.remove("invalid");
-      textarea[0].classList.add("valid");
-    }
+    inputs.forEach(input => {
+      input.classList.add("active");
+
+      const isInputValid = this.showInputError(input.name);
+
+      if (!isInputValid) {
+        isFormValid = false;
+      }
+    });
+
+    textareas.forEach(textarea => {
+      const isQuestionValid = this.showInputError("question");
+
+      if(!isQuestionValid){
+        isFormValid = false;
+        textarea.classList.add("invalid");
+      }
+      else{
+        textarea.classList.remove("invalid");
+        textarea.classList.add("valid");
+      }
+    });
 
     return isFormValid;
   }
@@ -114,27 +128,27 @@ class AddQuestionForm extends Component {
           <div className="row">
             <div className="form-group col-md-6">
               <label id="questionLabel">
-                Question<span style={{ color: "red" }}>*</span>
+                Question
               </label>
+              <span style={{ color: "red" }}>*</span>
               <textarea
                 className="form-control"
                 rows="5"
                 type="text"
                 name="question"
                 ref="question"
+                maxLength="150"
                 onChange={this.handleUserInput}
-                onBlur={this.showFormErrors}
+                onBlur={this.handleUserInput}
                 required
               />
               <div className="error" id="questionError" />
             </div>
           </div>
           <div className="row">
-            <div className="col-md-6">Optional:</div>
-          </div>
-          <div className="row">
             <div className="col-md-3">
               <label id="authorNameLabel">Name</label>
+              <span style={{ color: "red" }}>*</span>
               <input
                 className="form-control"
                 type="text"
@@ -142,6 +156,7 @@ class AddQuestionForm extends Component {
                 ref="authorName"
                 value={this.state.authorName}
                 onChange={this.handleUserInput}
+                required
               />
               <div className="error" id="authorNameError" />
             </div>
@@ -149,12 +164,11 @@ class AddQuestionForm extends Component {
               <label id="emailLabel">Email</label>
               <input
                 className="form-control"
-                type="text"
+                type="email"
                 name="email"
                 ref="email"
                 value={this.state.email}
                 onChange={this.handleUserInput}
-                pattern="/^(([^<>()\[\]\\.,;:\s@&quot;]+(\.[^<>()\[\]\\.,;:\s@&quot;]+)*)|(&quot;.+&quot;))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/"
               />
               <div className="error" id="emailError" />
             </div>
