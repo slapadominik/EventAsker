@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import LinkButton from "./LinkButton";
-import Question from './Question';
+import Question from "./Question";
 
 class Event extends Component {
   constructor(props) {
@@ -22,32 +22,44 @@ class Event extends Component {
       eventLectures: [],
       eventQustions: [],
       collapse: false,
-      questionCollapse:false
+      questionCollapse: false
     };
   }
 
   mapQuestionsToListItems = () => {
-    return this.props.eventQuestions.map((question) => 
-        <Question key={question.questionId} authorName={question.authorName} email={question.email} questionContent={question.questionContent} />
-      );
-  }
+    return this.props.eventQuestions.map(question => (
+      <Question
+        key={question.questionId}
+        authorName={question.authorName}
+        email={question.email}
+        questionContent={question.questionContent}
+      />
+    ));
+  };
   toggle = () => {
     this.setState({ collapse: !this.state.collapse });
-  }
+  };
 
   toggleQuestions = () => {
     this.setState({ questionCollapse: !this.state.questionCollapse });
-  }
-  
+  };
+
   render() {
     const { isAuthenticated } = this.props.auth;
     const deleteButton = (
-      <div className="btn-group" role="group">
-      <button className="btn btn-danger" onClick={() => this.props.onDelete(this.props.eventId)}>Delete</button>
-      <button className="btn btn-primary" onClick={this.toggleQuestions}>Questions</button>
-      </div>
+      <React.Fragment>
+        <button
+          className="btn btn-danger"
+          onClick={() => this.props.onDelete(this.props.eventId)}
+        >
+          Delete
+        </button>
+        <button className="btn btn-primary" onClick={this.toggleQuestions}>
+          Questions
+        </button>
+      </React.Fragment>
     );
-    const location = '/addQuestion/'+this.props.eventId;
+    const location = "/addQuestion/" + this.props.eventId;
 
     return (
       <div className="row-flex card">
@@ -56,11 +68,11 @@ class Event extends Component {
           <h6>{this.props.eventCity}</h6>
           <h6>{this.props.eventDate}</h6>
         </div>
-        <div className="btn-group" role="group">
+        <div className="btn-group-justified" align="right" role="group">
           <button className="btn btn-primary" onClick={this.toggle}>
             Description
           </button>
-        <LinkButton to={location}>Ask Question</LinkButton>
+          <LinkButton to={location}>Ask Question</LinkButton>
           {isAuthenticated ? deleteButton : null}
         </div>
 
@@ -80,9 +92,7 @@ class Event extends Component {
           <Card>
             <CardBody>
               <h6>Questions: </h6>
-              <div>
-                {this.mapQuestionsToListItems()}
-              </div>
+              <div>{this.mapQuestionsToListItems()}</div>
             </CardBody>
           </Card>
         </Collapse>
