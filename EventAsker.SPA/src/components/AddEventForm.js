@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Form.css";
-import axios from 'axios';
-import { BASE_URL } from '../constants';
+import axios from "axios";
+import { BASE_URL } from "../constants";
 
 export default class AddEventForm extends Component {
   constructor(props) {
@@ -25,9 +25,9 @@ export default class AddEventForm extends Component {
   };
 
   handleSubmit = e => {
-    e.preventDefault();
+    const inputs = document.querySelectorAll("input");
 
-    console.log("state", JSON.stringify(this.state));
+    e.preventDefault();
 
     if (!this.showFormErrors()) {
       this.setState({ success: false });
@@ -35,15 +35,20 @@ export default class AddEventForm extends Component {
       this.setState({ success: true });
       this.setState({ nameSuccess: this.state.name });
 
+      inputs.forEach(input => {
+        input.classList.remove("active");
+      });
+
       this.clearInputs();
-      axios.post(BASE_URL+'/event/addevent', {
-          name: this.state.name,
-          description: this.state.description,
-          date: this.state.date,
-          street: this.state.street,
-          audienceKey: this.state.audienceKey,
-          cityId: this.state.cityId
-        });
+
+      axios.post(BASE_URL + "/event/addevent", {
+        name: this.state.name,
+        description: this.state.description,
+        date: this.state.date,
+        street: this.state.street,
+        audienceKey: this.state.audienceKey,
+        cityId: this.state.cityId
+      });
     }
   };
 
@@ -72,8 +77,6 @@ export default class AddEventForm extends Component {
     if (!validity.valid) {
       if (validity.valueMissing) {
         error.textContent = `${label} is a required field`;
-      } else if (validity.patternMismatch) {
-        error.textContent = `Wrong date format, try: dd/MM/yyyy`;
       }
       return false;
     }
@@ -96,7 +99,8 @@ export default class AddEventForm extends Component {
     return (
       <form noValidate>
         <div className="form-group col-md-6">
-          <label id="nameLabel">Name<span style={{color: 'red'}}>*</span></label>
+          <label id="nameLabel">Name</label>
+          <span style={{ color: "red" }}>*</span>
           <input
             className="form-control"
             type="text"
@@ -109,7 +113,8 @@ export default class AddEventForm extends Component {
           <div className="error" id="nameError" />
         </div>
         <div className="form-group col-md-6">
-          <label id="descriptionLabel">Description<span style={{color: 'red'}}>*</span></label>
+          <label id="descriptionLabel">Description</label>
+          <span style={{ color: "red" }}>*</span>
           <input
             className="form-control"
             type="text"
@@ -122,21 +127,22 @@ export default class AddEventForm extends Component {
           <div className="error" id="descriptionError" />
         </div>
         <div className="form-group col-md-6">
-          <label id="dateLabel">Date<span style={{color: 'red'}}>*</span></label>
+          <label id="dateLabel">Date</label>
+          <span style={{ color: "red" }}>*</span>
           <input
             className="form-control"
-            type="text"
+            type="date"
             name="date"
             ref="date"
             value={this.state.date}
             onChange={this.handleUserInput}
-            pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"
             required
           />
           <div className="error" id="dateError" />
         </div>
         <div className="form-group col-md-6">
-          <label id="streetLabel">Place<span style={{color: 'red'}}>*</span></label>
+          <label id="streetLabel">Place</label>
+          <span style={{ color: "red" }}>*</span>
           <input
             className="form-control"
             type="text"
@@ -149,7 +155,8 @@ export default class AddEventForm extends Component {
           <div className="error" id="streetError" />
         </div>
         <div className="form-group col-md-6">
-          <label id="audienceKeyLabel">Audience Key<span style={{color: 'red'}}>*</span></label>
+          <label id="audienceKeyLabel">Audience Key</label>
+          <span style={{ color: "red" }}>*</span>
           <input
             className="form-control"
             type="text"
