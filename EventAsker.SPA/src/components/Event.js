@@ -36,9 +36,10 @@ class Event extends Component {
       />
     ));
   };
+
   toggle = () => {
     this.setState({ collapse: !this.state.collapse });
-  };
+    };
 
   toggleQuestions = () => {
     this.setState({ questionCollapse: !this.state.questionCollapse });
@@ -67,6 +68,7 @@ class Event extends Component {
           <h3>{this.props.eventName}</h3>
           <h6>{this.props.eventCity}</h6>
           <h6>{this.props.eventDate}</h6>
+          <h6>{this.props.eventTime}</h6>
         </div>
         <div className="btn-group-justified" align="right" role="group">
           <button className="btn btn-primary" onClick={this.toggle}>
@@ -84,7 +86,6 @@ class Event extends Component {
                 <p>{this.props.eventDescription}</p>
               </div>
               <h6>Street: </h6> <p>{this.props.eventStreet}</p>
-              <h6>Lectures: </h6> <p>{this.props.eventLectures}</p>
             </CardBody>
           </Card>
         </Collapse>

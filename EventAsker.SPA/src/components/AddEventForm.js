@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import "./Form.css";
 import axios from "axios";
 import { BASE_URL } from "../constants";
+import PropTypes from "prop-types";
 
-export default class AddEventForm extends Component {
+class AddEventForm extends Component {
   constructor(props) {
     super(props);
 
@@ -13,7 +14,7 @@ export default class AddEventForm extends Component {
       date: "",
       street: "",
       audienceKey: "",
-      cityId: 1,
+      city: "",
       success: false,
       nameSuccess: ""
     };
@@ -45,9 +46,14 @@ export default class AddEventForm extends Component {
         name: this.state.name,
         description: this.state.description,
         date: this.state.date,
+        city: this.state.city,
         street: this.state.street,
         audienceKey: this.state.audienceKey,
-        cityId: this.state.cityId
+        cityId: this.state.cityId,
+        isActive: true
+      })
+      .then(response => { 
+        this.context.router.history.push("/events");
       });
     }
   };
@@ -90,7 +96,7 @@ export default class AddEventForm extends Component {
       name: "",
       description: "",
       date: "",
-      street: "",
+      city: "",
       audienceKey: ""
     });
   }
@@ -131,7 +137,7 @@ export default class AddEventForm extends Component {
           <span style={{ color: "red" }}>*</span>
           <input
             className="form-control"
-            type="date"
+            type="datetime-local"
             name="date"
             ref="date"
             value={this.state.date}
@@ -141,7 +147,21 @@ export default class AddEventForm extends Component {
           <div className="error" id="dateError" />
         </div>
         <div className="form-group col-md-6">
-          <label id="streetLabel">Place</label>
+          <label id="cityLabel">City</label>
+          <span style={{ color: "red" }}>*</span>
+          <input
+            className="form-control"
+            type="text"
+            name="city"
+            ref="city"
+            value={this.state.city}
+            onChange={this.handleUserInput}
+            required
+          />
+          <div className="error" id="cityError" />
+        </div>
+        <div className="form-group col-md-6">
+          <label id="streetLabel">Street</label>
           <span style={{ color: "red" }}>*</span>
           <input
             className="form-control"
@@ -188,3 +208,9 @@ export default class AddEventForm extends Component {
     );
   }
 }
+
+AddEventForm.contextTypes = {
+  router: PropTypes.object.isRequired
+};
+
+export default AddEventForm;

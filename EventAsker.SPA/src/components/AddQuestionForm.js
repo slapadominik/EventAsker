@@ -5,6 +5,8 @@ import { BASE_URL } from "../constants";
 import PropTypes from "prop-types";
 import Notifications, { success } from 'react-notification-system-redux';
 import {connect} from 'react-redux';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 const notificationOpts = {
   title: 'Thank you for your question!',
@@ -21,7 +23,7 @@ class AddQuestionForm extends Component {
       question: "",
       authorName: "",
       email: "",
-      lecturerId: 1,
+      lectureId: 3,
       success: false
     };
   }
@@ -43,9 +45,10 @@ class AddQuestionForm extends Component {
           AuthorName: this.state.authorName,
           Email: this.state.email,
           EventId: this.props.match.params.id,
-          LecturerId: this.state.lecturerId,
+          LectureId: this.state.lectureId,
         })
         .then(response => {
+
           this.addNotification();
         })
     }
@@ -121,10 +124,21 @@ class AddQuestionForm extends Component {
   }
 
   render() {
+    const options = [
+      { value: 'one', label: 'One' },
+      { value: 'two', label: 'Two', className: 'myOptionClassName' } 
+    ]
+    const defaultOption = options[1]
+
     const {notifications} = this.props;
     return (
       <div className="containter">
         <form noValidate>
+          <div className="row">
+            <div className="form-group col-md-6">
+            <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
+            </div>
+          </div>
           <div className="row">
             <div className="form-group col-md-6">
               <label id="questionLabel">
@@ -198,6 +212,7 @@ class AddQuestionForm extends Component {
   }
 }
 
+
 AddQuestionForm.contextTypes = {
   store: PropTypes.object
 };
@@ -205,6 +220,7 @@ AddQuestionForm.contextTypes = {
 AddQuestionForm.propTypes = {
   notifications: PropTypes.array
 };
+
 
 export default connect(
   state => ({ notifications: state.notifications })

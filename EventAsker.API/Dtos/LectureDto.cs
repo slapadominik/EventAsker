@@ -10,6 +10,6 @@ namespace EventAsker.API.Dtos
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public int EventId { get; set; }
-        public LecturerDto Lecturer { get; set; }
+        public string LecturerName { get; set; }
     }
 }

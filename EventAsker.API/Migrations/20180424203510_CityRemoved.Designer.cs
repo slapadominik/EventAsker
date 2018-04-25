@@ -11,9 +11,10 @@ using System;
 namespace EventAsker.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180424203510_CityRemoved")]
+    partial class CityRemoved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,8 +55,6 @@ namespace EventAsker.API.Migrations
                     b.Property<string>("Description")
                         .IsRequired();
 
-                    b.Property<bool>("IsActive");
-
                     b.Property<string>("Name")
                         .IsRequired();
 
@@ -79,8 +78,7 @@ namespace EventAsker.API.Migrations
 
                     b.Property<int>("EventId");
 
-                    b.Property<string>("LecturerName")
-                        .IsRequired();
+                    b.Property<int>("LecturerId");
 
                     b.Property<DateTime>("StartTime");
 
@@ -91,7 +89,27 @@ namespace EventAsker.API.Migrations
 
                     b.HasIndex("EventId");
 
+                    b.HasIndex("LecturerId");
+
                     b.ToTable("Lecture");
+                });
+
+            modelBuilder.Entity("EventAsker.API.Model.Lecturer", b =>
+                {
+                    b.Property<int>("LecturerId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Company");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.HasKey("LecturerId");
+
+                    b.ToTable("Lecturer");
                 });
 
             modelBuilder.Entity("EventAsker.API.Model.Question", b =>
@@ -105,7 +123,7 @@ namespace EventAsker.API.Migrations
 
                     b.Property<int>("EventId");
 
-                    b.Property<int?>("LectureId");
+                    b.Property<int>("LecturerId");
 
                     b.Property<string>("QuestionContent")
                         .IsRequired();
@@ -114,7 +132,7 @@ namespace EventAsker.API.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.HasIndex("LectureId");
+                    b.HasIndex("LecturerId");
 
                     b.ToTable("Question");
                 });
@@ -125,6 +143,11 @@ namespace EventAsker.API.Migrations
                         .WithMany("Lectures")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("EventAsker.API.Model.Lecturer", "Lecturer")
+                        .WithMany("Lectures")
+                        .HasForeignKey("LecturerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("EventAsker.API.Model.Question", b =>
@@ -134,9 +157,10 @@ namespace EventAsker.API.Migrations
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("EventAsker.API.Model.Lecture", "Lecture")
+                    b.HasOne("EventAsker.API.Model.Lecturer", "Lecturer")
                         .WithMany("Questions")
-                        .HasForeignKey("LectureId");
+                        .HasForeignKey("LecturerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

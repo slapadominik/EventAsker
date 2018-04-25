@@ -9,10 +9,8 @@ namespace EventAsker.API.Context
 
         //enable lazy loading
         public virtual DbSet<Event> Events {get; set;}
-        public virtual DbSet<City> Cities {get; set;}
         public virtual DbSet<Admin> Admins {get; set;}
         public virtual DbSet<Question> Question {get; set;}
-        public virtual DbSet<Lecturer> Lecturer {get; set;}
 
         
     }

@@ -17,6 +17,7 @@ export default class ShowEvents extends Component {
 
   getEvents(url) {
     return axios.get(url).then(response => {
+        console.log(response);
       this.setState({
         events: response.data
       });
@@ -46,7 +47,8 @@ export default class ShowEvents extends Component {
         eventDescription={event.description}
         eventStreet={event.street}
         eventCity={event.city}
-        eventDate={event.date}
+        eventDate={this.getDate(event.date)}
+        eventTime={this.getTime(event.date)}
         eventLectures={event.lectures}
         eventQuestions={event.questions}
         onDelete={this.deleteEvent}
@@ -54,6 +56,13 @@ export default class ShowEvents extends Component {
     ));
   };
 
+  getDate = (dateTimePickerText) => {
+      return dateTimePickerText.substr(0, dateTimePickerText.indexOf('T'));
+  }
+
+  getTime = (dateTimePickerText) => {
+      return dateTimePickerText.split('T')[1].slice(0, -3);
+  }
   render() {
     return (
       <div>
