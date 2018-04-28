@@ -3,12 +3,25 @@ import { Collapse, CardBody, Card } from "reactstrap";
 import "../index.css";
 import "./Event.css";
 import axios from "axios";
-import { BASE_URL } from "../constants";
+import { BASE_URL, modalEnterEventPasswordToAskQuestion } from "../constants";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import LinkButton from "./LinkButton";
 import Question from "./Question";
+import Modal from 'react-modal';
+
+const modalEnterEventPasswordToAskQuestionStyle = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    width: '500px',
+  }
+};
 
 class Event extends Component {
   constructor(props) {
@@ -20,10 +33,41 @@ class Event extends Component {
       eventCity: "Wawa",
       eventDate: "21/11/1999",
       eventLectures: [],
-      eventQustions: [],
+      eventQuestions: [],
       collapse: false,
-      questionCollapse: false
+      questionCollapse: false,
+      modalIsOpen: false,
+      password: "",
     };
+  }
+
+  handleSubmit = e => {
+    console.log(this.props.eventId);
+    console.log(this.state.password);
+    axios.get(BASE_URL + "/event/checkeventpassword", { EventId: this.props.eventId, AudienceKey: this.state.password })
+      .then(response => {
+        console.log(response);
+      })
+  };
+
+  handleChangePassword = e => {
+    this.setState({ password: e.target.value });
+  };
+
+  openModal = () => {
+    this.setState({ modalIsOpen: true });
+  }
+
+  afterOpenModal = () => {
+    // references are now sync'd and can be accessed.
+    // this.subtitle.style.color = '#f00';
+  }
+
+  closeModal = () => {
+    this.setState({ modalIsOpen: false, password: "" });
+  }
+
+  showDescription = () => {
   }
 
   mapQuestionsToListItems = () => {
@@ -39,7 +83,7 @@ class Event extends Component {
 
   toggle = () => {
     this.setState({ collapse: !this.state.collapse });
-    };
+  };
 
   toggleQuestions = () => {
     this.setState({ questionCollapse: !this.state.questionCollapse });
@@ -74,7 +118,28 @@ class Event extends Component {
           <button className="btn btn-primary" onClick={this.toggle}>
             Description
           </button>
-          <LinkButton to={location}>Ask Question</LinkButton>
+          <button className="btn btn-success" onClick={this.openModal}>Ask Question</button>
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}
+            style={modalEnterEventPasswordToAskQuestionStyle}
+            contentLabel="Event password"
+          >
+            <h2 ref={subtitle => this.subtitle}>{this.props.eventName}</h2>
+            <dic className="form-group">
+              <label for="password">Event password:</label>
+              <input
+                className="form-control"
+                type="password"
+                value={this.state.password}
+                onChange={this.handleChangePassword}
+                required
+              />
+              <button onClick={this.closeModal} className="btn btn-danger col-2">Cancel</button>
+              <button onClick={this.handleSubmit} className="btn btn-info">Confirm</button>
+            </dic>
+          </Modal>
           {isAuthenticated ? deleteButton : null}
         </div>
 

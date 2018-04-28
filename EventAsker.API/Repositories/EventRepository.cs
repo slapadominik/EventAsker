@@ -44,5 +44,15 @@ namespace EventAsker.API.Repositories
              eventToDelete.IsActive = false;
             _context.SaveChanges();
         }
+
+        public bool CheckEventPassword(CheckEventPasswordDto dto)
+        {
+            var eventToCheck = _context.Events
+                .Single(e => e.EventId == dto.EventId);
+
+            if (eventToCheck.AudienceKey == dto.AudienceKey)
+                return true;
+            return false;
+        }
     }
 }

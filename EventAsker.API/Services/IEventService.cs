@@ -11,5 +11,6 @@ namespace EventAsker.API.Interfaces
         List<EventDto> GetEvents();
         void AddEvent(AddEventDto dto);
         void DeleteEvent(DeleteEventDto dto);
+        bool CheckEventPassword(CheckEventPasswordDto dto);
     }
 }

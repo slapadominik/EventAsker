@@ -17,6 +17,5 @@ namespace EventAsker.API.Dtos
         public string LecturerName {get; set;}
         public int? LectureId {get; set;}
         public bool IsActive {get; set;}
-        
     }
 }
