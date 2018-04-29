@@ -60,7 +60,7 @@ namespace EventAsker.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("CheckEventPassword")]
+        [HttpPut("CheckEventPassword")]
         public IActionResult CheckEventPassword([FromBody]CheckEventPasswordDto dto)
         {
             if (!ModelState.IsValid)    

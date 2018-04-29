@@ -38,16 +38,21 @@ class Event extends Component {
       questionCollapse: false,
       modalIsOpen: false,
       password: "",
+      responseStatus: 0,
     };
+  }
+
+  componentWillMount() {
+    Modal.setAppElement('body');
   }
 
   handleSubmit = e => {
     console.log(this.props.eventId);
     console.log(this.state.password);
-    axios.get(BASE_URL + "/event/checkeventpassword", { EventId: this.props.eventId, AudienceKey: this.state.password })
+    axios.put(BASE_URL + "/event/checkeventpassword", { EventId: this.props.eventId, AudienceKey: this.state.password })
       .then(response => {
-        console.log(response);
-      })
+        responseStatus: response.status;
+      });
   };
 
   handleChangePassword = e => {
@@ -104,6 +109,7 @@ class Event extends Component {
         </button>
       </React.Fragment>
     );
+
     const location = "/addQuestion/" + this.props.eventId;
 
     return (
@@ -127,8 +133,8 @@ class Event extends Component {
             contentLabel="Event password"
           >
             <h2 ref={subtitle => this.subtitle}>{this.props.eventName}</h2>
-            <dic className="form-group">
-              <label for="password">Event password:</label>
+            <div className="form-group">
+              <label htmlFor="password">Event password:</label>
               <input
                 className="form-control"
                 type="password"
@@ -137,8 +143,8 @@ class Event extends Component {
                 required
               />
               <button onClick={this.closeModal} className="btn btn-danger col-2">Cancel</button>
-              <button onClick={this.handleSubmit} className="btn btn-info">Confirm</button>
-            </dic>
+              <button onClick={(event) => { this.handleSubmit(); this.closeModal(); }} className="btn btn-info">Confirm</button>
+            </div>
           </Modal>
           {isAuthenticated ? deleteButton : null}
         </div>
@@ -176,3 +182,4 @@ function mapStateToProps(state) {
   };
 }
 export default connect(mapStateToProps)(Event);
+
