@@ -3,11 +3,9 @@ import { Collapse, CardBody, Card } from "reactstrap";
 import "../index.css";
 import "./Event.css";
 import axios from "axios";
-import { BASE_URL, modalEnterEventPasswordToAskQuestion } from "../constants";
+import { BASE_URL } from "../constants";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link, Route } from "react-router-dom";
-import LinkButton from "./LinkButton";
 import Question from "./Question";
 import Modal from 'react-modal';
 
@@ -38,6 +36,7 @@ class Event extends Component {
       questionCollapse: false,
       modalIsOpen: false,
       password: "",
+      isEnteredPasswordInvalid: false,
     };
   }
 
@@ -46,15 +45,17 @@ class Event extends Component {
   }
 
   handleSubmit = e => {
-    console.log(this.props.eventId);
-    console.log(this.state.password);
     axios.put(BASE_URL + "/event/checkeventpassword", { EventId: this.props.eventId, AudienceKey: this.state.password })
       .then(response => {
         if (response.status === 200) {
-          console.log("response status 200");
+          window.location = "/addQuestion/" + this.props.eventId;
+          return;
         }
       })
-  };
+      .catch(() => {
+        this.setState({ isEnteredPasswordInvalid: true });
+      });
+  }
 
   handleChangePassword = e => {
     this.setState({ password: e.target.value });
@@ -68,7 +69,7 @@ class Event extends Component {
   }
 
   closeModal = () => {
-    this.setState({ modalIsOpen: false, password: "" });
+    this.setState({ modalIsOpen: false, password: "", isEnteredPasswordInvalid: false });
   }
 
   showDescription = () => {
@@ -108,8 +109,15 @@ class Event extends Component {
         </button>
       </React.Fragment>
     );
+    const wrongPasswordText = (
+      <React.Fragment>
+        <div className="alert alert-danger">
+          <strong>Access denied!</strong> Entered event password is invalid.
+        </div>
+      </React.Fragment>
 
-    const location = "/addQuestion/" + this.props.eventId;
+    )
+
 
     return (
       <div className="row-flex card">
@@ -142,7 +150,8 @@ class Event extends Component {
                 required
               />
               <button onClick={this.closeModal} className="btn btn-danger col-2">Cancel</button>
-              <button onClick={(event) => { this.handleSubmit(); this.closeModal(); }} className="btn btn-info">Confirm</button>
+              <button onClick={(event) => { this.handleSubmit() }} className="btn btn-info">Confirm</button>
+              {this.state.isEnteredPasswordInvalid ? wrongPasswordText : null}
             </div>
           </Modal>
           {isAuthenticated ? deleteButton : null}
