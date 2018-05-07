@@ -11,7 +11,7 @@ import LinkButton from "./LinkButton";
 import Question from "./Question";
 import { lecture } from '../actions/lecturesAction';
 import { bindActionCreators } from 'redux';
-
+import DeleteModal from "./DeleteModal"
 
 class Event extends Component {
   constructor(props) {
@@ -25,7 +25,8 @@ class Event extends Component {
       eventLectures: props.eventLectures,
       eventQustions: [],
       collapse: false,
-      questionCollapse: false
+      questionCollapse: false,
+      modal:false
     };
   }
 
@@ -58,19 +59,13 @@ class Event extends Component {
     const { isAuthenticated } = this.props.auth;
     const deleteButton = (
       <React.Fragment>
-        <button
-          className="btn btn-danger"
-          onClick={() => this.props.onDelete(this.props.eventId)}
-        >
-          Delete
-        </button>
+        <DeleteModal eventId={this.props.eventId} isOpen={this.state.modal}/>
         <button className="btn btn-primary" onClick={this.toggleQuestions}>
           Questions
         </button>
       </React.Fragment>
     );
-    
-    //linkButon zamienić na router push
+
     return (
       <div className="row-flex card">
         <div>
