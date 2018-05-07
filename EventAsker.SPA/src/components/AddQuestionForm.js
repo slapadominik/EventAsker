@@ -4,7 +4,7 @@ import axios from "axios";
 import { BASE_URL } from "../constants";
 import PropTypes from "prop-types";
 import Notifications, { success } from 'react-notification-system-redux';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Dropdown from 'react-dropdown';
 import { lecture, lectureAction } from '../actions/lecturesAction';
 import 'react-dropdown/style.css';
@@ -57,13 +57,13 @@ class AddQuestionForm extends Component {
       this.setState({ success: true });
 
       this.clearInputs();
-      axios.post(BASE_URL+'/question/addQuestion', {
-          QuestionContent: this.state.question,
-          AuthorName: this.state.authorName,
-          Email: this.state.email,
-          EventId: this.props.match.params.id,
-          LectureId: this.state.lectureId,
-        })
+      axios.post(BASE_URL + '/question/addQuestion', {
+        QuestionContent: this.state.question,
+        AuthorName: this.state.authorName,
+        Email: this.state.email,
+        EventId: this.props.match.params.id,
+        LectureId: this.state.lectureId,
+      })
         .then(response => {
 
           this.addNotification();
@@ -71,13 +71,13 @@ class AddQuestionForm extends Component {
     }
   };
 
-  dispatchNotification = (fn, timeout) =>{
+  dispatchNotification = (fn, timeout) => {
     setTimeout(() => {
       this.context.store.dispatch(fn(notificationOpts));
     }, timeout);
   }
 
-  addNotification = ()=>{
+  addNotification = () => {
     this.dispatchNotification(success, 250);
   }
 
@@ -99,11 +99,11 @@ class AddQuestionForm extends Component {
     textareas.forEach(textarea => {
       const isQuestionValid = this.showInputError("question");
 
-      if(!isQuestionValid){
+      if (!isQuestionValid) {
         isFormValid = false;
         textarea.classList.add("invalid");
       }
-      else{
+      else {
         textarea.classList.remove("invalid");
         textarea.classList.add("valid");
       }
@@ -143,17 +143,17 @@ class AddQuestionForm extends Component {
   render() {
     const options = [
       { value: 'one', label: 'One' },
-      { value: 'two', label: 'Two', className: 'myOptionClassName' } 
+      { value: 'two', label: 'Two', className: 'myOptionClassName' }
     ]
     const defaultOption = options[1]
 
-    const {notifications} = this.props;
+    const { notifications } = this.props;
     return (
       <div className="containter">
         <form noValidate>
           <div className="row">
             <div className="form-group col-md-6">
-            <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
+              <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
             </div>
           </div>
           <div className="row">
@@ -212,7 +212,7 @@ class AddQuestionForm extends Component {
                 onClick={this.handleSubmit}
               >
                 Ask
-              </button>             
+              </button>
             </div>
             <div className="note">
               <h6>
@@ -222,7 +222,7 @@ class AddQuestionForm extends Component {
               </h6>
             </div>
           </div>
-        </form>    
+        </form>
         <Notifications notifications={notifications} />
       </div>
     );
