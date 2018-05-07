@@ -6,7 +6,9 @@ import PropTypes from "prop-types";
 import Notifications, { success } from 'react-notification-system-redux';
 import {connect} from 'react-redux';
 import Dropdown from 'react-dropdown';
+import { lecture, lectureAction } from '../actions/lecturesAction';
 import 'react-dropdown/style.css';
+
 
 const notificationOpts = {
   title: 'Thank you for your question!',
@@ -15,18 +17,33 @@ const notificationOpts = {
   autoDismiss: 3,
 };
 
+
+const mapStateToProps = function(state) {
+  return {
+     notifications: state.notifications,
+     lectures: state
+  }
+}
+
+
 class AddQuestionForm extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       question: "",
       authorName: "",
       email: "",
       lectureId: 3,
-      success: false
+      success: false,
     };
   }
+
+  componentDidMount(){
+    console.log(this.props);
+  }
+
+  
+  
   handleUserInput = e => {
     this.setState({ [e.target.name]: e.target.value });
     this.showInputError(e.target.name);
@@ -218,10 +235,10 @@ AddQuestionForm.contextTypes = {
 };
 
 AddQuestionForm.propTypes = {
-  notifications: PropTypes.array
+  notifications: PropTypes.array,
 };
 
-
-export default connect(
-  state => ({ notifications: state.notifications })
-)(AddQuestionForm);
+export default connect(mapStateToProps, null)(AddQuestionForm);
+/*
+*
+*/

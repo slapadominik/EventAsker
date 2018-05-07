@@ -1,19 +1,20 @@
-import {SET_CURRENT_USER} from '../actions/types';
+import {SET_CURRENT_USER, SET_LECTURES} from '../actions/actionTypes';
 import isEmpty from 'lodash/isEmpty';
 
 const initialState = {
     isAuthenticated: false,
-    user: {}
+    user: {},
+    lectures: []
 }
 
 export default (state = initialState, action = {}) => {
     switch(action.type) {
         case SET_CURRENT_USER:
             return {
+                ...state,
                 isAuthenticated: !isEmpty(action.user),
                 user: action.user
             };
-        
         default: return state;
     }
 }

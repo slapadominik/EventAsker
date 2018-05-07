@@ -58,5 +58,7 @@ namespace EventAsker.API.Controllers
             _eventService.DeleteEvent(deleteEventDto);
             return Ok(deleteEventDto);
         }
+
+        
     }
 }

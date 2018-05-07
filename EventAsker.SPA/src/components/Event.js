@@ -9,17 +9,20 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import LinkButton from "./LinkButton";
 import Question from "./Question";
+import { lecture } from '../actions/lecturesAction';
+import { bindActionCreators } from 'redux';
+
 
 class Event extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventName: "Spotkanko",
-      eventDescription: "januszowe",
-      eventStreet: "poziomkowa",
-      eventCity: "Wawa",
+      eventName: "",
+      eventDescription: "",
+      eventStreet: "",
+      eventCity: "",
       eventDate: "21/11/1999",
-      eventLectures: [],
+      eventLectures: props.eventLectures,
       eventQustions: [],
       collapse: false,
       questionCollapse: false
@@ -45,6 +48,12 @@ class Event extends Component {
     this.setState({ questionCollapse: !this.state.questionCollapse });
   };
 
+  onClickAddQuestion = (e) => {
+    const location = "/addQuestion/" + this.props.eventId;
+    this.context.router.history.push(location);
+    this.props.lecture(this.state.eventLectures);
+  }
+
   render() {
     const { isAuthenticated } = this.props.auth;
     const deleteButton = (
@@ -60,8 +69,8 @@ class Event extends Component {
         </button>
       </React.Fragment>
     );
-    const location = "/addQuestion/" + this.props.eventId;
-
+    
+    //linkButon zamienić na router push
     return (
       <div className="row-flex card">
         <div>
@@ -74,7 +83,7 @@ class Event extends Component {
           <button className="btn btn-primary" onClick={this.toggle}>
             Description
           </button>
-          <LinkButton to={location}>Ask Question</LinkButton>
+          <button className="btn btn-success" onClick={this.onClickAddQuestion}>Add Question</button>
           {isAuthenticated ? deleteButton : null}
         </div>
 
@@ -105,9 +114,15 @@ class Event extends Component {
 Event.propTypes = {
   auth: PropTypes.object.isRequired
 };
+
+Event.contextTypes = {
+  router: PropTypes.object.isRequired
+};
+
 function mapStateToProps(state) {
   return {
     auth: state.auth
   };
 }
-export default connect(mapStateToProps)(Event);
+
+export default connect(mapStateToProps, dispatch => bindActionCreators({ lecture }, dispatch))(Event);
