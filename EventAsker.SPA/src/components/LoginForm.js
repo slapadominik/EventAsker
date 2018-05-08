@@ -48,7 +48,7 @@ class LoginForm extends Component {
               type="password"
               value={this.state.password}
               onChange={this.handleChangePassword}
-              reuired
+              required
             />
           </div>
           <div className="col-md-2">

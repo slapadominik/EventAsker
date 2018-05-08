@@ -22,8 +22,7 @@ namespace EventAsker.API.Repositories
 
         public List<EventDto> GetEvents()
         {
-
-            List<Event> eventList = _context.Events.Include(e => e.City).Include(e => e.Questions).Include(e => e.Lectures).ToList();
+            List<Event> eventList = _context.Events.Where(x => x.IsActive).Include(e => e.Questions).Include(e => e.Lectures).ToList();
             List<EventDto> eventListDto = new List<EventDto>();
             eventListDto = _mapper.Map<List<Event>,List<EventDto>>(eventList);
             return eventListDto;
@@ -41,9 +40,19 @@ namespace EventAsker.API.Repositories
         {
             var eventToDelete = _context.Events
                 .Single(e => e.EventId == dto.EventId);
-
-            _context.Events.Remove(eventToDelete);
+            
+             eventToDelete.IsActive = false;
             _context.SaveChanges();
+        }
+
+        public bool CheckEventPassword(CheckEventPasswordDto dto)
+        {
+            var eventToCheck = _context.Events
+                .Single(e => e.EventId == dto.EventId);
+
+            if (eventToCheck.AudienceKey == dto.AudienceKey)
+                return true;
+            return false;
         }
     }
 }

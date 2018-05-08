@@ -12,7 +12,7 @@ namespace EventAsker.API.Dtos
         public string Description { get; set; }
         public string AudienceKey { get; set; }
 
-        public CityDto City{ get; set; }
+        public string City {get; set;}
 
         public ICollection<LectureDto> Lectures { get; set; }
         public ICollection<QuestionDto> Questions { get; set; }

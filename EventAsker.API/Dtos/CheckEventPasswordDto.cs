@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace EventAsker.API.Dtos
 {
-    public class CityDto
+    public class CheckEventPasswordDto
     {
-        public int CityId { get; set; }
-        public string CityName { get; set; }
+        public int EventId { get; set; }
+        public string AudienceKey { get; set; }
     }
 }

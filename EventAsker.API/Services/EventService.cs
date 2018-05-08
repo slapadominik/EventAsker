@@ -34,5 +34,10 @@ namespace EventAsker.API.Services
         {
             _repository.DeleteEvent(dto);
         }
+
+        public bool CheckEventPassword(CheckEventPasswordDto dto)
+        {
+            return _repository.CheckEventPassword(dto);
+        }
     }
 }

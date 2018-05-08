@@ -13,16 +13,13 @@ namespace EventAsker.API.Model
         [Required]
         public string Street {get; set;} 
         [Required]
-        public DateTime Date {get; set;}
+        public string Date {get; set;}
         [Required]
         public string Description {get; set;}
         public string AudienceKey {get; set;}
-
-        public int CityId {get; set;}
-        public City City {get; set;}
-
+        public string City {get; set;}
+        public bool IsActive {get; set;}
         public ICollection<Lecture> Lectures { get; set; }
-
         public ICollection<Question> Questions { get; set; }
     }
 }

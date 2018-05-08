@@ -38,7 +38,7 @@ namespace EventAsker.API.Controllers
 
         [HttpPost("AddEvent")]
         public IActionResult AddEvent([FromBody]AddEventDto dto)
-        {
+         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -57,6 +57,20 @@ namespace EventAsker.API.Controllers
             };
             _eventService.DeleteEvent(deleteEventDto);
             return Ok(deleteEventDto);
+        }
+
+        [AllowAnonymous]
+        [HttpPut("CheckEventPassword")]
+        public IActionResult CheckEventPassword([FromBody]CheckEventPasswordDto dto)
+        {
+            if (!ModelState.IsValid)    
+                return BadRequest(ModelState);
+
+            var isPasswordCorrect = _eventService.CheckEventPassword(dto);
+            if(isPasswordCorrect)
+                return Ok();
+
+            return Unauthorized();
         }
     }
 }

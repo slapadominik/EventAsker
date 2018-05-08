@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace EventAsker.API.Model
@@ -15,11 +16,10 @@ namespace EventAsker.API.Model
         public DateTime StartTime { get; set; }
         [Required]
         public DateTime EndTime { get; set; }
-
+        [Required]
+        public string LecturerName {get; set;}
         public int EventId { get; set; }
         public Event Event { get; set; }
-
-        public int LecturerId { get; set; }
-        public Lecturer Lecturer { get; set; }
+        public ICollection<Question> Questions { get; set; }  
     }
 }
