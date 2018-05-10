@@ -91,7 +91,7 @@ export default class RegisterForm extends Component {
     return (
       <div className="form-center">
       <form onSubmit={this.handleSubmit} noValidate>
-        <div className="form-group col-md-8">
+        <div className="form-group col-md-offset-2">
           <label>Username<span style={{color: 'red'}}>*</span></label>
             <input
               className="form-control"
@@ -101,7 +101,7 @@ export default class RegisterForm extends Component {
             />
           <ul>{usernameLi}</ul>
         </div>
-        <div className="form-group col-md-8">
+        <div className="form-group col-md-offset-2">
           <label>Password<span style={{color: 'red'}}>*</span></label>
             <input
               className="form-control"
@@ -111,7 +111,7 @@ export default class RegisterForm extends Component {
             />          
           <ul>{passwordLi}</ul>
         </div>
-        <div className="col-md-2">
+        <div className="col-md-offset-2">
           <button
             id="sumbitBtn"
             className="btn btn-primary"

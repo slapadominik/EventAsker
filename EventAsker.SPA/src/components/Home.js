@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import logo from "../images/conference_home.jpg";
 import "../styles/index.css";
+import Header from "./Header";
+import Footer from "./Footer";
 
 export default class Home extends Component {
   render() {

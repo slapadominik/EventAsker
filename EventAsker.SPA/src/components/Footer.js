@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import "../styles/Footer.css";
+import "../styles/index.css";
 
 class Footer extends Component {
     render(){
         return(
-        <footer className="mainfooter">
-        <div className="footer-bottom">
+            <footer className="footer">
             <div className="container">
-                <p>&copy; Copyright 2018.  All rights reserved.</p>
+              <span className="text-muted">Eventasker.pl&#169; {new Date().getFullYear()}</span>
             </div>
-        </div>
-        </footer>
+          </footer>
         );
     }
 }

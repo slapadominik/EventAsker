@@ -33,7 +33,7 @@ class LoginForm extends Component {
     return (
       <div className="form-center">
       <form onSubmit={this.handleSubmit} noValidate>
-          <div className="form-group col-md-8">
+          <div className="form-group col-md-offset-2">
             <label>Username:</label>
             <input
               className="form-control"
@@ -43,7 +43,7 @@ class LoginForm extends Component {
               required
             />
           </div>
-          <div className="form-group col-md-8">
+          <div className="form-group col-md-offset-2">
             <label>Password:</label>
             <input
               className="form-control"
@@ -53,11 +53,12 @@ class LoginForm extends Component {
               required
             />
           </div>
-          <div className="col-md-2">
+          <div className="col-md-offset-2">
           <button className="btn btn-primary" onClick={this.handleSubmit}>
           Login
           </button>
           </div>
+        
       </form>
       </div>
     );

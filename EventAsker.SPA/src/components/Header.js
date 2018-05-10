@@ -13,53 +13,50 @@ class Header extends Component {
 
   render() {
     const { isAuthenticated } = this.props.auth;
-
     const adminLinks = (
       <React.Fragment>
-        <li>
-          <Link to="/addEvent">Add Event</Link>
+        <li class="nav-item">
+            <Link className="nav-link" to="/addEvent">Add Event<span className="sr-only">(current)</span></Link>
         </li>
-        <li>
-          <a href="/" onClick={this.logout}>
-            Logout
-          </a>
+        <li class="nav-item">
+          <a className="nav-link" href="/" onClick={this.logout}>Logout<span className="sr-only">(current)</span></a>
         </li>
       </React.Fragment>
     );
-
     const guestLinks = (
       <React.Fragment>
-        <li>
-          <Link to="/login">Login</Link>
+        <li className="nav-item">
+            <Link className="nav-link" to="/login">Login<span className="sr-only">(current)</span></Link>
         </li>
-        <li>
-          <Link to="/register">Register</Link>
+        <li className="nav-item">
+            <Link className="nav-link" to="/register">Register<span className="sr-only">(current)</span></Link>
         </li>
       </React.Fragment>
     );
 
     return (
-      <div className="container">
-        <nav className="navbar navbar-default">
-        <div className="container-fluid">
-          <div className="navbar-header">
-          <Link to="/">
-              <img src="images/logo.jpg" alt="EventAsker"/>
+      <nav className="navbar navbar-expand-sm navbar-light bg-light fixed-top">
+        <div className="container">
+          <Link to="/" className="navbar-brand">
+            <img  className="hidden-xs" src="images/logo.jpg" alt="EventAsker"/>
           </Link>
-          </div>
-          <ul className="nav navbar-nav flex-row">
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/events">Events</Link>
-            </li>
-            {isAuthenticated ? null : guestLinks}
-            {isAuthenticated ? adminLinks : null}
-          </ul>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarResponsive">
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item active">
+                <Link className="nav-link" to="/">Home<span class="sr-only">(current)</span></Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/events">Events<span class="sr-only">(current)</span></Link>
+              </li>
+              {isAuthenticated ? null : guestLinks}
+              {isAuthenticated ? adminLinks : null}
+            </ul>
+          </div>   
         </div>
-       </nav>
-      </div>
+      </nav>
     );
   }
 }

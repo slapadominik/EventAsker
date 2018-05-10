@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Switch } from 'react-router-dom'
-import './styles/App.css';
 import Header from "./components/Header";
 import Home from './components/Home';
 import RegisterForm from './components/RegisterForm';
@@ -14,15 +13,16 @@ import AddEventForm from './components/AddEventForm';
 import AddQuestionForm from './components/AddQuestionForm';
 import NotFound from './components/NotFound';
 import Footer from "./components/Footer";
+import "./styles/index.css";
 
 class App extends Component {
 
   render() {
     return (
       <Router>
-        <div className="site">
+        <div>
           <Header />
-          <div className="app">
+          <div className="wrapper">
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/register" component={RegisterForm} />
