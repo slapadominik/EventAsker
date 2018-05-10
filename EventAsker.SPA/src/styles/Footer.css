@@ -1,0 +1,14 @@
+.mainfooter{
+    background: #333333;
+    padding: 2em;
+    color: white;
+    min-height: 25px;
+}
+
+.footer-bottom {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+

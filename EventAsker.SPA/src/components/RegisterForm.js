@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BASE_URL } from "../constants";
-import "./Form.css";
+import "../styles/Form.css";
 
 export default class RegisterForm extends Component {
   constructor(props) {
@@ -89,31 +89,26 @@ export default class RegisterForm extends Component {
       <li key={i}>{msg}</li>
     ));
     return (
+      <div className="form-center">
       <form onSubmit={this.handleSubmit} noValidate>
-        <div className="form-group col-md-3">
-          <label>
-            Username<span style={{color: 'red'}}>*</span>
-            </label>
+        <div className="form-group col-md-8">
+          <label>Username<span style={{color: 'red'}}>*</span></label>
             <input
-            className="form-control"
+              className="form-control"
               type="text"
               value={this.state.username}
               onChange={this.handleChangeUsername}
             />
-          
           <ul>{usernameLi}</ul>
         </div>
-        <div className="form-group col-md-3">
-          <label>
-            Password<span style={{color: 'red'}}>*</span>
-            </label>
+        <div className="form-group col-md-8">
+          <label>Password<span style={{color: 'red'}}>*</span></label>
             <input
-            className="form-control"
+              className="form-control"
               type="password"
               value={this.state.password}
               onChange={this.handleChangePassword}
-            />
-          
+            />          
           <ul>{passwordLi}</ul>
         </div>
         <div className="col-md-2">
@@ -126,11 +121,10 @@ export default class RegisterForm extends Component {
           </button>
         </div>
         <h5>
-          {this.state.success
-            ? "Zarejestrowano użytkownika ".concat(this.state.usernameSuccess)
-            : ""}
+          {this.state.success ? "Zarejestrowano użytkownika ".concat(this.state.usernameSuccess) : ""}
         </h5>
       </form>
+      </div>
     );
   }
 }

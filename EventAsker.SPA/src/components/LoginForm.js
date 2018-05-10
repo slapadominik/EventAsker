@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { login } from "../actions/userAction";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import "./Form.css";
+import "../styles/Form.css";
+import "../styles/index.css";
 
 class LoginForm extends Component {
   constructor(props) {
@@ -30,8 +31,9 @@ class LoginForm extends Component {
 
   render() {
     return (
+      <div className="form-center">
       <form onSubmit={this.handleSubmit} noValidate>
-          <div className="form-group col-md-3">
+          <div className="form-group col-md-8">
             <label>Username:</label>
             <input
               className="form-control"
@@ -41,7 +43,7 @@ class LoginForm extends Component {
               required
             />
           </div>
-          <div className="form-group col-md-3">
+          <div className="form-group col-md-8">
             <label>Password:</label>
             <input
               className="form-control"
@@ -57,6 +59,7 @@ class LoginForm extends Component {
           </button>
           </div>
       </form>
+      </div>
     );
   }
 }

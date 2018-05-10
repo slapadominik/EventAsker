@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "../index.css";
+import "../styles/index.css";
 import { logout } from "../actions/userAction";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -39,12 +39,13 @@ class Header extends Component {
     );
 
     return (
-      <nav className="navbar navbar-default">
+      <div className="container">
+        <nav className="navbar navbar-default">
         <div className="container-fluid">
           <div className="navbar-header">
-            <Link className="navbar-brand" to="/">
-              EventAsker
-            </Link>
+          <Link to="/">
+              <img src="images/logo.jpg" alt="EventAsker"/>
+          </Link>
           </div>
           <ul className="nav navbar-nav flex-row">
             <li>
@@ -57,7 +58,8 @@ class Header extends Component {
             {isAuthenticated ? adminLinks : null}
           </ul>
         </div>
-      </nav>
+       </nav>
+      </div>
     );
   }
 }

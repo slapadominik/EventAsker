@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Collapse, CardBody, Card } from "reactstrap";
-import "../index.css";
-import "./Event.css";
+import "../styles/index.css";
+import "../styles/Event.css";
 import axios from "axios";
 import { BASE_URL } from "../constants";
 import PropTypes from "prop-types";
@@ -133,9 +133,7 @@ class Event extends Component {
           <h6>{this.props.eventTime}</h6>
         </div>
         <div className="btn-group-justified" align="right" role="group">
-          <button className="btn btn-primary" onClick={this.toggle}>
-            Description
-          </button>
+          <button className="btn btn-primary" onClick={this.toggle}> Description</button>
           <button className="btn btn-success" onClick={this.openModal}>Ask Question</button>
           <Modal
             isOpen={this.state.modalIsOpen}

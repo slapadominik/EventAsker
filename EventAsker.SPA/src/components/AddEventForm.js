@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Form.css";
+import "../styles/Form.css";
 import axios from "axios";
 import { BASE_URL } from "../constants";
 import PropTypes from "prop-types";

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Form.css";
+import "../styles/Form.css";
 import axios from "axios";
 import { BASE_URL } from "../constants";
 import PropTypes from "prop-types";
@@ -149,7 +149,7 @@ class AddQuestionForm extends Component {
 
     const { notifications } = this.props;
     return (
-      <div className="containter">
+      <div className="form-center">
         <form noValidate>
           <div className="row">
             <div className="form-group col-md-6">
@@ -158,9 +158,7 @@ class AddQuestionForm extends Component {
           </div>
           <div className="row">
             <div className="form-group col-md-6">
-              <label id="questionLabel">
-                Question
-              </label>
+              <label id="questionLabel">Question</label>
               <span style={{ color: "red" }}>*</span>
               <textarea
                 className="form-control"
@@ -216,9 +214,7 @@ class AddQuestionForm extends Component {
             </div>
             <div className="note">
               <h6>
-                {this.state.success
-                  ? "Question added"
-                  : ""}
+                {this.state.success ? "Question added" : ""}
               </h6>
             </div>
           </div>
