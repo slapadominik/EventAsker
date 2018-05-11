@@ -7,4 +7,41 @@
 
 .card {
   margin-top: 10px;
+  min-height: 200px;
+  margin-right: 0;
+}
+
+.card-img-top {
+  width: 100%;
+  height: auto ;
+  object-fit: cover;
+}
+
+.card-buttons {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  width: 10rem;
+}
+
+img{
+  width:100%;
+  height:auto;
+}
+
+.card-img-top{
+  width:100%;
+  height:auto;
+}
+
+.card-event{
+  margin-bottom: 30px;
+}
+
+.event-info{
+  padding: 15px;
+}
+
+.btn {
+  margin-top: 5px !important;
+  margin-bottom: 5px;
 }

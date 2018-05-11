@@ -15,10 +15,13 @@ class Header extends Component {
     const { isAuthenticated } = this.props.auth;
     const adminLinks = (
       <React.Fragment>
-        <li class="nav-item">
+        <li className="nav-item">
             <Link className="nav-link" to="/addEvent">Add Event<span className="sr-only">(current)</span></Link>
         </li>
-        <li class="nav-item">
+        <li className="nav-item">
+            <Link className="nav-link" to="/register">Register<span className="sr-only">(current)</span></Link>
+        </li>
+        <li className="nav-item">
           <a className="nav-link" href="/" onClick={this.logout}>Logout<span className="sr-only">(current)</span></a>
         </li>
       </React.Fragment>
@@ -26,10 +29,7 @@ class Header extends Component {
     const guestLinks = (
       <React.Fragment>
         <li className="nav-item">
-            <Link className="nav-link" to="/login">Login<span className="sr-only">(current)</span></Link>
-        </li>
-        <li className="nav-item">
-            <Link className="nav-link" to="/register">Register<span className="sr-only">(current)</span></Link>
+            <Link className="nav-link" to="/adminlogin">Login<span className="sr-only">(current)</span></Link>
         </li>
       </React.Fragment>
     );
@@ -45,11 +45,11 @@ class Header extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item active">
-                <Link className="nav-link" to="/">Home<span class="sr-only">(current)</span></Link>
+              <li className="nav-item">
+                <Link className="nav-link" to="/">Home<span className="sr-only">(current)</span></Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/events">Events<span class="sr-only">(current)</span></Link>
+                <Link className="nav-link" to="/events">Events<span className="sr-only">(current)</span></Link>
               </li>
               {isAuthenticated ? null : guestLinks}
               {isAuthenticated ? adminLinks : null}

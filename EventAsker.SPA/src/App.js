@@ -20,19 +20,17 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div className="app">
           <Header />
-          <div className="wrapper">
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/register" component={RegisterForm} />
-            <Route path="/login" component={LoginForm} />
+            <Route path="/adminlogin" component={LoginForm} />
             <Route path="/events" component={ShowEvents} />
             <Route path="/addEvent" component={AddEventForm}/>
             <Route path="/addQuestion/:id" component={AddQuestionForm} />  
             <Route path="*" component={NotFound} />
           </Switch>
-          </div>
           <Footer/>
         </div>
       </Router>

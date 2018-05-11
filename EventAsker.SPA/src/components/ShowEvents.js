@@ -66,10 +66,12 @@ export default class ShowEvents extends Component {
   }
   render() {
     return (
-      <div className="container">
-        <div className="events-group">
-          <h2 className="txt-center">Events</h2>
-          <div>{this.renderEvents()}</div>
+      <div>
+        <div className="container">
+          <div className="events-group">
+            <h2 className="txt-center">Events</h2>
+            <div>{this.renderEvents()}</div>
+          </div>
         </div>
       </div>
     );

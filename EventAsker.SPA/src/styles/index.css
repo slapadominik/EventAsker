@@ -1,9 +1,7 @@
-html, body {
-    margin: 0;
-    
-    display:table;
-    height: 100%;
-    width:100%;
+html {
+    position: relative;
+    min-height: 100%;
+    background-color: #ECECEC;
 }
 
 .wrapper {
@@ -63,7 +61,7 @@ li a {
 }
 
 .events-group{
-    margin-top: 20px;
+    margin-top: 90px;
 }
 
 @media (max-width: 767px) { 
@@ -80,4 +78,9 @@ li a {
 .nav-item a {
     text-decoration: none;
     color: green;
+}
+
+.app {
+    margin-bottom: 170px;
+    background-color: #ECECEC;
 }

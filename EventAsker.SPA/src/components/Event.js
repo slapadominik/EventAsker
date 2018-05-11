@@ -125,61 +125,79 @@ class Event extends Component {
 
 
     return (
-      <div className="row-flex card">
-        <div>
-          <h3>{this.props.eventName}</h3>
-          <h6>{this.props.eventCity}</h6>
-          <h6>{this.props.eventDate}</h6>
-          <h6>{this.props.eventTime}</h6>
-        </div>
-        <div className="btn-group-justified" align="right" role="group">
-          <button className="btn btn-primary" onClick={this.toggle}> Description</button>
-          <button className="btn btn-success" onClick={this.openModal}>Ask Question</button>
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onAfterOpen={this.afterOpenModal}
-            onRequestClose={this.closeModal}
-            style={modalEnterEventPasswordToAskQuestionStyle}
-            contentLabel="Event password"
-          >
-            <h2 ref={subtitle => this.subtitle}>{this.props.eventName}</h2>
-            <div className="form-group">
-              <label htmlFor="password">Event password:</label>
-              <input
-                className="form-control"
-                type="password"
-                value={this.state.password}
-                onChange={this.handleChangePassword}
-                required
-              />
-              <button onClick={this.closeModal} className="btn btn-danger col-2">Cancel</button>
-              <button onClick={(event) => { this.handleSubmit() }} className="btn btn-info">Confirm</button>
-              {this.state.isEnteredPasswordInvalid ? wrongPasswordText : null}
-            </div>
-          </Modal>
-          {isAuthenticated ? deleteButton : null}
-        </div>
-
-        <Collapse isOpen={this.state.collapse}>
-          <Card>
-            <CardBody>
-              <div className="desc">
-                <h6>Description: </h6>
-                <p>{this.props.eventDescription}</p>
+      <div>
+        <div class="container card-event">
+          <div class="row bg-faded">
+              <div class="col-md-4">
+                <div class="card card-block h-100 justify-content-center align-items-center">
+                  <div className="card-img-top img-fluid">
+                    <img src="/images/huge_avatar.jpg"/>
+                  </div>
               </div>
-              <h6>Street: </h6> <p>{this.props.eventStreet}</p>
-            </CardBody>
-          </Card>
+          </div>
+          <div class="col-md-6">
+            <div class="card card-block h-100 justify-content-center">
+              <div className="event-info">
+                <h3>{this.props.eventName}</h3>
+                <h6>{this.props.eventCity}</h6>
+                <h6>{this.props.eventDate}</h6>
+                <h6>{this.props.eventTime}</h6>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-2">
+            <div className="card card-block h-100 justify-content-center align-items-center card-buttons">
+            <div className="btn-group-vertical" align="right" role="group">
+               <button className="btn btn-primary" onClick={this.toggle}> Description</button>
+               <button className="btn btn-success" onClick={this.openModal}>Ask Question</button>
+               <Modal
+                 isOpen={this.state.modalIsOpen}
+                 onAfterOpen={this.afterOpenModal}
+                 onRequestClose={this.closeModal}
+                 style={modalEnterEventPasswordToAskQuestionStyle}
+                 contentLabel="Event password"
+                 >
+                 <h2 ref={subtitle => this.subtitle}>{this.props.eventName}</h2>
+                 <div className="form-group">
+                   <label htmlFor="password">Event password:</label>
+                   <input
+                     className="form-control"
+                     type="password"
+                     value={this.state.password}
+                     onChange={this.handleChangePassword}
+                     required
+                   />
+                   <button onClick={this.closeModal} className="btn btn-danger col-2">Cancel</button>
+                   <button onClick={(event) => { this.handleSubmit() }} className="btn btn-info">Confirm</button>
+                   {this.state.isEnteredPasswordInvalid ? wrongPasswordText : null}
+                 </div>
+               </Modal>
+               {isAuthenticated ? deleteButton : null}
+             </div>
+            </div>
+            </div>
+          </div>
+          </div>
+          <Collapse isOpen={this.state.collapse}>
+           <Card>
+             <CardBody>
+               <div className="desc">
+                 <h6>Description: </h6>
+                 <p>{this.props.eventDescription}</p>
+               </div>
+               <h6>Street: </h6> <p>{this.props.eventStreet}</p>
+             </CardBody>
+           </Card>
+         </Collapse>
+         <Collapse isOpen={this.state.questionCollapse}>
+           <Card>
+             <CardBody>
+               <h6>Questions: </h6>
+               <div>{this.mapQuestionsToListItems()}</div>
+             </CardBody>
+           </Card>
         </Collapse>
-        <Collapse isOpen={this.state.questionCollapse}>
-          <Card>
-            <CardBody>
-              <h6>Questions: </h6>
-              <div>{this.mapQuestionsToListItems()}</div>
-            </CardBody>
-          </Card>
-        </Collapse>
-      </div>
+        </div>
     );
   }
 }

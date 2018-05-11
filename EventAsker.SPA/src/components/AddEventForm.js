@@ -103,8 +103,9 @@ class AddEventForm extends Component {
 
   render() {
     return (
+      <div className="form-center">
       <form noValidate>
-        <div className="form-group col-md-6">
+        <div className="form-group col-md-8">
           <label id="nameLabel">Name</label>
           <span style={{ color: "red" }}>*</span>
           <input
@@ -118,7 +119,7 @@ class AddEventForm extends Component {
           />
           <div className="error" id="nameError" />
         </div>
-        <div className="form-group col-md-6">
+        <div className="form-group col-md-8">
           <label id="descriptionLabel">Description</label>
           <span style={{ color: "red" }}>*</span>
           <input
@@ -132,7 +133,7 @@ class AddEventForm extends Component {
           />
           <div className="error" id="descriptionError" />
         </div>
-        <div className="form-group col-md-6">
+        <div className="form-group col-md-8">
           <label id="dateLabel">Date</label>
           <span style={{ color: "red" }}>*</span>
           <input
@@ -146,7 +147,7 @@ class AddEventForm extends Component {
           />
           <div className="error" id="dateError" />
         </div>
-        <div className="form-group col-md-6">
+        <div className="form-group col-md-8">
           <label id="cityLabel">City</label>
           <span style={{ color: "red" }}>*</span>
           <input
@@ -160,7 +161,7 @@ class AddEventForm extends Component {
           />
           <div className="error" id="cityError" />
         </div>
-        <div className="form-group col-md-6">
+        <div className="form-group col-md-8">
           <label id="streetLabel">Street</label>
           <span style={{ color: "red" }}>*</span>
           <input
@@ -174,7 +175,7 @@ class AddEventForm extends Component {
           />
           <div className="error" id="streetError" />
         </div>
-        <div className="form-group col-md-6">
+        <div className="form-group col-md-8">
           <label id="audienceKeyLabel">Audience Key</label>
           <span style={{ color: "red" }}>*</span>
           <input
@@ -188,7 +189,7 @@ class AddEventForm extends Component {
           />
           <div className="error" id="audienceKeyError" />
         </div>
-        <div className="col-md-2">
+        <div className="col-md-4">
           <button
             id="sumbitBtn"
             className="btn btn-primary"
@@ -199,12 +200,11 @@ class AddEventForm extends Component {
         </div>
         <div className="note">
           <h6>
-            {this.state.success
-              ? "Added Event ".concat(this.state.nameSuccess)
-              : ""}
+            {this.state.success? "Added Event ".concat(this.state.nameSuccess): ""}
           </h6>
         </div>
       </form>
+      </div>
     );
   }
 }

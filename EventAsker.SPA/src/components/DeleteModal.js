@@ -29,8 +29,8 @@ class DeleteModal extends React.Component {
 
   render() {
     return (
-      <span>
-        <Button color="danger" onClick={this.toggle}>Delete</Button>
+        <button className="btn btn-danger" onClick={this.toggle}>
+          Delete
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Confirm deletion of the event</ModalHeader>
           <ModalBody>
@@ -41,7 +41,7 @@ class DeleteModal extends React.Component {
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
-      </span>
+        </button>
     );
   }
 }
