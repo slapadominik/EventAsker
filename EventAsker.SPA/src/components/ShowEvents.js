@@ -53,6 +53,7 @@ export default class ShowEvents extends Component {
         eventLectures={event.lectures}
         eventQuestions={event.questions}
         onDelete={this.deleteEvent}
+        imageFilename={event.imageFilename}
       />
     ));
   };

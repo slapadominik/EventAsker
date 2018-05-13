@@ -19,14 +19,6 @@ class DeleteModal extends React.Component {
     });
   }
 
-  deleteEvent = () =>{
-    return axios
-      .delete(BASE_URL + "/Event/DeleteEvent", {
-        params: { eventId: this.props.eventId }
-      })
-      .then(window.location.reload());
-  }
-
   render() {
     return (
         <button className="btn btn-danger" onClick={this.toggle}>
@@ -37,7 +29,7 @@ class DeleteModal extends React.Component {
             Do you really want to delete this event?
           </ModalBody>
           <ModalFooter>
-            <Button color="danger" onClick={this.deleteEvent}>Delete</Button>
+            <Button color="danger" onClick={() => this.props.onDelete(this.props.eventId)}>Delete</Button>
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>

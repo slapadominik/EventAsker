@@ -25,9 +25,9 @@ namespace EventAsker.API.Services
            return _repository.GetEvents();
         }
 
-        public void AddEvent(AddEventDto dto)
+        public bool AddEvent(AddEventDto dto)
         {
-            _repository.AddEvent(dto);
+            return _repository.AddEvent(dto);
         }
 
         public void DeleteEvent(DeleteEventDto dto)

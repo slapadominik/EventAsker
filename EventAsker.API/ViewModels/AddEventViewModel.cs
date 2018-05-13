@@ -8,5 +8,6 @@
         public string Description { get; set; }
         public string AudienceKey { get; set; }
         public string City{ get; set; }
+        public string ImagePath { get; set; }
     }
 }
