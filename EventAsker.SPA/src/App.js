@@ -13,6 +13,7 @@ import ShowEvents from './components/ShowEvents';
 import AddEventForm from './components/AddEventForm';
 import AddQuestionForm from './components/AddQuestionForm';
 import NotFound from './components/NotFound';
+import Unauthorized401 from './components/Unauthorized401';
 
 class App extends Component {
 
@@ -28,6 +29,7 @@ class App extends Component {
             <Route path="/events" component={ShowEvents} />
             <Route path="/addEvent" component={AddEventForm}/>
             <Route path="/addQuestion/:id" component={AddQuestionForm} />  
+            <Route path="/unauthorized" component={Unauthorized401}/>
             <Route path="*" component={NotFound} />
           </Switch>
         </div>
