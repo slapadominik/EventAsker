@@ -10,3 +10,10 @@ p {
     text-align: center; 
 }
 
+span{
+    font-weight: bold;
+}
+
+.errorpage{
+    padding: 75px 75px 75px 75px ;
+}
