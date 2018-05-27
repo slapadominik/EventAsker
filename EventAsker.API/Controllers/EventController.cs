@@ -37,12 +37,15 @@ namespace EventAsker.API.Controllers
         }
 
         [HttpPost("AddEvent")]
-        public IActionResult AddEvent([FromBody]AddEventDto dto)
+        public IActionResult AddEvent([FromForm]AddEventDto dto)
          {
-            if (!ModelState.IsValid)
+             if (!_eventService.AddEvent(dto))
+             {
+                ModelState.AddModelError("Image", "Image's format should be .png or .jpg");
+             }
+             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            _eventService.AddEvent(dto);
             AddEventViewModel addEventViewModel = _mapper.Map<AddEventViewModel>(dto);
 
             return Ok(addEventViewModel);

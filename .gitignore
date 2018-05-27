@@ -58,3 +58,4 @@ chrome-user-data
 
 *.sln
 launchSettings.json
+wwwroot

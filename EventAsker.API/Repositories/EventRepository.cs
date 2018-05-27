@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using AutoMapper;
 using EventAsker.API.Context;
 using EventAsker.API.Dtos;
+using EventAsker.API.Helpers;
+using EventAsker.API.Migrations;
 using EventAsker.API.Model;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace EventAsker.API.Repositories
@@ -14,10 +20,12 @@ namespace EventAsker.API.Repositories
     {
         private readonly ApplicationDbContext _context;
         private IMapper _mapper;
-        public EventRepository(ApplicationDbContext context, IMapper mapper)
+        private IHostingEnvironment _env;
+        public EventRepository(ApplicationDbContext context, IMapper mapper, IHostingEnvironment env)
         {
             _context = context;
             _mapper = mapper;
+            _env = env;
         }
 
         public List<EventDto> GetEvents()
@@ -28,12 +36,18 @@ namespace EventAsker.API.Repositories
             return eventListDto;
         }
 
-        public void AddEvent(AddEventDto dto)
+        public bool AddEvent(AddEventDto dto)
         {
-            var newEvent = _mapper.Map<Event>(dto);
+            string imageFileName;
+            if (ImageFileHelper.SaveFile(dto.Image, out imageFileName))
+            {
+                Event newEvent = _mapper.Map<Event>(dto);
+                newEvent.ImageFilename = imageFileName;
+                _context.Add(newEvent);
+                return _context.SaveChanges() > 0;
+            }
 
-            _context.Add(newEvent);
-            _context.SaveChanges();
+            return false;
         }
 
         public void DeleteEvent(DeleteEventDto dto)
@@ -54,5 +68,7 @@ namespace EventAsker.API.Repositories
                 return true;
             return false;
         }
+
+        
     }
 }
