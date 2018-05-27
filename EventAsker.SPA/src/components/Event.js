@@ -34,7 +34,7 @@ class Event extends Component {
       eventCity: "",
       eventDate: "21/11/1999",
       eventLectures: props.eventLectures,
-      eventQuestions: [],
+      eventQuestions: props.eventQuestions,
       collapse: false,
       questionCollapse: false,
       modalIsOpen: false,
@@ -83,12 +83,30 @@ class Event extends Component {
     return this.props.eventQuestions.map(question => (
       <Question
         key={question.questionId}
+        questionId={question.questionId}
         authorName={question.authorName}
         email={question.email}
         questionContent={question.questionContent}
+        isAuthenticated={this.props.auth}
+        onDelete={this.deleteQuestion}
       />
     ));
   };
+
+  deleteQuestion = (id) => {
+    return axios
+    .delete(BASE_URL + "/Question/DeleteQuestion/" + id)
+    .then(() => {
+      console.log(this.state.eventQuestions);
+      this.setState(prevState => {
+        return { eventQuestions: prevState.eventQuestions.filter( x => x.questionId !== id) }
+      });
+      console.log(this.state.eventQuestions);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
 
   toggle = () => {
     this.setState({ collapse: !this.state.collapse });
@@ -126,17 +144,17 @@ class Event extends Component {
 
     return (
       <div>
-        <div class="container card-event">
-          <div class="row bg-faded">
-              <div class="col-md-4">
-                <div class="card card-block h-100 justify-content-center align-items-center">
+        <div className="container card-event">
+          <div className="row bg-faded">
+              <div className="col-md-4">
+                <div className="card card-block h-100 justify-content-center align-items-center">
                   <div className="card-img-top img-fluid">
                     <img src="/images/huge_avatar.jpg"/>
                   </div>
               </div>
           </div>
-          <div class="col-md-6">
-            <div class="card card-block h-100 justify-content-center">
+          <div className="col-md-6">
+            <div className="card card-block h-100 justify-content-center">
               <div className="event-info">
                 <h3>{this.props.eventName}</h3>
                 <h6>{this.props.eventCity}</h6>
@@ -167,8 +185,8 @@ class Event extends Component {
                      onChange={this.handleChangePassword}
                      required
                    />
-                   <button onClick={this.closeModal} className="btn btn-danger col-2">Cancel</button>
-                   <button onClick={(event) => { this.handleSubmit() }} className="btn btn-info">Confirm</button>
+                   <button onClick={this.closeModal} className="btn btn-danger btn-horizontal float-right">Cancel</button>
+                   <button onClick={(event) => { this.handleSubmit() }} className="btn btn-info btn-horizontal float-right">Confirm</button>
                    {this.state.isEnteredPasswordInvalid ? wrongPasswordText : null}
                  </div>
                </Modal>
@@ -193,7 +211,7 @@ class Event extends Component {
            <Card>
              <CardBody>
                <h6>Questions: </h6>
-               <div>{this.mapQuestionsToListItems()}</div>
+               <div className="containter">{this.mapQuestionsToListItems()}</div>
              </CardBody>
            </Card>
         </Collapse>
