@@ -1,0 +1,19 @@
+h1{
+    text-align: center;
+}
+
+p {
+    text-align: center;    
+}
+
+.holder{
+    text-align: center; 
+}
+
+span{
+    font-weight: bold;
+}
+
+.errorpage{
+    padding: 75px 75px 75px 75px ;
+}
