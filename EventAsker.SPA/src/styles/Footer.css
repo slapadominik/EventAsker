@@ -1,0 +1,43 @@
+.footer-bottom {
+    text-align: center;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    line-height: 60px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+  }
+
+.footer-item-left{
+    position: relative;
+    margin-top: auto;
+    margin-bottom: auto;
+    float:left;
+    text-align: left;
+}
+
+.footer-item-left p{
+    margin-bottom: 0;
+}
+
+.footer-item-right{
+    position: relative;
+    float: right;
+    text-align: right;
+    font-size: 1.8em;
+}
+
+.footer-item-right a{
+    text-decoration: none;
+    color: white;
+}
+.footer-icons {
+    padding-left: 20px;
+}
+.clear {
+    clear: both;
+}

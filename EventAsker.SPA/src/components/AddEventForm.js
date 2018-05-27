@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Form.css";
+import "../styles/Form.css";
 import axios from "axios";
 import { BASE_URL } from "../constants";
 import PropTypes from "prop-types";
@@ -16,7 +16,8 @@ class AddEventForm extends Component {
       audienceKey: "",
       city: "",
       success: false,
-      nameSuccess: ""
+      nameSuccess: "",
+      mainImage: null
     };
   }
 
@@ -41,23 +42,31 @@ class AddEventForm extends Component {
       });
 
       this.clearInputs();
-
-      axios.post(BASE_URL + "/event/addevent", {
-        name: this.state.name,
-        description: this.state.description,
-        date: this.state.date,
-        city: this.state.city,
-        street: this.state.street,
-        audienceKey: this.state.audienceKey,
-        cityId: this.state.cityId,
-        isActive: true
-      })
-      .then(response => { 
-        this.context.router.history.push("/events");
-      });
+      this.sendRequest();
     }
   };
 
+  sendRequest = () => {
+    var formData = new FormData();
+    formData.append("name", this.state.name);
+    formData.append("description", this.state.description);
+    formData.append("date", this.state.date);
+    formData.append("city", this.state.city);
+    formData.append("street", this.state.street);
+    formData.append("audienceKey", this.state.audienceKey);
+    formData.append("city", this.state.city);
+    formData.append("isActive", true);
+    formData.append("Image", this.state.mainImage);
+    axios.post(BASE_URL + "/event/addevent", formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    .then(response => { 
+      this.context.router.history.push("/events");
+    })
+    .catch(error => console.log(error));
+  }
   showFormErrors() {
     const inputs = document.querySelectorAll("input");
     let isFormValid = true;
@@ -90,6 +99,10 @@ class AddEventForm extends Component {
     error.textContent = "";
     return true;
   }
+  
+  fileChangedHandler = (event) => {
+    this.setState({ mainImage: event.target.files[0]});
+  }
 
   clearInputs() {
     this.setState({
@@ -103,8 +116,9 @@ class AddEventForm extends Component {
 
   render() {
     return (
+      <div className="form-center">
       <form noValidate>
-        <div className="form-group col-md-6">
+        <div className="form-group col-md-8">
           <label id="nameLabel">Name</label>
           <span style={{ color: "red" }}>*</span>
           <input
@@ -114,25 +128,27 @@ class AddEventForm extends Component {
             ref="name"
             value={this.state.name}
             onChange={this.handleUserInput}
+            maxLength="30"
             required
           />
           <div className="error" id="nameError" />
         </div>
-        <div className="form-group col-md-6">
+        <div className="form-group col-md-8">
           <label id="descriptionLabel">Description</label>
           <span style={{ color: "red" }}>*</span>
-          <input
+          <textarea
             className="form-control"
             type="text"
             name="description"
             ref="description"
             value={this.state.description}
             onChange={this.handleUserInput}
+            maxLength="300"
             required
           />
           <div className="error" id="descriptionError" />
         </div>
-        <div className="form-group col-md-6">
+        <div className="form-group col-md-8">
           <label id="dateLabel">Date</label>
           <span style={{ color: "red" }}>*</span>
           <input
@@ -140,13 +156,15 @@ class AddEventForm extends Component {
             type="datetime-local"
             name="date"
             ref="date"
+            min="2000-01-01T00:00"
+            max="2050-01-01T00:00"
             value={this.state.date}
             onChange={this.handleUserInput}
             required
           />
           <div className="error" id="dateError" />
         </div>
-        <div className="form-group col-md-6">
+        <div className="form-group col-md-8">
           <label id="cityLabel">City</label>
           <span style={{ color: "red" }}>*</span>
           <input
@@ -156,11 +174,12 @@ class AddEventForm extends Component {
             ref="city"
             value={this.state.city}
             onChange={this.handleUserInput}
+            maxLength="30"
             required
           />
           <div className="error" id="cityError" />
         </div>
-        <div className="form-group col-md-6">
+        <div className="form-group col-md-8">
           <label id="streetLabel">Street</label>
           <span style={{ color: "red" }}>*</span>
           <input
@@ -170,11 +189,12 @@ class AddEventForm extends Component {
             ref="street"
             value={this.state.street}
             onChange={this.handleUserInput}
+            maxLength="30"
             required
           />
           <div className="error" id="streetError" />
         </div>
-        <div className="form-group col-md-6">
+        <div className="form-group col-md-8">
           <label id="audienceKeyLabel">Audience Key</label>
           <span style={{ color: "red" }}>*</span>
           <input
@@ -184,11 +204,25 @@ class AddEventForm extends Component {
             ref="audienceKey"
             value={this.state.audienceKey}
             onChange={this.handleUserInput}
+            maxLength="10"
             required
           />
           <div className="error" id="audienceKeyError" />
         </div>
-        <div className="col-md-2">
+        <div className="form-group col-md-8">
+          <label id="mainImageLabel">Main Image</label>
+          <span style={{ color: "red" }}>*</span>
+          <input
+            className="form-control"
+            type="file"
+            name="mainImage"
+            ref="mainImage"
+            onChange={this.fileChangedHandler}
+            required
+          />
+          <div className="error" id="mainImageError" />
+        </div> 
+        <div className="col-md-4">
           <button
             id="sumbitBtn"
             className="btn btn-primary"
@@ -199,12 +233,11 @@ class AddEventForm extends Component {
         </div>
         <div className="note">
           <h6>
-            {this.state.success
-              ? "Added Event ".concat(this.state.nameSuccess)
-              : ""}
+            {this.state.success? "Added Event ".concat(this.state.nameSuccess): ""}
           </h6>
         </div>
       </form>
+      </div>
     );
   }
 }

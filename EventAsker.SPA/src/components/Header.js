@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "../index.css";
+import "../styles/index.css";
 import { logout } from "../actions/userAction";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -13,49 +13,48 @@ class Header extends Component {
 
   render() {
     const { isAuthenticated } = this.props.auth;
-
     const adminLinks = (
       <React.Fragment>
-        <li>
-          <Link to="/addEvent">Add Event</Link>
+        <li className="nav-item">
+            <Link className="nav-link" to="/addEvent">Add Event<span className="sr-only">(current)</span></Link>
         </li>
-        <li>
-          <a href="/" onClick={this.logout}>
-            Logout
-          </a>
+        <li className="nav-item">
+            <Link className="nav-link" to="/register">Register<span className="sr-only">(current)</span></Link>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="/" onClick={this.logout}>Logout<span className="sr-only">(current)</span></a>
         </li>
       </React.Fragment>
     );
-
     const guestLinks = (
       <React.Fragment>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-        <li>
-          <Link to="/register">Register</Link>
+        <li className="nav-item">
+            <Link className="nav-link" to="/adminlogin">Login<span className="sr-only">(current)</span></Link>
         </li>
       </React.Fragment>
     );
 
     return (
-      <nav className="navbar navbar-default">
-        <div className="container-fluid">
-          <div className="navbar-header">
-            <Link className="navbar-brand" to="/">
-              EventAsker
-            </Link>
-          </div>
-          <ul className="nav navbar-nav flex-row">
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/events">Events</Link>
-            </li>
-            {isAuthenticated ? null : guestLinks}
-            {isAuthenticated ? adminLinks : null}
-          </ul>
+      <nav className="navbar navbar-expand-sm navbar-light bg-light fixed-top">
+        <div className="container">
+          <Link to="/" className="navbar-brand">
+            <img  className="hidden-xs" src="images/logo.jpg" alt="EventAsker"/>
+          </Link>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarResponsive">
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link className="nav-link" to="/">Home<span className="sr-only">(current)</span></Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/events">Events<span className="sr-only">(current)</span></Link>
+              </li>
+              {isAuthenticated ? null : guestLinks}
+              {isAuthenticated ? adminLinks : null}
+            </ul>
+          </div>   
         </div>
       </nav>
     );

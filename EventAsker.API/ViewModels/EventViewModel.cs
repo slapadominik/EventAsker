@@ -11,8 +11,8 @@ namespace EventAsker.API.ViewModels
         public DateTime Date { get; set; }
         public string Description { get; set; }
         public string AudienceKey { get; set; }
-
         public string City {get; set;}
+        public string ImageFilename { get; set; }
 
         public ICollection<LectureViewModel> Lectures { get; set; }
         public ICollection<QuestionViewModel> Questions { get; set; }
