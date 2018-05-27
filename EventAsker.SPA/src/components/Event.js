@@ -3,7 +3,7 @@ import { Collapse, CardBody, Card } from "reactstrap";
 import "../styles/index.css";
 import "../styles/Event.css";
 import axios from "axios";
-import { BASE_URL } from "../constants";
+import { BASE_URL, BASE_STATIC_FILES } from "../constants";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Question from "./Question";
@@ -126,7 +126,7 @@ class Event extends Component {
     const { isAuthenticated } = this.props.auth;
     const deleteButton = (
       <React.Fragment>
-        <DeleteModal eventId={this.props.eventId} isOpen={this.state.modal}/>
+        <DeleteModal eventId={this.props.eventId} isOpen={this.state.modal} onDelete={this.props.onDelete}/>
         <button className="btn btn-primary" onClick={this.toggleQuestions}>
           Questions
         </button>
@@ -140,20 +140,20 @@ class Event extends Component {
       </React.Fragment>
 
     )
-
+    const imageLocation = BASE_STATIC_FILES + this.props.imageFilename;
 
     return (
       <div>
         <div className="container card-event">
           <div className="row bg-faded">
-              <div className="col-md-4">
-                <div className="card card-block h-100 justify-content-center align-items-center">
+              <div className="col-md-5">
+                <div className="card card-block h-100 justify-content-center align-items-center card-transparent">
                   <div className="card-img-top img-fluid">
-                    <img src="/images/huge_avatar.jpg"/>
+                    <img src={imageLocation} alt="Event"/>
                   </div>
               </div>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-5">
             <div className="card card-block h-100 justify-content-center">
               <div className="event-info">
                 <h3>{this.props.eventName}</h3>

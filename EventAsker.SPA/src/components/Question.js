@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import "../styles/Event.css";
 
 export default class Question extends Component {
   constructor(props) {
@@ -52,7 +53,7 @@ export default class Question extends Component {
     );
 
     return (
-      <div className="row-flex card">
+            <div className="row-flex card question">
         <div className="container">
           <div className="row">
             <div className="col-md-10">
