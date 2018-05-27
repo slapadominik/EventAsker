@@ -19,7 +19,9 @@ namespace EventAsker.API.Model
         public string AudienceKey {get; set;}
         public string City {get; set;}
         public bool IsActive {get; set;}
+        public string ImageFilename {get; set;}
         public ICollection<Lecture> Lectures { get; set; }
         public ICollection<Question> Questions { get; set; }
+
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Elmah.Io.AspNetCore;
 using EventAsker.API.Context;
+using EventAsker.API.Helpers;
 using EventAsker.API.Interfaces;
 using EventAsker.API.Repositories;
 using EventAsker.API.Services;
@@ -23,13 +24,12 @@ namespace EventAsker.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -74,6 +74,9 @@ namespace EventAsker.API
             app.UseAuthentication();
             app.UseMvc();
             app.UseElmahIo();
+            app.UseStaticFiles();
+
+            ImageFileHelper.HostingEnvironment = env;
         }
     }
 }

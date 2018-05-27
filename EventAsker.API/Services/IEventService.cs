@@ -9,7 +9,7 @@ namespace EventAsker.API.Interfaces
     public interface IEventService
     {
         List<EventDto> GetEvents();
-        void AddEvent(AddEventDto dto);
+        bool AddEvent(AddEventDto dto);
         void DeleteEvent(DeleteEventDto dto);
         bool CheckEventPassword(CheckEventPasswordDto dto);
     }

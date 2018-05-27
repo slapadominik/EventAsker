@@ -9,11 +9,13 @@ using EventAsker.API.Model;
 using EventAsker.API.Repositories;
 using EventAsker.API.Services;
 using EventAsker.API.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
 namespace EventAsker.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class AuthController : Controller
     {
@@ -23,6 +25,8 @@ namespace EventAsker.API.Controllers
             _service = service;
             _mapper = mapper;
         }
+
+
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] AdminDto adminDto){
             
@@ -38,6 +42,7 @@ namespace EventAsker.API.Controllers
             return Ok(adminViewModel);
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] AdminDto adminDto){
             Admin admin = await _service.LoginAsync(adminDto);

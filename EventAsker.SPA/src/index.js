@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './styles/index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -12,6 +12,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './rootReducer';
 import { setCurrentUser } from './actions/userAction';
 import jwt from 'jsonwebtoken';
+import 'font-awesome/css/font-awesome.min.css';
 
 const store = createStore(rootReducer,
     composeWithDevTools(

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Event from "./Event";
 import axios from "axios";
 import { BASE_URL } from "../constants";
+import "../styles/index.css";
 
 export default class ShowEvents extends Component {
   constructor() {
@@ -52,6 +53,7 @@ export default class ShowEvents extends Component {
         eventLectures={event.lectures}
         eventQuestions={event.questions}
         onDelete={this.deleteEvent}
+        imageFilename={event.imageFilename}
       />
     ));
   };
@@ -66,8 +68,12 @@ export default class ShowEvents extends Component {
   render() {
     return (
       <div>
-        <h2>EVENTS:</h2>
-        <div>{this.renderEvents()}</div>
+        <div className="container">
+          <div className="events-group">
+            <h2 className="txt-center">Events</h2>
+            <div>{this.renderEvents()}</div>
+          </div>
+        </div>
       </div>
     );
   }
