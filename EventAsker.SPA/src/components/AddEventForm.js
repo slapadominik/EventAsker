@@ -42,19 +42,20 @@ class AddEventForm extends Component {
 
       this.clearInputs();
 
-      axios.post(BASE_URL + "/event/addevent", {
-        name: this.state.name,
-        description: this.state.description,
-        date: this.state.date,
-        city: this.state.city,
-        street: this.state.street,
-        audienceKey: this.state.audienceKey,
-        cityId: this.state.cityId,
-        isActive: true
-      })
-      .then(response => { 
-        this.context.router.history.push("/events");
-      });
+      axios
+        .post(BASE_URL + "/event/AddEvent", {
+          name: this.state.name,
+          description: this.state.description,
+          date: this.state.date,
+          city: this.state.city,
+          street: this.state.street,
+          audienceKey: this.state.audienceKey,
+          cityId: this.state.cityId,
+          isActive: true
+        })
+        .then(response => {
+          this.context.router.history.push("/events");
+        });
     }
   };
 
@@ -104,106 +105,111 @@ class AddEventForm extends Component {
   render() {
     return (
       <div className="form-center">
-      <form noValidate>
-        <div className="form-group col-md-8">
-          <label id="nameLabel">Name</label>
-          <span style={{ color: "red" }}>*</span>
-          <input
-            className="form-control"
-            type="text"
-            name="name"
-            ref="name"
-            value={this.state.name}
-            onChange={this.handleUserInput}
-            required
-          />
-          <div className="error" id="nameError" />
+        <div className="col">
+          <span style={{ color: "red" }}>*</span> - field required
         </div>
-        <div className="form-group col-md-8">
-          <label id="descriptionLabel">Description</label>
-          <span style={{ color: "red" }}>*</span>
-          <input
-            className="form-control"
-            type="text"
-            name="description"
-            ref="description"
-            value={this.state.description}
-            onChange={this.handleUserInput}
-            required
-          />
-          <div className="error" id="descriptionError" />
-        </div>
-        <div className="form-group col-md-8">
-          <label id="dateLabel">Date</label>
-          <span style={{ color: "red" }}>*</span>
-          <input
-            className="form-control"
-            type="datetime-local"
-            name="date"
-            ref="date"
-            value={this.state.date}
-            onChange={this.handleUserInput}
-            required
-          />
-          <div className="error" id="dateError" />
-        </div>
-        <div className="form-group col-md-8">
-          <label id="cityLabel">City</label>
-          <span style={{ color: "red" }}>*</span>
-          <input
-            className="form-control"
-            type="text"
-            name="city"
-            ref="city"
-            value={this.state.city}
-            onChange={this.handleUserInput}
-            required
-          />
-          <div className="error" id="cityError" />
-        </div>
-        <div className="form-group col-md-8">
-          <label id="streetLabel">Street</label>
-          <span style={{ color: "red" }}>*</span>
-          <input
-            className="form-control"
-            type="text"
-            name="street"
-            ref="street"
-            value={this.state.street}
-            onChange={this.handleUserInput}
-            required
-          />
-          <div className="error" id="streetError" />
-        </div>
-        <div className="form-group col-md-8">
-          <label id="audienceKeyLabel">Audience Key</label>
-          <span style={{ color: "red" }}>*</span>
-          <input
-            className="form-control"
-            type="text"
-            name="audienceKey"
-            ref="audienceKey"
-            value={this.state.audienceKey}
-            onChange={this.handleUserInput}
-            required
-          />
-          <div className="error" id="audienceKeyError" />
-        </div>
-        <div className="col-md-4">
-          <button
-            id="sumbitBtn"
-            className="btn btn-primary"
-            onClick={this.handleSubmit}
-          >
-            Add Event
-          </button>
-        </div>
-        <div className="note">
-          <h6>
-            {this.state.success? "Added Event ".concat(this.state.nameSuccess): ""}
-          </h6>
-        </div>
-      </form>
+        <form noValidate>
+          <div className="form-group col-md-8">
+            <label id="nameLabel">Name</label>
+            <span style={{ color: "red" }}>*</span>
+            <input
+              className="form-control"
+              type="text"
+              name="name"
+              ref="name"
+              value={this.state.name}
+              onChange={this.handleUserInput}
+              required
+            />
+            <div className="error" id="nameError" />
+          </div>
+          <div className="form-group col-md-8">
+            <label id="descriptionLabel">Description</label>
+            <span style={{ color: "red" }}>*</span>
+            <input
+              className="form-control"
+              type="text"
+              name="description"
+              ref="description"
+              value={this.state.description}
+              onChange={this.handleUserInput}
+              required
+            />
+            <div className="error" id="descriptionError" />
+          </div>
+          <div className="form-group col-md-8">
+            <label id="dateLabel">Date</label>
+            <span style={{ color: "red" }}>*</span>
+            <input
+              className="form-control"
+              type="datetime-local"
+              name="date"
+              ref="date"
+              value={this.state.date}
+              onChange={this.handleUserInput}
+              required
+            />
+            <div className="error" id="dateError" />
+          </div>
+          <div className="form-group col-md-8">
+            <label id="cityLabel">City</label>
+            <span style={{ color: "red" }}>*</span>
+            <input
+              className="form-control"
+              type="text"
+              name="city"
+              ref="city"
+              value={this.state.city}
+              onChange={this.handleUserInput}
+              required
+            />
+            <div className="error" id="cityError" />
+          </div>
+          <div className="form-group col-md-8">
+            <label id="streetLabel">Street</label>
+            <span style={{ color: "red" }}>*</span>
+            <input
+              className="form-control"
+              type="text"
+              name="street"
+              ref="street"
+              value={this.state.street}
+              onChange={this.handleUserInput}
+              required
+            />
+            <div className="error" id="streetError" />
+          </div>
+          <div className="form-group col-md-8">
+            <label id="audienceKeyLabel">Audience Key</label>
+            <span style={{ color: "red" }}>*</span>
+            <input
+              className="form-control"
+              type="text"
+              name="audienceKey"
+              ref="audienceKey"
+              value={this.state.audienceKey}
+              onChange={this.handleUserInput}
+              required
+            />
+            <div className="error" id="audienceKeyError" />
+          </div>
+          <div className="col-md-4">
+            <button
+              id="sumbitBtn"
+              className="btn btn-primary"
+              onClick={this.handleSubmit}
+            >
+              Add Event
+            </button>
+          </div>
+          <div className="note">
+            <h6>
+              {this.state.success
+                ? "Added Event ".concat(this.state.nameSuccess)
+                : ""}
+            </h6>
+          </div>
+        </form>
       </div>
     );
   }
