@@ -93,15 +93,15 @@ class Event extends Component {
     ));
   };
 
+  filterQuestions = (id) => {
+    return this.state.eventQuestions.filter(q => q.questionId !== id);
+  }
+
   deleteQuestion = (id) => {
     return axios
     .delete(BASE_URL + "/Question/DeleteQuestion/" + id)
-    .then(() => {
-      console.log(this.state.eventQuestions);
-      this.setState(prevState => {
-        return { eventQuestions: prevState.eventQuestions.filter( x => x.questionId !== id) }
-      });
-      console.log(this.state.eventQuestions);
+    .then(response => {
+      this.setState({ eventQuestions: this.filterQuestions(id)});
     })
     .catch(err => {
       console.log(err);

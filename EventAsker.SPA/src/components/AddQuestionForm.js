@@ -50,8 +50,6 @@ class AddQuestionForm extends Component {
       this.setState({ success: false });
     } else {
       this.setState({ success: true });
-
-      this.clearInputs();
       axios
         .post(BASE_URL + "/question/addQuestion", {
           QuestionContent: this.state.question,
@@ -61,7 +59,11 @@ class AddQuestionForm extends Component {
           LectureId: this.state.lectureId
         })
         .then(response => {
+          this.clearInputs();
           this.addNotification();
+          setTimeout(() => {
+            this.context.router.history.push("/events");
+          }, 3000);
         });
     }
   };
@@ -226,7 +228,8 @@ class AddQuestionForm extends Component {
 }
 
 AddQuestionForm.contextTypes = {
-  store: PropTypes.object
+  store: PropTypes.object,
+  router: PropTypes.object.isRequied
 };
 
 AddQuestionForm.propTypes = {

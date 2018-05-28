@@ -57,7 +57,7 @@ class AddEventForm extends Component {
     formData.append("city", this.state.city);
     formData.append("isActive", true);
     formData.append("Image", this.state.mainImage);
-    axios.post(BASE_URL + "/event/addevent", formData, {
+    axios.post(BASE_URL + "/event/AddEvent", formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
