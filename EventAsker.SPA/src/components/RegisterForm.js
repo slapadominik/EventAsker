@@ -35,7 +35,11 @@ class RegisterForm extends Component {
     .then(response => {
       this.context.router.history.push("/")
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+      console.log(error);
+      if(error.response.status === 401)
+       {this.context.router.history.push("/unauthorized")}
+    });
   };
 
   clearInputs() {

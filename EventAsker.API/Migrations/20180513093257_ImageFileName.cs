@@ -8,18 +8,17 @@ namespace EventAsker.API.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "FilePath",
+            migrationBuilder.AddColumn<string>(
+                name: "Imagefilename",
                 table: "Events",
-                newName: "ImageFilename");
+                nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
+            migrationBuilder.DropColumn(
                 name: "ImageFilename",
-                table: "Events",
-                newName: "FilePath");
+                table: "Events");
         }
     }
 }
