@@ -43,8 +43,6 @@ namespace EventAsker.API.Controllers
              {
                 ModelState.AddModelError("Image", "Image's format should be .png or .jpg");
              }
-             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
 
             AddEventViewModel addEventViewModel = _mapper.Map<AddEventViewModel>(dto);
 
