@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 
@@ -22,7 +23,6 @@ namespace EventAsker.API.Dtos
         public string City {get; set;}
         public int? LectureId {get; set;}
         public bool IsActive {get; set;}
-        public IFormFile Image {get; set;}
-        
+        public IFormFile Image {get; set;}      
     }
 }

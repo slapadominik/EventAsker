@@ -11,7 +11,7 @@ namespace EventAsker.API.Context
         public virtual DbSet<Event> Events {get; set;}
         public virtual DbSet<Admin> Admins {get; set;}
         public virtual DbSet<Question> Question {get; set;}
-
+        public virtual DbSet<Lecture> Lecture { get; set; }
         
     }
 }

@@ -13,6 +13,7 @@ using EventAsker.API.Model;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace EventAsker.API.Repositories
 {
@@ -41,9 +42,9 @@ namespace EventAsker.API.Repositories
             string imageFileName;
             if (ImageFileHelper.SaveFile(dto.Image, out imageFileName))
             {
-                Event newEvent = _mapper.Map<Event>(dto);
-                newEvent.ImageFilename = imageFileName;
-                _context.Add(newEvent);
+                Event eventToAdd = _mapper.Map<Event>(dto);
+                eventToAdd.ImageFilename = imageFileName;
+                _context.Events.Add(eventToAdd);
                 return _context.SaveChanges() > 0;
             }
             return false;
@@ -67,7 +68,6 @@ namespace EventAsker.API.Repositories
                 return true;
             return false;
         }
-
         
     }
 }

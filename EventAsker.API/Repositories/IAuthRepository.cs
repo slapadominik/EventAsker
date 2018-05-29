@@ -7,7 +7,6 @@ namespace EventAsker.API.Repositories
     public interface IAuthRepository
     {
          Task<Admin> AddAsync(AdminDto admin);
-
          Task<Admin> GetAdminAsync(string username);
          Task<bool> UserExistsAsync(string username);
           

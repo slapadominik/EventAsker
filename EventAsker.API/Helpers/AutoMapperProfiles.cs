@@ -29,8 +29,10 @@ namespace EventAsker.API.Helpers
 
             CreateMap<AddEventDto, Event>();
 
-            CreateMap<AddQuestionDto, Question>();         
-            
+            CreateMap<AddQuestionDto, Question>();
+
+            CreateMap<AddLectureDto, Lecture>();
+
         }
 
         

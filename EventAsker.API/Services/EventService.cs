@@ -8,36 +8,37 @@ using EventAsker.API.Dtos;
 using EventAsker.API.Interfaces;
 using EventAsker.API.Model;
 using EventAsker.API.Repositories;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace EventAsker.API.Services
 {
     public class EventService : IEventService
     {
-        private readonly IEventRepository _repository;
+        private readonly IEventRepository _eventRepo;
 
-        public EventService(IEventRepository repository)
+        public EventService(IEventRepository eventRepo)
         {
-            _repository = repository;
+            _eventRepo = eventRepo;
         }
 
         public List<EventDto> GetEvents()
         {
-           return _repository.GetEvents();
+           return _eventRepo.GetEvents();
         }
 
         public bool AddEvent(AddEventDto dto)
         {
-            return _repository.AddEvent(dto);
+            return _eventRepo.AddEvent(dto);
         }
 
         public void DeleteEvent(DeleteEventDto dto)
         {
-            _repository.DeleteEvent(dto);
+            _eventRepo.DeleteEvent(dto);
         }
 
         public bool CheckEventPassword(CheckEventPasswordDto dto)
         {
-            return _repository.CheckEventPassword(dto);
+            return _eventRepo.CheckEventPassword(dto);
         }
     }
 }
