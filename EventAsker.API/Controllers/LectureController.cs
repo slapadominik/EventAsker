@@ -31,5 +31,17 @@ namespace EventAsker.API.Controllers
         {
             return Ok();
         }
+
+        [HttpPost("AddLectures")]
+        public IActionResult AddLectures([FromBody] LectureContainerDto lecturesContainer)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var lecturesDto = lecturesContainer.Lectures; 
+            _lecturerService.AddLectrues(lecturesDto);
+            return Ok();
+        }
+
+
     }
 }

@@ -25,6 +25,7 @@ namespace EventAsker.API.Repositories
         {
             var lectures = _mapper.Map<List<Lecture>>(dtos);
             _context.Lecture.AddRange(lectures);
+            
             return _context.SaveChanges() > 0;
         }
 

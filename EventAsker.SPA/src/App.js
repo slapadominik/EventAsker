@@ -15,7 +15,7 @@ import NotFound from './components/NotFound';
 import Unauthorized401 from './components/Unauthorized401';
 import Footer from "./components/Footer";
 import "./styles/index.css";
-
+import AddLecturesForm from './components/AddLecturesForm';
 
 class App extends Component {
 
@@ -32,7 +32,8 @@ class App extends Component {
             <Route path="/addEvent" component={AddEventForm}/>
             <Route path="/addQuestion/:id" component={AddQuestionForm} />  
             <Route path="/unauthorized" component={Unauthorized401}/>
-            <Route path="*" component={NotFound} />
+            <Route path="/addLectures/:id" component={AddLecturesForm} />
+            <Route path="*" component={NotFound} />         
           </Switch>
           <Footer/>
         </div>

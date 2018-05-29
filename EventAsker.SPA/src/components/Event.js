@@ -11,6 +11,7 @@ import { lecture } from '../actions/lecturesAction';
 import { bindActionCreators } from 'redux';
 import DeleteModal from "./DeleteModal"
 import Modal from 'react-modal';
+import {Link } from 'react-router-dom'
 
 const modalEnterEventPasswordToAskQuestionStyle = {
   content: {
@@ -130,8 +131,14 @@ class Event extends Component {
         <button className="btn btn-primary" onClick={this.toggleQuestions}>
           Questions
         </button>
+        <Link to={`/addLectures/${this.props.eventId}`}>
+          <button className="btn btn-success">
+            Add lectures
+          </button>
+        </Link>
       </React.Fragment>
     );
+    
     const wrongPasswordText = (
       <React.Fragment>
         <div className="alert alert-danger">

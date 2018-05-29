@@ -36,3 +36,8 @@ textarea.invalid {
   padding-left: 0px !important;
 }
 
+.button-form {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center
+}
