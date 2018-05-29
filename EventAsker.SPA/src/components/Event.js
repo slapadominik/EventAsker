@@ -80,7 +80,7 @@ class Event extends Component {
   }
 
   mapQuestionsToListItems = () => {
-    return this.props.eventQuestions.map(question => (
+    return this.state.eventQuestions.map(question => (
       <Question
         key={question.questionId}
         questionId={question.questionId}
