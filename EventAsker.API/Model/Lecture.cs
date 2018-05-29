@@ -13,9 +13,9 @@ namespace EventAsker.API.Model
         [Required]
         public string Description { get; set; }
         [Required]
-        public DateTime StartTime { get; set; }
+        public string StartTime { get; set; }
         [Required]
-        public DateTime EndTime { get; set; }
+        public string EndTime { get; set; }
         [Required]
         public string LecturerName {get; set;}
         public int EventId { get; set; }

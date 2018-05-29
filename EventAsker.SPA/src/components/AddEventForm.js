@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
+import "../styles/index.css";
 import axios from "axios";
 import { BASE_URL } from "../constants";
 import PropTypes from "prop-types";
@@ -17,7 +18,8 @@ class AddEventForm extends Component {
       city: "",
       success: false,
       nameSuccess: "",
-      mainImage: null
+      mainImage: null,
+      lectures: [{topic: "", description: "", starttime: "", endtime: "", lecturername: ""}]
     };
   }
 
@@ -117,119 +119,137 @@ class AddEventForm extends Component {
   render() {
     return (
       <div className="form-center">
+      <h2 className="form-title">Add event</h2>
       <form noValidate>
-        <div className="form-group col-md-8">
-          <label id="nameLabel">Name</label>
-          <span style={{ color: "red" }}>*</span>
-          <input
-            className="form-control"
-            type="text"
-            name="name"
-            ref="name"
-            value={this.state.name}
-            onChange={this.handleUserInput}
-            maxLength="30"
-            required
-          />
-          <div className="error" id="nameError" />
+        <div className="row">
+        <div className="form-group col-md-10 offset-md-1">
+            <label id="nameLabel">Name</label>
+            <span style={{ color: "red" }}>*</span>
+            <input
+              className="form-control"
+              type="text"
+              name="name"
+              ref="name"
+              value={this.state.name}
+              onChange={this.handleUserInput}
+              maxLength="30"
+              required
+            />
+            <div className="error" id="nameError" />
+          </div>
         </div>
-        <div className="form-group col-md-8">
-          <label id="descriptionLabel">Description</label>
-          <span style={{ color: "red" }}>*</span>
-          <textarea
-            className="form-control"
-            type="text"
-            name="description"
-            ref="description"
-            value={this.state.description}
-            onChange={this.handleUserInput}
-            maxLength="300"
-            required
-          />
-          <div className="error" id="descriptionError" />
+        <div className="row">
+          <div className="form-group col-md-10 offset-md-1">
+            <label id="descriptionLabel">Description</label>
+            <span style={{ color: "red" }}>*</span>
+            <textarea
+              className="form-control"
+              type="text"
+              name="description"
+              ref="description"
+              value={this.state.description}
+              onChange={this.handleUserInput}
+              maxLength="300"
+              rows="4"
+              required
+            />
+            <div className="error" id="descriptionError" />
         </div>
-        <div className="form-group col-md-8">
-          <label id="dateLabel">Date</label>
-          <span style={{ color: "red" }}>*</span>
-          <input
-            className="form-control"
-            type="datetime-local"
-            name="date"
-            ref="date"
-            min="2000-01-01T00:00"
-            max="2050-01-01T00:00"
-            value={this.state.date}
-            onChange={this.handleUserInput}
-            required
-          />
-          <div className="error" id="dateError" />
         </div>
-        <div className="form-group col-md-8">
-          <label id="cityLabel">City</label>
-          <span style={{ color: "red" }}>*</span>
-          <input
-            className="form-control"
-            type="text"
-            name="city"
-            ref="city"
-            value={this.state.city}
-            onChange={this.handleUserInput}
-            maxLength="30"
-            required
-          />
-          <div className="error" id="cityError" />
+        <div className="row">
+          <div className="form-group col-md-10 offset-md-1">
+            <label id="dateLabel">Date</label>
+            <span style={{ color: "red" }}>*</span>
+            <input
+              className="form-control"
+              type="datetime-local"
+              name="date"
+              ref="date"
+              min="2000-01-01T00:00"
+              max="2050-01-01T00:00"
+              value={this.state.date}
+              onChange={this.handleUserInput}
+              required
+            />
+            <div className="error" id="dateError" />
+          </div>
         </div>
-        <div className="form-group col-md-8">
-          <label id="streetLabel">Street</label>
-          <span style={{ color: "red" }}>*</span>
-          <input
-            className="form-control"
-            type="text"
-            name="street"
-            ref="street"
-            value={this.state.street}
-            onChange={this.handleUserInput}
-            maxLength="30"
-            required
-          />
-          <div className="error" id="streetError" />
+        <div className="row">
+          <div className="form-group col-md-10 offset-md-1">
+            <label id="cityLabel">City</label>
+            <span style={{ color: "red" }}>*</span>
+            <input
+              className="form-control"
+              type="text"
+              name="city"
+              ref="city"
+              value={this.state.city}
+              onChange={this.handleUserInput}
+              maxLength="30"
+              required
+            />
+            <div className="error" id="cityError" />
+          </div>
         </div>
-        <div className="form-group col-md-8">
-          <label id="audienceKeyLabel">Audience Key</label>
-          <span style={{ color: "red" }}>*</span>
-          <input
-            className="form-control"
-            type="text"
-            name="audienceKey"
-            ref="audienceKey"
-            value={this.state.audienceKey}
-            onChange={this.handleUserInput}
-            maxLength="10"
-            required
-          />
-          <div className="error" id="audienceKeyError" />
+        <div className="row">
+          <div className="form-group col-md-10 offset-md-1">
+            <label id="streetLabel">Street</label>
+            <span style={{ color: "red" }}>*</span>
+            <input
+              className="form-control"
+              type="text"
+              name="street"
+              ref="street"
+              value={this.state.street}
+              onChange={this.handleUserInput}
+              maxLength="30"
+              required
+            />
+            <div className="error" id="streetError" />
+          </div>
         </div>
-        <div className="form-group col-md-8">
-          <label id="mainImageLabel">Main Image</label>
-          <span style={{ color: "red" }}>*</span>
-          <input
-            className="form-control"
-            type="file"
-            name="mainImage"
-            ref="mainImage"
-            onChange={this.fileChangedHandler}
-            required
-          />
-          <div className="error" id="mainImageError" />
-        </div> 
-        <div className="col-md-4">
-          <button
-            id="sumbitBtn"
-            className="btn btn-primary"
-            onClick={this.handleSubmit}
-          >
-            Add Event
-          </button>
+        <div className="row">
+          <div className="form-group col-md-10 offset-md-1">
+            <label id="audienceKeyLabel">Audience Key</label>
+            <span style={{ color: "red" }}>*</span>
+            <input
+              className="form-control"
+              type="text"
+              name="audienceKey"
+              ref="audienceKey"
+              value={this.state.audienceKey}
+              onChange={this.handleUserInput}
+              maxLength="10"
+              required
+            />
+            <div className="error" id="audienceKeyError" />
+          </div>
+        </div>
+        <div className="row">
+          <div className="form-group col-md-10 offset-md-1">
+            <label id="mainImageLabel">Main Image</label>
+            <span style={{ color: "red" }}>*</span>
+            <input
+              className="form-control"
+              type="file"
+              name="mainImage"
+              ref="mainImage"
+              onChange={this.fileChangedHandler}
+              required
+            />
+            <div className="error" id="mainImageError" />
+          </div> 
+        </div>
+        <div className="row">
+          <div className="col-md-4 offset-md-1">
+            <button
+              id="sumbitBtn"
+              className="btn btn-primary"
+              onClick={this.handleSubmit}
+            >
+              Add Event
+            </button>
+          </div>
         </div>
         <div className="note">
           <h6>

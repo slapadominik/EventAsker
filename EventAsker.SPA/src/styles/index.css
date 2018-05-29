@@ -84,3 +84,13 @@ li a {
     margin-bottom: 170px;
     background-color: #ECECEC;
 }
+
+.form-title {
+    text-align: center;
+}
+
+.form-border {
+    border:thin black solid;
+    margin:20px;
+    padding:20px;
+}

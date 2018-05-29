@@ -46,7 +46,6 @@ namespace EventAsker.API.Repositories
                 _context.Add(newEvent);
                 return _context.SaveChanges() > 0;
             }
-
             return false;
         }
 
