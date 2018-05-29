@@ -28,15 +28,19 @@ class RegisterForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.clearInputs();
-    axios
-      .post(BASE_URL + "/auth/register", {
-        username: this.state.username,
-        password: this.state.password
-      })
-      .then(response => {
-        this.context.router.history.push("/");
-      })
-      .catch(error => console.log(error));
+
+    axios.post(BASE_URL + "/auth/register", {
+      username: this.state.username,
+      password: this.state.password
+    })
+    .then(response => {
+      this.context.router.history.push("/")
+    })
+    .catch(error => {
+      console.log(error);
+      if(error.response.status === 401)
+       {this.context.router.history.push("/unauthorized")}
+    });
   };
 
   clearInputs() {

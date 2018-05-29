@@ -65,7 +65,11 @@ class AddEventForm extends Component {
     .then(response => { 
       this.context.router.history.push("/events");
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+      console.log(error);
+      if(error.response.status === 401)
+      {this.context.router.history.push("/unauthorized");}
+      });
   }
   showFormErrors() {
     const inputs = document.querySelectorAll("input");
