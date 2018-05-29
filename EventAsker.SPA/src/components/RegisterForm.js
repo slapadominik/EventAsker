@@ -28,14 +28,15 @@ class RegisterForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.clearInputs();
-    axios.post(BASE_URL + "/auth/register", {
-      username: this.state.username,
-      password: this.state.password
-    })
-    .then(response => {
-      this.context.router.history.push("/")
-    })
-    .catch(error => console.log(error));
+    axios
+      .post(BASE_URL + "/auth/register", {
+        username: this.state.username,
+        password: this.state.password
+      })
+      .then(response => {
+        this.context.router.history.push("/");
+      })
+      .catch(error => console.log(error));
   };
 
   clearInputs() {
@@ -48,38 +49,48 @@ class RegisterForm extends Component {
   render() {
     return (
       <div className="form-center">
-      <form onSubmit={this.handleSubmit} noValidate>
-        <div className="form-group col-md-offset-2">
-          <label>Username<span style={{color: 'red'}}>*</span></label>
+        <form onSubmit={this.handleSubmit} noValidate>
+          <div className="form-group col-md-offset-2">
+            <label>
+              Username<span style={{ color: "red" }}>*</span>
+            </label>
             <input
               className="form-control"
               type="text"
               value={this.state.username}
               onChange={this.handleChangeUsername}
             />
-        </div>
-        <div className="form-group col-md-offset-2">
-          <label>Password<span style={{color: 'red'}}>*</span></label>
+          </div>
+          <div className="form-group col-md-offset-2">
+            <label>
+              Password<span style={{ color: "red" }}>*</span>
+            </label>
             <input
               className="form-control"
               type="password"
               value={this.state.password}
               onChange={this.handleChangePassword}
             />
+          </div>
+          <div className="col info">
+          <span style={{ color: "red" }}>*</span> - field required
         </div>
-        <div className="col-md-offset-2">
-          <button
-            id="sumbitBtn"
-            className="btn btn-primary"
-            onClick={this.handleSubmit}
-          >
-            Register
-          </button>
-        </div>
-        <h5>
-          {this.state.success ? "Zarejestrowano użytkownika ".concat(this.state.usernameSuccess) : ""}
-        </h5>
-      </form>
+          <div className="col-md-offset-2">
+            <button
+              id="sumbitBtn"
+              className="btn btn-primary"
+              onClick={this.handleSubmit}
+            >
+              Register
+            </button>
+          </div>
+          
+          <h5>
+            {this.state.success
+              ? "Zarejestrowano użytkownika ".concat(this.state.usernameSuccess)
+              : ""}
+          </h5>
+        </form>
       </div>
     );
   }

@@ -53,3 +53,7 @@ img{
   background-color: transparent !important;
   border: transparent !important;
 }
+
+.btn-horizontal{
+  margin-left: 5px !important;
+}

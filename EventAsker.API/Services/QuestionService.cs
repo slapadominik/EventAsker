@@ -23,12 +23,12 @@ namespace EventAsker.API.Services
             await _repository.AddQuestionAsync(questionDto);
         }
 
-        public async Task DeleteQuestionAsync(DeleteQuestionDto questionDto)
+        public void DeleteQuestion(DeleteQuestionDto questionDto)
         {
             if (questionDto == null)
                 throw new InvalidOperationException("Question mustn't be null");
             
-            await _repository.DeleteQuestionAsync(questionDto);
+            _repository.DeleteQuestion(questionDto);
         }
 
         public IEnumerable<QuestionDto> GetAllQuestions()

@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
 using EventAsker.API.Dtos;
 using EventAsker.API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventAsker.API.Controllers
 {
-
     [Route("api/[controller]")]
     public class QuestionController : Controller
     {
@@ -32,6 +32,20 @@ namespace EventAsker.API.Controllers
         public IActionResult GetQuestions(int id){
             return Ok(_serivce.GetQuestionsByEventId(id));
         }
+
+        [HttpDelete("DeleteQuestion/{id}")]
+        public IActionResult DeleteQuestion(int id)
+        {
+            var deleteQuestionDto = new DeleteQuestionDto()
+            {
+                QuestionId = id
+            };
+
+            _serivce.DeleteQuestion(deleteQuestionDto);
+
+            return Ok(deleteQuestionDto);
+        }
+
 
     }
 }

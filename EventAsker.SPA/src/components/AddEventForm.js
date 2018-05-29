@@ -59,7 +59,7 @@ class AddEventForm extends Component {
     formData.append("city", this.state.city);
     formData.append("isActive", true);
     formData.append("Image", this.state.mainImage);
-    axios.post(BASE_URL + "/event/addevent", formData, {
+    axios.post(BASE_URL + "/event/AddEvent", formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -239,6 +239,13 @@ class AddEventForm extends Component {
             />
             <div className="error" id="mainImageError" />
           </div> 
+        </div>
+        <div className="row">
+          <div className="col-md-10 offset-md-1">
+            <div className="col info">
+              <span style={{ color: "red" }}>*</span> - field required
+            </div>
+          </div>
         </div>
         <div className="row">
           <div className="col-md-4 offset-md-1">
