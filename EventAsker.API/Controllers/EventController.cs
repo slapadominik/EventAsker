@@ -26,6 +26,13 @@ namespace EventAsker.API.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("{eventId:int}")]
+        public IActionResult GetEvent(int eventId)
+        {
+            return Ok(_eventService.GetEvent(eventId));
+        }
+
+        [AllowAnonymous]
         [HttpGet("GetEvents")]
         public IActionResult GetEvents()
         {

@@ -8,6 +8,7 @@ namespace EventAsker.API.Repositories
 {
     public interface IEventRepository
     {
+        EventDto GetEvent(int eventId);
         List<EventDto> GetEvents();
         bool AddEvent(AddEventDto dto);
         void DeleteEvent(DeleteEventDto dto);

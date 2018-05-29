@@ -28,6 +28,15 @@ namespace EventAsker.API.Repositories
             _env = env;
         }
 
+        public EventDto GetEvent(int eventId)
+        {
+            var eventToCheck = _context.Events
+                .Single(e => e.EventId == eventId);
+            EventDto eventDto = new EventDto();
+            eventDto = _mapper.Map<Event, EventDto>(eventToCheck);
+            return eventDto;
+        }
+
         public List<EventDto> GetEvents()
         {
             List<Event> eventList = _context.Events.Where(x => x.IsActive).Include(e => e.Questions).Include(e => e.Lectures).ToList();
