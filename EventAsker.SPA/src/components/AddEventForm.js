@@ -19,8 +19,16 @@ class AddEventForm extends Component {
       success: false,
       nameSuccess: "",
       mainImage: null,
-      lectures: [{topic: "", description: "", starttime: "", endtime: "", lecturername: ""}]
+      lectures: [{topic: "", description: "", starttime: "", endtime: "", lecturername: "", eventId: ""}]
     };
+  }
+
+  handleAddLecture = () => {
+    this.setState({ lectures: this.state.lectures.concat([{topic: "", description: "", starttime: "", endtime: "", lecturername: "", eventId: ""}])})
+  }
+  
+  handleRemoveLecture = (idx) => () => {
+    this.setState({ lectures: this.state.lectures.filter((s, sidx) => idx !== sidx) });
   }
 
   handleUserInput = e => {
@@ -239,6 +247,47 @@ class AddEventForm extends Component {
             />
             <div className="error" id="mainImageError" />
           </div> 
+        </div>
+        <div>
+          {this.state.lectures.map((lecture, id) => (
+          <div>
+            <div className="row">
+            <input
+              type="text"
+              placeholder={`Lecture's topic`}
+              value={lecture.topic}
+            />
+            </div>
+            <div className="row">
+             <textarea
+              type="text"
+              placeholder={`Lecture's description`}
+              value={lecture.description}
+            />
+             </div>
+             <div className="row">
+             <input
+              type="time"
+              value={lecture.starttime}
+            />
+            </div>
+            <div className="row">
+             <input
+              type="time"
+              value={lecture.endtime}
+            />
+            </div>
+            <div className="row">
+             <input
+              type="text"
+              placeholder={`Lecturer's name`}
+              value={lecture.lecturername}
+            />
+             </div>
+            <button type="button" onClick={this.handleRemoveLecture(id)} className="small">-</button>
+          </div>
+        ))}
+        <button type="button" onClick={this.handleAddLecture} className="small">Add Shareholder</button>
         </div>
         <div className="row">
           <div className="col-md-10 offset-md-1">
