@@ -65,6 +65,7 @@ export default class ShowEvents extends Component {
   getTime = (dateTimePickerText) => {
       return dateTimePickerText.split('T')[1].slice(0, -3);
   }
+
   render() {
     return (
       <div>

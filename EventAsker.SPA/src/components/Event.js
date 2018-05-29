@@ -122,6 +122,19 @@ class Event extends Component {
     this.props.lecture(this.state.eventLectures);
   }
 
+  onClickEventInfo = (e) => {
+    window.location = "/eventDescription/" + this.props.eventId;
+  }
+
+  onMouseEnter = (e) => {
+
+    document.body.style.cursor = 'pointer';
+  }
+
+  onMouseLeave = (e) => {
+    document.body.style.cursor = 'auto';
+  }
+
   render() {
     const { isAuthenticated } = this.props.auth;
     const deleteButton = (
@@ -155,7 +168,7 @@ class Event extends Component {
           </div>
           <div className="col-md-5">
             <div className="card card-block h-100 justify-content-center">
-              <div className="event-info">
+              <div className="event-info" onClick={this.onClickEventInfo} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
                 <h3>{this.props.eventName}</h3>
                 <h6>{this.props.eventCity}</h6>
                 <h6>{this.props.eventDate}</h6>

@@ -14,7 +14,7 @@ export default class Home extends Component {
         </div>
         <div className="container home-text">
           <p>
-          EventAsker it is an application that helps speakers collect questions from the public during events. <br/>
+          EventAsker is an application that helps speakers collect questions from the public during events. <br/>
           As an event participant you don't need any account to ask a question to event speaker!<br/> You only need a password to event you participate!<br/>
           If you want to create an event on our site, contact with us EventAsker@gmail.com.
           </p> 

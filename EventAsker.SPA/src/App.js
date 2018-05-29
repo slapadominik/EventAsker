@@ -14,6 +14,7 @@ import AddQuestionForm from './components/AddQuestionForm';
 import NotFound from './components/NotFound';
 import Unauthorized401 from './components/Unauthorized401';
 import Footer from "./components/Footer";
+import EventDescriptionForm from './components/EventDescriptionForm';
 import "./styles/index.css";
 
 
@@ -30,7 +31,8 @@ class App extends Component {
             <Route path="/adminlogin" component={LoginForm} />
             <Route path="/events" component={ShowEvents} />
             <Route path="/addEvent" component={AddEventForm}/>
-            <Route path="/addQuestion/:id" component={AddQuestionForm} />  
+            <Route path="/addQuestion/:id" component={AddQuestionForm} />
+            <Route path="/eventDescription/:id" component={EventDescriptionForm} />
             <Route path="/unauthorized" component={Unauthorized401}/>
             <Route path="*" component={NotFound} />
           </Switch>
