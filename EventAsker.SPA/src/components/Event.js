@@ -34,7 +34,7 @@ class Event extends Component {
       eventCity: "",
       eventDate: "21/11/1999",
       eventLectures: props.eventLectures,
-      eventQuestions: [],
+      eventQuestions: props.eventQuestions,
       collapse: false,
       questionCollapse: false,
       modalIsOpen: false,
@@ -80,15 +80,33 @@ class Event extends Component {
   }
 
   mapQuestionsToListItems = () => {
-    return this.props.eventQuestions.map(question => (
+    return this.state.eventQuestions.map(question => (
       <Question
         key={question.questionId}
+        questionId={question.questionId}
         authorName={question.authorName}
         email={question.email}
         questionContent={question.questionContent}
+        isAuthenticated={this.props.auth}
+        onDelete={this.deleteQuestion}
       />
     ));
   };
+
+  filterQuestions = (id) => {
+    return this.state.eventQuestions.filter(q => q.questionId !== id);
+  }
+
+  deleteQuestion = (id) => {
+    return axios
+    .delete(BASE_URL + "/Question/DeleteQuestion/" + id)
+    .then(response => {
+      this.setState({ eventQuestions: this.filterQuestions(id)});
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
 
   toggle = () => {
     this.setState({ collapse: !this.state.collapse });
@@ -167,8 +185,8 @@ class Event extends Component {
                      onChange={this.handleChangePassword}
                      required
                    />
-                   <button onClick={this.closeModal} className="btn btn-danger col-2">Cancel</button>
-                   <button onClick={(event) => { this.handleSubmit() }} className="btn btn-info">Confirm</button>
+                   <button onClick={this.closeModal} className="btn btn-danger btn-horizontal float-right">Cancel</button>
+                   <button onClick={(event) => { this.handleSubmit() }} className="btn btn-info btn-horizontal float-right">Confirm</button>
                    {this.state.isEnteredPasswordInvalid ? wrongPasswordText : null}
                  </div>
                </Modal>
@@ -193,7 +211,7 @@ class Event extends Component {
            <Card>
              <CardBody>
                <h6>Questions: </h6>
-               <div>{this.mapQuestionsToListItems()}</div>
+               <div className="containter">{this.mapQuestionsToListItems()}</div>
              </CardBody>
            </Card>
         </Collapse>

@@ -25,11 +25,11 @@ namespace EventAsker.API.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteQuestionAsync(DeleteQuestionDto questionDto)
+        public void DeleteQuestion(DeleteQuestionDto questionDto)
         {
-            Question question = await _context.Question.SingleOrDefaultAsync(q => q.QuestionId == questionDto.QuestionId);
+            Question question = _context.Question.SingleOrDefault(q => q.QuestionId == questionDto.QuestionId);
             _context.Question.Remove(question);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public IEnumerable<QuestionDto> GetAllQuestions()

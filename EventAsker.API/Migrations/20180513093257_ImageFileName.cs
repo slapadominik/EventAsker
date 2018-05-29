@@ -9,7 +9,8 @@ namespace EventAsker.API.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "Imagefilename",
+
+                name: "ImageFilename",
                 table: "Events",
                 nullable: true);
         }
@@ -18,7 +19,8 @@ namespace EventAsker.API.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "ImageFilename",
-                table: "Events");
+                table: "Events"
+            );
         }
     }
 }

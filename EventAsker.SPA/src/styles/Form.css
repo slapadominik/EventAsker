@@ -31,3 +31,7 @@ textarea.invalid {
   max-width: 30%;
   margin-top: 200px;
 }
+
+.info {
+  padding-left: 0px !important;
+}
