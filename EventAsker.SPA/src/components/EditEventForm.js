@@ -48,10 +48,9 @@ class EditEventForm extends Component {
     });
   }
 
-  mapCurrentEventToState(){
-    this.setState({
-    });
-}
+  mapCurrentEventToState() {
+    this.setState({});
+  }
 
   handleUserInput = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -248,8 +247,22 @@ class EditEventForm extends Component {
               <div className="error" id="audienceKeyError" />
             </div>
           </div>
+          <div className="row">
+            <div className="form-group col-md-10 offset-md-1">
+              <label id="mainImageLabel">Main Image</label>
+              <input
+                className="form-control"
+                type="file"
+                name="mainImage"
+                ref="mainImage"
+                onChange={this.fileChangedHandler}
+              />
+              <div className="error" id="mainImageError" />
+            </div>
+          </div>
           <h4 className="offset-md-1">Lectures:</h4>
-          <br/><br/>
+          <br />
+          <br />
           <div className="row">
             <div className="col-md-10 offset-md-1">
               <div className="col info">

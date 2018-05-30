@@ -79,20 +79,21 @@ namespace EventAsker.API.Repositories
         public EditEventDto EditEvent(EditEventDto dto)
         {
             var eventToEdit = _context.Events.SingleOrDefault(e => e.EventId == dto.EventId);
-            string imageName = eventToEdit.ImageFilename;
-            eventToEdit = _mapper.Map<EditEventDto, Event>(dto);
+
+            eventToEdit.Name = dto.Name;
+            eventToEdit.Street = dto.Description;
+            eventToEdit.Date = dto.Date;
+            eventToEdit.Description = dto.Description;
+            eventToEdit.AudienceKey = dto.AudienceKey;
+            eventToEdit.City = dto.City;
 
             if (dto.Image != null)
             {
                 ImageFileHelper.SaveFile(dto.Image, out var imageFileName);
                 eventToEdit.ImageFilename = imageFileName;
             }
-            else
-            {
-                eventToEdit.ImageFilename = imageName;
-            }
 
-            eventToEdit.IsActive = true;
+            _context.SaveChanges();
 
             return _mapper.Map<Event, EditEventDto>(eventToEdit);
         }
