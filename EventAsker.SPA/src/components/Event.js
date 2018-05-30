@@ -140,22 +140,22 @@ class Event extends Component {
 
   render() {
     const { isAuthenticated } = this.props.auth;
-    const deleteButton = (
+    const adminButtons = (
       <React.Fragment>
-        <DeleteModal
-          eventId={this.props.eventId}
-          isOpen={this.state.modal}
-          onDelete={this.props.onDelete}
-        />
         <button className="btn btn-primary" onClick={this.toggleQuestions}>
           Questions
         </button>
         <button className="btn btn-success" onClick={this.onClickAddLecture}>
           Add lectures
         </button>
-        <button className="btn btn-warning" onClick={this.onClickEditEvent}>
+        <button className="btn btn-info" onClick={this.onClickEditEvent}>
           Edit Event
         </button>
+        <DeleteModal
+          eventId={this.props.eventId}
+          isOpen={this.state.modal}
+          onDelete={this.props.onDelete}
+        />
       </React.Fragment>
     );
 
@@ -237,7 +237,7 @@ class Event extends Component {
                         : null}
                     </div>
                   </Modal>
-                  {isAuthenticated ? deleteButton : null}
+                  {isAuthenticated ? adminButtons : null}
                 </div>
               </div>
             </div>
