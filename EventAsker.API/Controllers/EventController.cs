@@ -49,6 +49,24 @@ namespace EventAsker.API.Controllers
             return Ok(addEventViewModel);
         }
 
+        [HttpGet("GetEvent/{id}")]
+        public IActionResult GetEvent(int id)
+        {
+            var getEvent = _eventService.GetEvent(id);
+            var eventViewModel = _mapper.Map<EventDto, EventViewModel>(getEvent);
+
+            return Ok(eventViewModel);
+
+        }
+
+        [HttpPut("EditEvent")]
+        public IActionResult EditEvent([FromForm] EditEventDto dto)
+        {
+            _eventService.EditEvent(dto);
+
+            return Ok(dto);
+        }
+
         [HttpDelete("DeleteEvent")]
         public IActionResult DeleteEvent(int eventId)
         {

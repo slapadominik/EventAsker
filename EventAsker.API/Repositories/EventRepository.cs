@@ -13,6 +13,7 @@ using EventAsker.API.Model;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace EventAsker.API.Repositories
 {
@@ -41,12 +42,11 @@ namespace EventAsker.API.Repositories
             string imageFileName;
             if (ImageFileHelper.SaveFile(dto.Image, out imageFileName))
             {
-                Event newEvent = _mapper.Map<Event>(dto);
-                newEvent.ImageFilename = imageFileName;
-                _context.Add(newEvent);
+                Event eventToAdd = _mapper.Map<Event>(dto);
+                eventToAdd.ImageFilename = imageFileName;
+                _context.Events.Add(eventToAdd);
                 return _context.SaveChanges() > 0;
             }
-
             return false;
         }
 
@@ -69,6 +69,33 @@ namespace EventAsker.API.Repositories
             return false;
         }
 
-        
+        public EventDto GetEvent(int id)
+        {
+            var getEvent = _context.Events.Include(e => e.Lectures).SingleOrDefault(e => e.EventId == id);
+            var eventDto = _mapper.Map<Event, EventDto>(getEvent);
+            return eventDto;
+        }
+
+        public EditEventDto EditEvent(EditEventDto dto)
+        {
+            var eventToEdit = _context.Events.SingleOrDefault(e => e.EventId == dto.EventId);
+
+            eventToEdit.Name = dto.Name;
+            eventToEdit.Street = dto.Description;
+            eventToEdit.Date = dto.Date;
+            eventToEdit.Description = dto.Description;
+            eventToEdit.AudienceKey = dto.AudienceKey;
+            eventToEdit.City = dto.City;
+
+            if (dto.Image != null)
+            {
+                ImageFileHelper.SaveFile(dto.Image, out var imageFileName);
+                eventToEdit.ImageFilename = imageFileName;
+            }
+
+            _context.SaveChanges();
+
+            return _mapper.Map<Event, EditEventDto>(eventToEdit);
+        }
     }
 }

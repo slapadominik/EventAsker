@@ -53,9 +53,6 @@ class RegisterForm extends Component {
   render() {
     return (
       <div className="form-center">
-        <div className="col info">
-          <span style={{ color: "red" }}>*</span> - field required
-        </div>
         <form onSubmit={this.handleSubmit} noValidate>
           <div className="form-group col-md-offset-2">
             <label>
@@ -79,6 +76,9 @@ class RegisterForm extends Component {
               onChange={this.handleChangePassword}
             />
           </div>
+          <div className="col info">
+          <span style={{ color: "red" }}>*</span> - field required
+        </div>
           <div className="col-md-offset-2">
             <button
               id="sumbitBtn"
@@ -88,6 +88,7 @@ class RegisterForm extends Component {
               Register
             </button>
           </div>
+          
           <h5>
             {this.state.success
               ? "Zarejestrowano użytkownika ".concat(this.state.usernameSuccess)

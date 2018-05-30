@@ -30,7 +30,7 @@ class AddQuestionForm extends Component {
       question: "",
       authorName: "",
       email: "",
-      lectureId: 1,
+      lectureId: 3,
       success: false
     };
   }
@@ -146,12 +146,10 @@ class AddQuestionForm extends Component {
     const { notifications } = this.props;
     return (
       <div className="form-center">
-        <div className="col info" align="left">
-          <span style={{ color: "red" }}>*</span> - field required
-        </div>
+        
         <form noValidate>
           <div className="row">
-            <div className="form-group col-md-6">
+          <div className="form-group col-md-10">
               <Dropdown
                 options={options}
                 onChange={this._onSelect}
@@ -161,7 +159,7 @@ class AddQuestionForm extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="form-group col-md-6">
+            <div className="form-group col-md-10">
               <label id="questionLabel">Question</label>
               <span style={{ color: "red" }}>*</span>
               <textarea
@@ -179,7 +177,7 @@ class AddQuestionForm extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-md-5">
               <label id="authorNameLabel">Name</label>
               <span style={{ color: "red" }}>*</span>
               <input
@@ -193,7 +191,7 @@ class AddQuestionForm extends Component {
               />
               <div className="error" id="authorNameError" />
             </div>
-            <div className="col-md-3">
+            <div className="col-md-5">
               <label id="emailLabel">Email</label>
               <input
                 className="form-control"
@@ -206,18 +204,18 @@ class AddQuestionForm extends Component {
               <div className="error" id="emailError" />
             </div>
           </div>
+          <div className="col info top-buffer" align="left">
+              <span style={{ color: "red" }}>*</span> - field required
+            </div>
           <div className="row top-buffer">
-            <div className="col-md-2">
+            <div className="col-md-6">
               <button
                 id="sumbitBtn"
                 className="btn btn-primary"
                 onClick={this.handleSubmit}
               >
-                Ask
+                Ask question
               </button>
-            </div>
-            <div className="note">
-              <h6>{this.state.success ? "Question added" : ""}</h6>
             </div>
           </div>
         </form>
