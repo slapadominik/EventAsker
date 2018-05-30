@@ -40,5 +40,15 @@ namespace EventAsker.API.Services
         {
             return _eventRepo.CheckEventPassword(dto);
         }
+
+        public EventDto GetEvent(int id)
+        {
+            return _eventRepo.GetEvent(id);
+        }
+
+        public EditEventDto EditEvent(EditEventDto dto)
+        {
+            return _eventRepo.EditEvent(dto);
+        }
     }
 }

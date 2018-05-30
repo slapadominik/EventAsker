@@ -68,6 +68,33 @@ namespace EventAsker.API.Repositories
                 return true;
             return false;
         }
-        
+
+        public EventDto GetEvent(int id)
+        {
+            var getEvent = _context.Events.Include(e => e.Lectures).SingleOrDefault(e => e.EventId == id);
+            var eventDto = _mapper.Map<Event, EventDto>(getEvent);
+            return eventDto;
+        }
+
+        public EditEventDto EditEvent(EditEventDto dto)
+        {
+            var eventToEdit = _context.Events.SingleOrDefault(e => e.EventId == dto.EventId);
+            string imageName = eventToEdit.ImageFilename;
+            eventToEdit = _mapper.Map<EditEventDto, Event>(dto);
+
+            if (dto.Image != null)
+            {
+                ImageFileHelper.SaveFile(dto.Image, out var imageFileName);
+                eventToEdit.ImageFilename = imageFileName;
+            }
+            else
+            {
+                eventToEdit.ImageFilename = imageName;
+            }
+
+            eventToEdit.IsActive = true;
+
+            return _mapper.Map<Event, EditEventDto>(eventToEdit);
+        }
     }
 }
