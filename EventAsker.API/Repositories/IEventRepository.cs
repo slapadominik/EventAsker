@@ -12,5 +12,7 @@ namespace EventAsker.API.Repositories
         bool AddEvent(AddEventDto dto);
         void DeleteEvent(DeleteEventDto dto);
         bool CheckEventPassword(CheckEventPasswordDto dto);
+        EventDto GetEvent(int id);
+        EditEventDto EditEvent(EditEventDto dto);
     }
 }

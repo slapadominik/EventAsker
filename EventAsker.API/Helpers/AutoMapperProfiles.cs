@@ -33,6 +33,11 @@ namespace EventAsker.API.Helpers
 
             CreateMap<AddLectureDto, Lecture>();
 
+            CreateMap<EventDto, Event>();
+
+            CreateMap<EditEventDto, Event>();
+
+            CreateMap<Event, EditEventDto>();
         }
 
         
