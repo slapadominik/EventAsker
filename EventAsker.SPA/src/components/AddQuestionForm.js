@@ -149,16 +149,6 @@ class AddQuestionForm extends Component {
         
         <form noValidate>
           <div className="row">
-          <div className="form-group col-md-10">
-              <Dropdown
-                options={options}
-                onChange={this._onSelect}
-                value={defaultOption}
-                placeholder="Select an option"
-              />
-            </div>
-          </div>
-          <div className="row">
             <div className="form-group col-md-10">
               <label id="questionLabel">Question</label>
               <span style={{ color: "red" }}>*</span>

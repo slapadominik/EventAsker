@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import "../styles/Form.css";
 import axios from "axios";
 import {BASE_URL} from "../constants";
-import qs from "query-string";
 import { withRouter } from 'react-router-dom';
  
 class AddLecturesForm extends Component {

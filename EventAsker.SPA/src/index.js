@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import setAuthorizationToken from './helpers/authorizationToken';
 import { Provider } from 'react-redux';
@@ -32,5 +31,3 @@ ReactDOM.render(
             <App />
         </Provider>, 
         document.getElementById('root'));
-
-registerServiceWorker();

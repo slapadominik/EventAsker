@@ -260,9 +260,6 @@ class EditEventForm extends Component {
               <div className="error" id="mainImageError" />
             </div>
           </div>
-          <h4 className="offset-md-1">Lectures:</h4>
-          <br />
-          <br />
           <div className="row">
             <div className="col-md-10 offset-md-1">
               <div className="col info">
