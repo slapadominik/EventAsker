@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
-import "../styles/index.css";
+import "../styles/Index.css";
 import axios from "axios";
 import { BASE_URL } from "../constants";
 import PropTypes from "prop-types";

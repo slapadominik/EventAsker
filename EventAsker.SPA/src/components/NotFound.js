@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import "./errors.css";
+import "../styles/Errors.css";
 
 export default class NotFound extends Component {
     render() {

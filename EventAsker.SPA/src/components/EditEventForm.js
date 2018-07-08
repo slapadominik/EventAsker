@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import "../styles/Form.css";
-import "../styles/index.css";
+import "../styles/Index.css";
 import axios from "axios";
 import { BASE_URL } from "../constants";
 import PropTypes from "prop-types";
-import { lecture } from "../actions/lecturesAction";
 
 class EditEventForm extends Component {
   constructor(props) {
@@ -20,7 +19,7 @@ class EditEventForm extends Component {
       success: false,
       nameSuccess: "",
       mainImage: null,
-      eventId: parseInt(this.props.location.pathname.split("/")[2]),
+      eventId: parseInt(this.props.location.pathname.split("/")[2], 10),
       currentEvent: null,
       lectures: []
     };

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Collapse, CardBody, Card } from "reactstrap";
-import "../styles/index.css";
+import "../styles/Index.css";
 import "../styles/Event.css";
 import axios from "axios";
 import { BASE_URL, BASE_STATIC_FILES } from "../constants";

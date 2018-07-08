@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Event from "./Event";
 import axios from "axios";
 import { BASE_URL } from "../constants";
-import "../styles/index.css";
+import "../styles/Index.css";
 
 export default class ShowEvents extends Component {
   constructor() {

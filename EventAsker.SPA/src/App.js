@@ -14,7 +14,7 @@ import AddQuestionForm from './components/AddQuestionForm';
 import NotFound from './components/NotFound';
 import Unauthorized401 from './components/Unauthorized401';
 import Footer from "./components/Footer";
-import "./styles/index.css";
+import "./styles/Index.css";
 import AddLecturesForm from './components/AddLecturesForm';
 import EditEventForm from './components/EditEventForm';
 

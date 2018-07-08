@@ -15,7 +15,6 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace EventAsker.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     public class AuthController : Controller
     {
@@ -42,7 +41,6 @@ namespace EventAsker.API.Controllers
             return Ok(adminViewModel);
         }
 
-        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] AdminDto adminDto){
             Admin admin = await _service.LoginAsync(adminDto);

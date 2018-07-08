@@ -5,8 +5,6 @@ import { BASE_URL } from "../constants";
 import PropTypes from "prop-types";
 import Notifications, { success } from "react-notification-system-redux";
 import { connect } from "react-redux";
-import Dropdown from "react-dropdown";
-import { lecture, lectureAction } from "../actions/lecturesAction";
 import "react-dropdown/style.css";
 
 const notificationOpts = {
@@ -141,7 +139,6 @@ class AddQuestionForm extends Component {
       { value: "one", label: "One" },
       { value: "two", label: "Two", className: "myOptionClassName" }
     ];
-    const defaultOption = options[1];
 
     const { notifications } = this.props;
     return (
