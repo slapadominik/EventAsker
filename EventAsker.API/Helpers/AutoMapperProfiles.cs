@@ -1,8 +1,9 @@
-using System;
 using AutoMapper;
-using EventAsker.API.Dtos;
-using EventAsker.API.Model;
-using EventAsker.API.Repositories;
+using EventAsker.API.Domain.Entity;
+using EventAsker.API.Features.Event.DTO;
+using EventAsker.API.Features.Lecture.DTO;
+using EventAsker.API.Features.Question.DTO;
+using EventAsker.API.Features.Security.Authentication.DTO;
 using EventAsker.API.ViewModels;
 
 namespace EventAsker.API.Helpers
