@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EventAsker.API.ViewModels
+namespace EventAsker.API.Features.Lecture.ViewModels
 {
     public class LectureViewModel
     {

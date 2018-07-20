@@ -1,4 +1,4 @@
-namespace EventAsker.API.ViewModels
+namespace EventAsker.API.Features.Security.Authentication.ViewModels
 {
     public class AdminViewModel
     {

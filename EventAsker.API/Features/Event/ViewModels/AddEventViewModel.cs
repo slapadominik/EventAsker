@@ -1,4 +1,4 @@
-﻿namespace EventAsker.API.ViewModels
+﻿namespace EventAsker.API.Features.Event.ViewModels
 {
     public class AddEventViewModel
     {

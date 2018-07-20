@@ -2,8 +2,8 @@
 using AutoMapper;
 using EventAsker.API.Features.Event.DTO;
 using EventAsker.API.Features.Event.Services.Interfaces;
+using EventAsker.API.Features.Event.ViewModels;
 using EventAsker.API.Features.Security.Authentication.DTO;
-using EventAsker.API.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

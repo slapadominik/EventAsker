@@ -3,7 +3,7 @@ using AutoMapper;
 using EventAsker.API.Domain.Entity;
 using EventAsker.API.Features.Security.Authentication.DTO;
 using EventAsker.API.Features.Security.Authentication.Services.Interfaces;
-using EventAsker.API.ViewModels;
+using EventAsker.API.Features.Security.Authentication.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 

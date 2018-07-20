@@ -1,10 +1,13 @@
 using AutoMapper;
 using EventAsker.API.Domain.Entity;
 using EventAsker.API.Features.Event.DTO;
+using EventAsker.API.Features.Event.ViewModels;
 using EventAsker.API.Features.Lecture.DTO;
+using EventAsker.API.Features.Lecture.ViewModels;
 using EventAsker.API.Features.Question.DTO;
+using EventAsker.API.Features.Question.ViewModels;
 using EventAsker.API.Features.Security.Authentication.DTO;
-using EventAsker.API.ViewModels;
+using EventAsker.API.Features.Security.Authentication.ViewModels;
 
 namespace EventAsker.API.Helpers
 {

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using EventAsker.API.Features.Lecture.ViewModels;
+using EventAsker.API.Features.Question.ViewModels;
 
-namespace EventAsker.API.ViewModels
+namespace EventAsker.API.Features.Event.ViewModels
 {
     public class EventViewModel
     {

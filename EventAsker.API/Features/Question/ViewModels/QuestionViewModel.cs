@@ -1,4 +1,6 @@
-﻿namespace EventAsker.API.ViewModels
+﻿using EventAsker.API.Features.Lecture.ViewModels;
+
+namespace EventAsker.API.Features.Question.ViewModels
 {
     public class QuestionViewModel
     {
