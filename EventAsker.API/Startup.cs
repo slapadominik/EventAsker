@@ -44,7 +44,7 @@ namespace EventAsker.API
             services.AddAutoMapper();
             services.AddMvc();
             services.AddCors();
-            services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("LocalDb")));
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddTransient<IEventService, EventService>();
