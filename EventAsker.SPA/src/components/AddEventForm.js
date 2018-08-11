@@ -1,8 +1,12 @@
-import React, { Component } from "react";
+import React, {
+  Component
+} from "react";
 import "../styles/Form.css";
 import "../styles/Index.css";
 import axios from "axios";
-import { BASE_URL } from "../constants";
+import {
+  BASE_URL
+} from "../constants";
 import PropTypes from "prop-types";
 
 class AddEventForm extends Component {
@@ -23,7 +27,9 @@ class AddEventForm extends Component {
   }
 
   handleUserInput = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      [e.target.name]: e.target.value
+    });
     this.showInputError(e.target.name);
   };
 
@@ -34,10 +40,16 @@ class AddEventForm extends Component {
     e.preventDefault();
 
     if (!this.showFormErrors()) {
-      this.setState({ success: false });
+      this.setState({
+        success: false
+      });
     } else {
-      this.setState({ success: true });
-      this.setState({ nameSuccess: this.state.name });
+      this.setState({
+        success: true
+      });
+      this.setState({
+        nameSuccess: this.state.name
+      });
 
       inputs.forEach(input => {
         input.classList.remove("active");
@@ -60,17 +72,18 @@ class AddEventForm extends Component {
     formData.append("isActive", true);
     formData.append("Image", this.state.mainImage);
     axios.post(BASE_URL + "/event/AddEvent", formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    })
-    .then(response => { 
-      this.context.router.history.push("/events");
-    })
-    .catch(error => {
-      console.log(error);
-      if(error.response.status === 401)
-      {this.context.router.history.push("/unauthorized");}
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then(response => {
+        this.context.router.history.push("/events");
+      })
+      .catch(error => {
+        console.log(error);
+        if (error.response.status === 401) {
+          this.context.router.history.push("/unauthorized");
+        }
       });
   }
   showFormErrors() {
@@ -105,9 +118,11 @@ class AddEventForm extends Component {
     error.textContent = "";
     return true;
   }
-  
+
   fileChangedHandler = (event) => {
-    this.setState({ mainImage: event.target.files[0]});
+    this.setState({
+      mainImage: event.target.files[0]
+    });
   }
 
   clearInputs() {

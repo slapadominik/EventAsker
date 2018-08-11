@@ -1,8 +1,12 @@
-import React, { Component } from "react";
+import React, {
+  Component
+} from "react";
 import "../styles/Form.css";
 import "../styles/Index.css";
 import axios from "axios";
-import { BASE_URL } from "../constants";
+import {
+  BASE_URL
+} from "../constants";
 import PropTypes from "prop-types";
 
 class EditEventForm extends Component {
@@ -52,7 +56,9 @@ class EditEventForm extends Component {
   }
 
   handleUserInput = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      [e.target.name]: e.target.value
+    });
     this.showInputError(e.target.name);
   };
 
@@ -63,10 +69,16 @@ class EditEventForm extends Component {
     e.preventDefault();
 
     if (!this.showFormErrors()) {
-      this.setState({ success: false });
+      this.setState({
+        success: false
+      });
     } else {
-      this.setState({ success: true });
-      this.setState({ nameSuccess: this.state.name });
+      this.setState({
+        success: true
+      });
+      this.setState({
+        nameSuccess: this.state.name
+      });
 
       inputs.forEach(input => {
         input.classList.remove("active");
@@ -133,7 +145,9 @@ class EditEventForm extends Component {
   }
 
   fileChangedHandler = event => {
-    this.setState({ mainImage: event.target.files[0] });
+    this.setState({
+      mainImage: event.target.files[0]
+    });
   };
 
   render() {

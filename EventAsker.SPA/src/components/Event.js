@@ -61,16 +61,22 @@ class Event extends Component {
         }
       })
       .catch(() => {
-        this.setState({ isEnteredPasswordInvalid: true });
+        this.setState({
+          isEnteredPasswordInvalid: true
+        });
       });
   };
 
   handleChangePassword = e => {
-    this.setState({ password: e.target.value });
+    this.setState({
+      password: e.target.value
+    });
   };
 
   openModal = () => {
-    this.setState({ modalIsOpen: true });
+    this.setState({
+      modalIsOpen: true
+    });
   };
 
   afterOpenModal = () => {};
@@ -115,11 +121,15 @@ class Event extends Component {
   };
 
   toggle = () => {
-    this.setState({ collapse: !this.state.collapse });
+    this.setState({
+      collapse: !this.state.collapse
+    });
   };
 
   toggleQuestions = () => {
-    this.setState({ questionCollapse: !this.state.questionCollapse });
+    this.setState({
+      questionCollapse: !this.state.questionCollapse
+    });
   };
 
   onClickAddQuestion = e => {

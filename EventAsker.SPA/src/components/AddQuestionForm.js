@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import Notifications, { success } from "react-notification-system-redux";
 import { connect } from "react-redux";
 import "react-dropdown/style.css";
+import Select from 'react-select';
 
 const notificationOpts = {
   title: "Thank you for your question!",
@@ -14,7 +15,7 @@ const notificationOpts = {
   autoDismiss: 3
 };
 
-const mapStateToProps = function(state) {
+const mapStateToProps = function (state) {
   return {
     notifications: state.notifications,
     lectures: state
@@ -25,6 +26,7 @@ class AddQuestionForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      selectedValue: null,
       question: "",
       authorName: "",
       email: "",
@@ -38,16 +40,22 @@ class AddQuestionForm extends Component {
   }
 
   handleUserInput = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      [e.target.name]: e.target.value
+    });
     this.showInputError(e.target.name);
   };
 
   handleSubmit = e => {
     e.preventDefault();
     if (!this.showFormErrors()) {
-      this.setState({ success: false });
+      this.setState({
+        success: false
+      });
     } else {
-      this.setState({ success: true });
+      this.setState({
+        success: true
+      });
       axios
         .post(BASE_URL + "/question/addQuestion", {
           QuestionContent: this.state.question,
@@ -134,33 +142,49 @@ class AddQuestionForm extends Component {
     return true;
   };
 
+  handleLectureSelectChange = (selectedOption) => {
+    this.setState({selectedValue: selectedOption})
+  }
+
   render() {
-    const options = [
-      { value: "one", label: "One" },
-      { value: "two", label: "Two", className: "myOptionClassName" }
-    ];
+      const options = [{
+          value: "one",
+          label: "One"
+        },
+        {
+          value: "two",
+          label: "Two",
+        }
+      ];
 
     const { notifications } = this.props;
     return (
       <div className="form-center">
-        
         <form noValidate>
-          <div className="row">
-            <div className="form-group col-md-10">
-              <label id="questionLabel">Question</label>
-              <span style={{ color: "red" }}>*</span>
-              <textarea
-                className="form-control"
-                rows="5"
-                type="text"
-                name="question"
-                ref="question"
-                maxLength="150"
-                onChange={this.handleUserInput}
-                onBlur={this.handleUserInput}
-                required
-              />
-              <div className="error" id="questionError" />
+              <div className="row">
+                <div className="form-group col-md-10">
+                  <Select 
+                    value={this.state.selectedValue}
+                    onChange={this.handleLectureSelectChange}
+                    options={options}/>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="form-group col-md-10">
+                    <label id="questionLabel">Question</label>
+                    <span style={{ color: "red" }}>*</span>
+                    <textarea
+                      className="form-control"
+                      rows="5"
+                      type="text"
+                      name="question"
+                      ref="question"
+                      maxLength="150"
+                      onChange={this.handleUserInput}
+                      onBlur={this.handleUserInput}
+                      required
+                    />
+                  <div className="error" id="questionError" />
             </div>
           </div>
           <div className="row">
@@ -192,8 +216,8 @@ class AddQuestionForm extends Component {
             </div>
           </div>
           <div className="col info top-buffer" align="left">
-              <span style={{ color: "red" }}>*</span> - field required
-            </div>
+            <span style={{ color: "red" }}>*</span> - field required
+          </div>
           <div className="row top-buffer">
             <div className="col-md-6">
               <button
@@ -214,14 +238,14 @@ class AddQuestionForm extends Component {
 
 AddQuestionForm.contextTypes = {
   store: PropTypes.object,
-  router: PropTypes.object.isRequied
 };
 
 AddQuestionForm.propTypes = {
-  notifications: PropTypes.array
+  notifications: PropTypes.array,
+  router: PropTypes.object.isRequied
 };
 
-export default connect(mapStateToProps, null)(AddQuestionForm);
-/*
-*
-*/
+export default connect(
+  mapStateToProps,
+  null
+)(AddQuestionForm);
