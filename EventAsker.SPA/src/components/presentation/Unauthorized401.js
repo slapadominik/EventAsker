@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import "../styles/Errors.css";
+import "../../styles/Errors.css";
 
 export default class Unauthorized401 extends Component {
     render() {

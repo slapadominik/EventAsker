@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import { Switch } from 'react-router-dom'
-import Header from "./components/Header";
-import Home from './components/Home';
-import RegisterForm from './components/RegisterForm';
+import Header from "./components/containers/Header";
+import Home from './components/presentation/Home';
+import RegisterForm from './components/presentation/RegisterForm';
 import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
-import LoginForm from './components/LoginForm';
-import ShowEvents from './components/ShowEvents';
-import AddEventForm from './components/AddEventForm';
-import AddQuestionForm from './components/AddQuestionForm';
-import NotFound from './components/NotFound';
-import Unauthorized401 from './components/Unauthorized401';
-import Footer from "./components/Footer";
+import LoginForm from './components/containers/LoginForm';
+import AddEventForm from './components/presentation/AddEventForm';
+import AddQuestionForm from './components/containers/AddQuestionForm';
+import NotFound from './components/presentation/NotFound';
+import Unauthorized401 from './components/presentation/Unauthorized401';
+import Footer from "./components/presentation/Footer";
 import "./styles/Index.css";
-import AddLecturesForm from './components/AddLecturesForm';
-import EditEventForm from './components/EditEventForm';
+import AddLecturesForm from './components/presentation/AddLecturesForm';
+import EditEventForm from './components/presentation/EditEventForm';
+import EventListContainer from './components/containers/EventListContainer';
 
 class App extends Component {
 
@@ -29,7 +29,7 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route path="/register" component={RegisterForm} />
             <Route path="/adminlogin" component={LoginForm} />
-            <Route path="/events" component={ShowEvents} />
+            <Route path="/events" component={EventListContainer} />
             <Route path="/addEvent" component={AddEventForm}/>
             <Route path="/addQuestion/:id" component={AddQuestionForm} />  
             <Route path="/unauthorized" component={Unauthorized401}/>

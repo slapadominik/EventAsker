@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "../styles/Index.css";
-import { logout } from "../actions/userAction";
+import "../../styles/Index.css";
+import { logout } from "../../actions/userAction";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 

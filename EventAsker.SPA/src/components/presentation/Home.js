@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../styles/Index.css";
+import "../../styles/Index.css";
 
 export default class Home extends Component {
   render() {

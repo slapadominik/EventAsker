@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { login } from "../actions/userAction";
+import { login } from "../../actions/userAction";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import "../styles/Form.css";
-import "../styles/Index.css";
+import "../../styles/Form.css";
+import "../../styles/Index.css";
 
 class LoginForm extends Component {
   constructor(props) {
