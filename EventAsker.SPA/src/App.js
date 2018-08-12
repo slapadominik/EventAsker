@@ -31,10 +31,10 @@ class App extends Component {
             <Route path="/adminlogin" component={LoginForm} />
             <Route path="/events" component={EventListContainer} />
             <Route path="/addEvent" component={AddEventForm}/>
-            <Route path="/addQuestion/:id" component={AddQuestionForm} />  
+            <Route path="/event/addQuestion" component={AddQuestionForm} />  
             <Route path="/unauthorized" component={Unauthorized401}/>
-            <Route path="/addLectures/:id" component={AddLecturesForm} />
-            <Route path="/editEvent/:id" component={EditEventForm}/>
+            <Route path="/event/addLectures/:id" component={AddLecturesForm} />
+            <Route path="/event/editEvent/:id" component={EditEventForm}/>
             <Route path="*" component={NotFound} />         
           </Switch>
           <Footer/>

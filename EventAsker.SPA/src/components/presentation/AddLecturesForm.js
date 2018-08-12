@@ -40,7 +40,7 @@ class AddLecturesForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post(BASE_URL + "/lecture/addLectures", {
+        axios.post(BASE_URL + "/event/lecture/addLectures", {
             Lectures : this.state.lectures
         })
         .then(response => {

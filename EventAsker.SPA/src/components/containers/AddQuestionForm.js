@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import queryString from 'query-string';
 import "../../styles/Form.css";
 import axios from "axios";
 import {BASE_URL} from "../../constants";
@@ -23,18 +24,38 @@ class AddQuestionForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedValue: null,
+            lectures: [],
             question: "",
             authorName: "",
             email: "",
-            lectureId: 3,
-            success: false
+            success: false,
+            eventId: 0,
+            selectedLectureId: 0
         };
     }
 
-    componentDidMount() {
-        console.log(this.props);
+    componentWillMount(){
+        const eventId = parseInt(queryString.parse(this.props.location.search).eventId);
+        this.setState({
+            eventId: eventId
+        });
     }
+
+    componentDidMount() {
+        this.getEventById(BASE_URL+"/event/lecture/GetLecturesByEventId");
+    }
+    
+    getEventById(url) {
+        return axios.get(url, {
+            params: {
+                id: this.state.eventId
+            }
+        }).then(response => {   
+          this.setState({
+            lectures: response.data
+          });
+        });
+      }
 
     handleUserInput = e => {
         this.setState({
@@ -54,18 +75,14 @@ class AddQuestionForm extends Component {
                 QuestionContent: this.state.question,
                 AuthorName: this.state.authorName,
                 Email: this.state.email,
-                EventId: this.props.match.params.id,
-                LectureId: this.state.lectureId
+                EventId: this.state.eventId,
+                LectureId: this.state.selectedLectureId
             })
                 .then(response => {
                     this.clearInputs();
                     this.addNotification();
                     setTimeout(() => {
-                        this
-                            .context
-                            .router
-                            .history
-                            .push("/events");
+                        window.location = "/events";
                     }, 3000);
                 });
         }
@@ -148,20 +165,15 @@ class AddQuestionForm extends Component {
         return true;
     };
 
-    handleLectureSelectChange = (selectedOption) => {
-        this.setState({selectedValue: selectedOption})
+    handleLectureSelectChange = (selectedLecture) => {
+        this.setState({selectedLectureId: selectedLecture.value})
     }
 
     render() {
-        const options = [
-            {
-                value: "one",
-                label: "One"
-            }, {
-                value: "two",
-                label: "Two"
-            }
-        ];
+        const options = this.state.lectures.map(lecture => ({
+            label: lecture.topic,
+            value: lecture.lectureId
+        }));
 
         const {notifications} = this.props;
         return (
@@ -170,7 +182,7 @@ class AddQuestionForm extends Component {
                     <div className="row">
                         <div className="form-group col-md-10">
                             <Select
-                                value={this.state.selectedValue}
+                                value={this.state.selectedLectureId}
                                 onChange={this.handleLectureSelectChange}
                                 options={options}/>
                         </div>
@@ -246,12 +258,11 @@ class AddQuestionForm extends Component {
 }
 
 AddQuestionForm.contextTypes = {
-    store: PropTypes.object
+    store: PropTypes.object,
 };
 
 AddQuestionForm.propTypes = {
     notifications: PropTypes.array,
-    router: PropTypes.object.isRequied
-};
+}
 
 export default connect(mapStateToProps, null)(AddQuestionForm);

@@ -99,7 +99,10 @@ class Event extends Component {
     };
 
     onClickAddQuestion = e => {
-        const location = "/addQuestion/" + this.props.eventId;
+        const location = {
+            pathname: "/event/addQuestion",
+            search: '?eventId='+this.props.eventId
+        };
         this
             .context
             .router
@@ -108,7 +111,7 @@ class Event extends Component {
     };
 
     onClickAddLecture = e => {
-        const location = "/addLectures/" + this.props.eventId;
+        const location = "/event/addLectures/" + this.props.eventId;
         this
             .context
             .router
@@ -117,7 +120,7 @@ class Event extends Component {
     };
 
     onClickEditEvent = e => {
-        const location = "/editEvent/" + this.props.eventId;
+        const location = "/event/editEvent/" + this.props.eventId;
         this
             .context
             .router
