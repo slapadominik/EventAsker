@@ -61,6 +61,7 @@ class Event extends Component {
                 questionId={question.questionId}
                 authorName={question.authorName}
                 email={question.email}
+                lectureTopic={question.lectureTopic}
                 questionContent={question.questionContent}
                 isAuthenticated={this.props.auth}
                 onDelete={this.deleteQuestion}/>));
@@ -111,7 +112,10 @@ class Event extends Component {
     };
 
     onClickAddLecture = e => {
-        const location = "/event/addLectures/" + this.props.eventId;
+        const location = {
+            pathname: "/event/addLectures",
+            search: '?eventId='+ this.props.eventId
+        };
         this
             .context
             .router
@@ -129,7 +133,6 @@ class Event extends Component {
     };
 
     openModal = () => {
-        console.log(this.props)
         this.setState({modalIsOpen: true});
     };
 

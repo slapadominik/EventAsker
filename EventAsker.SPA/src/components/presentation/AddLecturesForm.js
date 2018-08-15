@@ -3,6 +3,7 @@ import "../../styles/Form.css";
 import axios from "axios";
 import {BASE_URL} from "../../constants";
 import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
  
 class AddLecturesForm extends Component {
     constructor(props) {
@@ -14,23 +15,22 @@ class AddLecturesForm extends Component {
             starttime: "",
             endtime: "",
             lecturername: "", 
-            eventId: parseInt(this.props.location.pathname.split('/')[2], 10)
-        }]
+            eventId: parseInt(queryString.parse(this.props.location.search).eventId)
+        }],
+        eventId: 0
       }
     }
-
 
     handleLecturePropertyInput = (idx) => (evt) => {
         const newLectures = this.state.lectures.map((lecture, sidx) => {
           if (idx !== sidx) return lecture;
           return { ...lecture, [evt.target.name]: evt.target.value};
         });
-        console.log(evt.target.name)
         this.setState({ lectures: newLectures });
     }
     
     handleAddLecture = () => {
-        this.setState({ lectures: this.state.lectures.concat([{topic: "", description: "", starttime: "", endtime: "", lecturername: "", eventId: parseInt(this.props.location.pathname.split('/')[2], 10)}])})
+        this.setState({ lectures: this.state.lectures.concat([{topic: "", description: "", starttime: "", endtime: "", lecturername: "", eventId: parseInt(queryString.parse(this.props.location.search).eventId)}])})
     }
       
     handleRemoveLecture = (idx) => () => {
@@ -40,7 +40,7 @@ class AddLecturesForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post(BASE_URL + "/event/lecture/addLectures", {
+        axios.post(BASE_URL + "/lecture/addLectures", {
             Lectures : this.state.lectures
         })
         .then(response => {

@@ -26,12 +26,9 @@ namespace EventAsker.API.Features.Event.Repositories
             _env = env;
         }
 
-        public List<EventDto> GetEvents()
+        public List<Domain.Entity.Event> GetEvents()
         {
-            List<Domain.Entity.Event> eventList = _context.Events.Where(x => x.IsActive).Include(e => e.Questions).Include(e => e.Lectures).ToList();
-            List<EventDto> eventListDto = new List<EventDto>();
-            eventListDto = _mapper.Map<List<Domain.Entity.Event>,List<EventDto>>(eventList);
-            return eventListDto;
+            return _context.Events.Where(x => x.IsActive).Include(e => e.Questions).Include(e => e.Lectures).ToList();
         }
 
         public bool AddEvent(AddEventDto dto)

@@ -29,20 +29,13 @@ class AddQuestionForm extends Component {
             authorName: "",
             email: "",
             success: false,
-            eventId: 0,
+            eventId: parseInt(queryString.parse(this.props.location.search).eventId),
             selectedLecture: null
         };
     }
 
-    componentWillMount(){
-        const eventId = parseInt(queryString.parse(this.props.location.search).eventId);
-        this.setState({
-            eventId: eventId
-        });
-    }
-
     componentDidMount() {
-        this.getEventById(BASE_URL+"/event/lecture/GetLecturesByEventId");
+        this.getEventById(BASE_URL+"/lecture/GetLecturesByEventId");
     }
     
     getEventById(url) {

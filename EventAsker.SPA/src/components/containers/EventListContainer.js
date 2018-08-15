@@ -17,7 +17,6 @@ export default class EventListContainer extends Component {
 
   getEvents(url) {
     return axios.get(url).then(response => {
-        console.log(response);
       this.setState({
         events: response.data
       });

@@ -6,7 +6,7 @@ namespace EventAsker.API.Features.Event.Repositories.Interfaces
 {
     public interface IEventRepository
     {
-        List<EventDto> GetEvents();
+        List<Domain.Entity.Event> GetEvents();
         bool AddEvent(AddEventDto dto);
         void DeleteEvent(DeleteEventDto dto);
         bool CheckEventPassword(CheckEventPasswordDto dto);

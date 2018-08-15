@@ -67,6 +67,9 @@ export default class Question extends Component {
                                 <b>Email</b>: {this.props.email}
                             </div>
                             <div>
+                                <b>Temat prelekcji</b>: {this.props.lectureTopic}
+                            </div>
+                            <div>
                                 <b>Treść</b>: {this.props.questionContent}
                             </div>
                         </div>

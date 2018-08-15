@@ -8,6 +8,6 @@ namespace EventAsker.API.Features.Question.ViewModels
         public string QuestionContent { get; set; }
         public string AuthorName { get; set; }
         public string Email { get; set; }
-        public LectureViewModel Lecture { get; set; }
+        public string LectureTopic { get; set; }
     }
 }

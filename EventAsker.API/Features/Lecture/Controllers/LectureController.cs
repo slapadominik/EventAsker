@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations.Operations;
 namespace EventAsker.API.Features.Lecture.Controllers
 {
     [Authorize]
-    [Route("api/event/[controller]")]
+    [Route("api/[controller]")]
     public class LectureController : Controller
     {
         private readonly ILectureService _lecturerService;

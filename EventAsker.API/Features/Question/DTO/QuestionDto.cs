@@ -8,5 +8,6 @@
         public string Email { get; set; }
         public int EventId { get; set; }
         public int LectureId{ get; set; }
+        public string LectureTopic { get; set; }
     }
 }

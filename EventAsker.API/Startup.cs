@@ -2,7 +2,11 @@
 using System.Text;
 using AutoMapper;
 using Elmah.Io.AspNetCore;
+using EventAsker.API.Domain.Converters;
+using EventAsker.API.Domain.Converters.Interfaces;
 using EventAsker.API.Domain.DataAccess;
+using EventAsker.API.Domain.Entity;
+using EventAsker.API.Features.Event.DTO;
 using EventAsker.API.Features.Event.Repositories;
 using EventAsker.API.Features.Event.Repositories.Interfaces;
 using EventAsker.API.Features.Event.Services;
@@ -53,6 +57,7 @@ namespace EventAsker.API
             services.AddTransient<IQuestionService, QuestionService>();
             services.AddTransient<ILectureRepository, LectureRepository>();
             services.AddTransient<ILectureService, LectureService>();
+            services.AddTransient<IConverter<Event, EventDto>, EventConverter>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters{
