@@ -30,7 +30,7 @@ class AddQuestionForm extends Component {
             email: "",
             success: false,
             eventId: 0,
-            selectedLectureId: 0
+            selectedLecture: null
         };
     }
 
@@ -76,7 +76,7 @@ class AddQuestionForm extends Component {
                 AuthorName: this.state.authorName,
                 Email: this.state.email,
                 EventId: this.state.eventId,
-                LectureId: this.state.selectedLectureId
+                LectureId: this.state.selectedLecture.value
             })
                 .then(response => {
                     this.clearInputs();
@@ -166,7 +166,7 @@ class AddQuestionForm extends Component {
     };
 
     handleLectureSelectChange = (selectedLecture) => {
-        this.setState({selectedLectureId: selectedLecture.value})
+        this.setState({selectedLecture: selectedLecture})
     }
 
     render() {
@@ -182,7 +182,7 @@ class AddQuestionForm extends Component {
                     <div className="row">
                         <div className="form-group col-md-10">
                             <Select
-                                value={this.state.selectedLectureId}
+                                value={this.state.selectedLecture}
                                 onChange={this.handleLectureSelectChange}
                                 options={options}/>
                         </div>
