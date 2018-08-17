@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Modal from "react-modal";
 import "../../styles/EventModal.css";
 
@@ -26,8 +26,6 @@ const EventPasswordModal = (props) => {
     );
 
     const afterOpenModal = () => {};
-
-    const showDescription = () => {};
 
     return (
         <div>

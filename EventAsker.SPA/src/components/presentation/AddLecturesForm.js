@@ -15,7 +15,7 @@ class AddLecturesForm extends Component {
             starttime: "",
             endtime: "",
             lecturername: "", 
-            eventId: parseInt(queryString.parse(this.props.location.search).eventId)
+            eventId: parseInt(queryString.parse(this.props.location.search).eventId, 10)
         }],
         eventId: 0
       }
@@ -30,7 +30,7 @@ class AddLecturesForm extends Component {
     }
     
     handleAddLecture = () => {
-        this.setState({ lectures: this.state.lectures.concat([{topic: "", description: "", starttime: "", endtime: "", lecturername: "", eventId: parseInt(queryString.parse(this.props.location.search).eventId)}])})
+        this.setState({ lectures: this.state.lectures.concat([{topic: "", description: "", starttime: "", endtime: "", lecturername: "", eventId: parseInt(queryString.parse(this.props.location.search).eventId, 10)}])})
     }
       
     handleRemoveLecture = (idx) => () => {

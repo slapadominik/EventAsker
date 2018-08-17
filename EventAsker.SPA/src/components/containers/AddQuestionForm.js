@@ -29,7 +29,7 @@ class AddQuestionForm extends Component {
             authorName: "",
             email: "",
             success: false,
-            eventId: parseInt(queryString.parse(this.props.location.search).eventId),
+            eventId: parseInt(queryString.parse(this.props.location.search).eventId, 10),
             selectedLecture: null
         };
     }
