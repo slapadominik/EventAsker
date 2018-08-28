@@ -83,7 +83,9 @@ class Event extends Component {
                 });
             })
             .catch(err => {
-                console.log(err);
+                if (err.response.status===401){
+                    this.context.router.history.push('/unauthorized');
+                }
             });
     };
 
@@ -145,18 +147,18 @@ class Event extends Component {
         const adminButtons = (
             <React.Fragment>
                 <button className="btn btn-warning" onClick={this.toggleQuestions}>
-                    Questions
+                    Pytania
                 </button>
                 <button className="btn btn-warning" onClick={this.onClickAddLecture}>
-                    Add lectures
+                    Dodaj prelekcje
                 </button>
                 <button className="btn btn-warning" onClick={this.onClickEditEvent}>
-                    Edit Event
+                    Edytuj wydarzenie
                 </button>
                 <DeleteModal
                     eventId={this.props.eventId}
                     isOpen={this.state.modal}
-                    onDelete={this.props.onDelete}/>
+                    onDelete={this.props.onDeleteEvent}/>
             </React.Fragment>
         );
 
@@ -190,10 +192,10 @@ class Event extends Component {
                                 <div className="btn-group-vertical" align="right" role="group">
                                     <button className="btn btn-primary" onClick={this.toggle}>
                                         {" "}
-                                        Description
+                                        Opis
                                     </button>
                                     <button className="btn btn-success" onClick={this.openModal}>
-                                        Ask Question
+                                        Zadaj pytanie
                                     </button>
                                     <EventPasswordModal isEnteredPasswordInvalid={this.state.isEnteredPasswordInvalid}  handleChangePassword={this.handleChangePassword} eventName={this.props.eventName} closeModal={this.closeModal} modalIsOpen={this.state.modalIsOpen} handleEventPasswordModalSubmit={this.handleEventPasswordModalSubmit} />
                                     {isAuthenticated

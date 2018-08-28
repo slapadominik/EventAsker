@@ -1,11 +1,13 @@
 using System.Threading.Tasks;
 using EventAsker.API.Features.Question.DTO;
 using EventAsker.API.Features.Question.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventAsker.API.Features.Question.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     public class QuestionController : Controller
     {
         private readonly IQuestionService _serivce;
@@ -13,6 +15,7 @@ namespace EventAsker.API.Features.Question.Controllers
             _serivce = service;
         }
 
+        [AllowAnonymous]
         [HttpPost("AddQuestion")]
         public async Task<IActionResult> AddQuestion([FromBody] AddQuestionDto questionDto){
             if (!ModelState.IsValid)

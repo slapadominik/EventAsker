@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import "../../styles/Errors.css";
+import "../../../styles/Errors.css";
 
-export default class NotFound extends Component {
+export default class Code404 extends Component {
     render() {
         return (
             <div className="errorpage">

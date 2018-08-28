@@ -29,7 +29,7 @@ class Header extends Component {
     const guestLinks = (
       <React.Fragment>
         <li className="nav-item">
-            <Link className="nav-link" to="/adminlogin">Login<span className="sr-only">(current)</span></Link>
+            <Link className="nav-link" to="/adminlogin">Logowanie<span className="sr-only">(current)</span></Link>
         </li>
       </React.Fragment>
     );
@@ -46,10 +46,10 @@ class Header extends Component {
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <Link className="nav-link" to="/">Home<span className="sr-only">(current)</span></Link>
+                <Link className="nav-link" to="/">Strona główna<span className="sr-only">(current)</span></Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/events">Events<span className="sr-only">(current)</span></Link>
+                <Link className="nav-link" to="/events">Wydarzenia<span className="sr-only">(current)</span></Link>
               </li>
               {isAuthenticated ? null : guestLinks}
               {isAuthenticated ? adminLinks : null}

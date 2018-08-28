@@ -8,7 +8,7 @@ export default class Home extends Component {
         <div className="bgimage">
           <div className="container-fluid">
             <div className="hero-text">
-              <h1>Find an event and join it!</h1>
+              <h1>Znajdź wydarzenie i dołącz do niego!</h1>
             </div>
           </div>
         </div>

@@ -2,10 +2,10 @@ import React from "react";
 import "../../styles/Index.css";
 import Event from "./Event";
 
-const EventList = ({events}) => (
+const EventList = ({events, onDeleteEvent}) => (
     <div className="container">
         <div className="events-group">
-            <h2 className="txt-center">Events</h2>
+            <h2 className="txt-center">Wydarzenia</h2>
             {events.map(event => (<Event
                 key={event.eventId}
                 eventId={event.eventId}
@@ -17,7 +17,7 @@ const EventList = ({events}) => (
                 eventTime={event.date.split('T')[1].slice(0, -3)}
                 eventLectures={event.lectures}
                 eventQuestions={event.questions}
-                onDelete={this.deleteEvent}
+                onDeleteEvent={onDeleteEvent}
                 imageFilename={event.imageFilename}/>))}
         </div>
     </div>

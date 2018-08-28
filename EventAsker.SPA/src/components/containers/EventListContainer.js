@@ -27,20 +27,25 @@ export default class EventListContainer extends Component {
     return this.state.events.filter(event => event.eventId !== id);
   };
 
-  deleteEvent = id => {
+  onDeleteEvent = id => {
     return axios
       .delete(BASE_URL + "/Event/DeleteEvent", {
         params: { eventId: id }
       })
       .then(response => {
         this.setState({ events: this.getEventsExceptEventWithSpecifedId(id) });
-      });
+      })
+      .catch(err => {
+        if (err.response.status===401){
+          this.context.router.history.push('/unauthorized');
+        }
+      })
   };
 
   render() {
     return (
       <div>
-         <EventList events={this.state.events}/>
+         <EventList events={this.state.events} onDeleteEvent={this.onDeleteEvent}/>
       </div>
     );
   }

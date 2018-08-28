@@ -10,8 +10,8 @@ import {
 import LoginForm from './components/containers/LoginForm';
 import AddEventForm from './components/presentation/AddEventForm';
 import AddQuestionForm from './components/containers/AddQuestionForm';
-import NotFound from './components/presentation/NotFound';
-import Unauthorized401 from './components/presentation/Unauthorized401';
+import Code404 from './components/presentation/errorCodes/Code404';
+import Code401 from './components/presentation/errorCodes/Code401';
 import Footer from "./components/presentation/Footer";
 import "./styles/Index.css";
 import AddLecturesForm from './components/presentation/AddLecturesForm';
@@ -32,10 +32,10 @@ class App extends Component {
             <Route path="/events" component={EventListContainer} />
             <Route path="/addEvent" component={AddEventForm}/>
             <Route path="/event/addQuestion" component={AddQuestionForm} />  
-            <Route path="/unauthorized" component={Unauthorized401}/>
+            <Route path="/unauthorized" component={Code401}/>
             <Route path="/event/addLectures/" component={AddLecturesForm} />
             <Route path="/event/editEvent/:id" component={EditEventForm}/>
-            <Route path="*" component={NotFound} />         
+            <Route path="*" component={Code404} />         
           </Switch>
           <Footer/>
         </div>
