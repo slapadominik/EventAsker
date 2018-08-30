@@ -75,7 +75,7 @@ namespace EventAsker.API.Features.Event.Repositories
             var eventToEdit = _context.Events.SingleOrDefault(e => e.EventId == dto.EventId);
 
             eventToEdit.Name = dto.Name;
-            eventToEdit.Street = dto.Description;
+            eventToEdit.Street = dto.Street;
             eventToEdit.Date = dto.Date;
             eventToEdit.Description = dto.Description;
             eventToEdit.AudienceKey = dto.AudienceKey;

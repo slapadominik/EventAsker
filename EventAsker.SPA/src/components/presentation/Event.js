@@ -126,7 +126,10 @@ class Event extends Component {
     };
 
     onClickEditEvent = e => {
-        const location = "/event/editEvent/" + this.props.eventId;
+        const location = {
+            pathname: "/event/editEvent",
+            search: '?eventId='+this.props.eventId
+        };
         this
             .context
             .router
@@ -209,21 +212,21 @@ class Event extends Component {
                 <Collapse isOpen={this.state.collapse}>
                     <Card>
                         <CardBody>
-                            <div className="desc">
-                                <h6>Description:
-                                </h6>
+                            <div className="question-collapse">
+                                <h5>Opis:</h5>
                                 <p>{this.props.eventDescription}</p>
                             </div>
-                            <h6>Street:
-                            </h6>
-                            <p>{this.props.eventStreet}</p>
+                            <div className="question-collapse">
+                                <h5>Ulica:</h5>
+                                <p>{this.props.eventStreet}</p>
+                            </div>
                         </CardBody>
                     </Card>
                 </Collapse>
                 <Collapse isOpen={this.state.questionCollapse}>
                     <Card>
                         <CardBody>
-                            <h6>Questions:
+                            <h6>Pytania:
                             </h6>
                             <div className="containter">{this.mapQuestionsToListItems()}</div>
                         </CardBody>

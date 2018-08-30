@@ -34,7 +34,7 @@ class App extends Component {
             <Route path="/event/addQuestion" component={AddQuestionForm} />  
             <Route path="/unauthorized" component={Code401}/>
             <Route path="/event/addLectures/" component={AddLecturesForm} />
-            <Route path="/event/editEvent/:id" component={EditEventForm}/>
+            <Route path="/event/editEvent" component={EditEventForm}/>
             <Route path="*" component={Code404} />         
           </Switch>
           <Footer/>

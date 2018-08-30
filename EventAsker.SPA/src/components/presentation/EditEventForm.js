@@ -8,6 +8,7 @@ import {
   BASE_URL
 } from "../../constants";
 import PropTypes from "prop-types";
+import queryString from 'query-string';
 
 class EditEventForm extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class EditEventForm extends Component {
       success: false,
       nameSuccess: "",
       mainImage: null,
-      eventId: parseInt(this.props.location.pathname.split("/")[2], 10),
+      eventId: parseInt(queryString.parse(this.props.location.search).eventId, 10),
       currentEvent: null,
       lectures: []
     };
@@ -64,6 +65,7 @@ class EditEventForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    console.log(this.state)
     const inputs = document.querySelectorAll("input");
 
     e.preventDefault();

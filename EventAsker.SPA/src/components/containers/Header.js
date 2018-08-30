@@ -16,13 +16,13 @@ class Header extends Component {
     const adminLinks = (
       <React.Fragment>
         <li className="nav-item">
-            <Link className="nav-link" to="/addEvent">Add Event<span className="sr-only">(current)</span></Link>
+            <Link className="nav-link" to="/addEvent">Dodaj wydarzenie<span className="sr-only">(current)</span></Link>
         </li>
         <li className="nav-item">
-            <Link className="nav-link" to="/register">Register<span className="sr-only">(current)</span></Link>
+            <Link className="nav-link" to="/register">Rejestracja<span className="sr-only">(current)</span></Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/" onClick={this.logout}>Logout<span className="sr-only">(current)</span></a>
+          <a className="nav-link" href="/" onClick={this.logout}>Wyloguj<span className="sr-only">(current)</span></a>
         </li>
       </React.Fragment>
     );

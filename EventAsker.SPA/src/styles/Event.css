@@ -1,6 +1,13 @@
-.desc {
+.question-collapse p {
   background-color: beige;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
+
+.question-collapse h5{
+  text-align: center;
+}
+
 .btn-group-justified .btn {
   margin: 0 3px;
 }

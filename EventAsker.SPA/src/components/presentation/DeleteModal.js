@@ -24,7 +24,7 @@ class DeleteModal extends React.Component {
   render() {
     return (
         <button className="btn btn-warning" onClick={this.toggle}>
-          Delete
+          Usuń
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Confirm deletion of the event</ModalHeader>
           <ModalBody>

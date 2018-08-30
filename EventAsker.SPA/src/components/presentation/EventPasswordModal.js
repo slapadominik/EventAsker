@@ -38,7 +38,7 @@ const EventPasswordModal = (props) => {
 
                 <div className="form-group">
                     <h2>{props.eventName}</h2>
-                    <label htmlFor="password">Event password:</label>
+                    <label htmlFor="password">Hasło do wydarzenia:</label>
                     <input
                         className="form-control"
                         type="password"
@@ -48,12 +48,12 @@ const EventPasswordModal = (props) => {
                     <button
                         onClick={props.closeModal}
                         className="btn btn-danger btn-horizontal float-right">
-                        Cancel
+                        Anuluj
                     </button>
                     <button
                         onClick={props.handleEventPasswordModalSubmit}
                         className="btn btn-info btn-horizontal float-right">
-                        Confirm
+                        Potwierdź
                     </button>
                     {props.isEnteredPasswordInvalid
                         ? wrongPasswordText
