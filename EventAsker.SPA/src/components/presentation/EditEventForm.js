@@ -47,7 +47,6 @@ class EditEventForm extends Component {
         currentEvent: response.data,
         lectures: response.data.lectures
       });
-      console.log(this.state.mainImage);
       this.mapCurrentEventToState();
     });
   }

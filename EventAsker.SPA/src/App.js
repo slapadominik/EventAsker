@@ -17,6 +17,7 @@ import "./styles/Index.css";
 import AddLecturesForm from './components/presentation/AddLecturesForm';
 import EditEventForm from './components/presentation/EditEventForm';
 import EventListContainer from './components/containers/EventListContainer';
+import EventDetails from './components/presentation/EventDetails';
 
 class App extends Component {
 
@@ -35,6 +36,7 @@ class App extends Component {
             <Route path="/unauthorized" component={Code401}/>
             <Route path="/event/addLectures/" component={AddLecturesForm} />
             <Route path="/event/editEvent" component={EditEventForm}/>
+            <Route path="/event" component={EventDetails}/>
             <Route path="*" component={Code404} />         
           </Switch>
           <Footer/>

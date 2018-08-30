@@ -47,13 +47,13 @@ namespace EventAsker.API.Features.Event.Controllers
         }
 
         [HttpGet("GetEvent/{id}")]
+        [AllowAnonymous]
         public IActionResult GetEvent(int id)
         {
             var getEvent = _eventService.GetEvent(id);
             var eventViewModel = _mapper.Map<EventDto, EventViewModel>(getEvent);
 
             return Ok(eventViewModel);
-
         }
 
         [HttpPut("EditEvent")]

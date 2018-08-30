@@ -137,6 +137,14 @@ class Event extends Component {
             .push(location);
     };
 
+    onClickEventDetails = e => {
+        const location = {
+            pathname: "/event",
+            search: '?eventId='+this.props.eventId
+        };
+        this.context.router.history.push(location);
+    }
+
     openModal = () => {
         this.setState({modalIsOpen: true});
     };
@@ -195,7 +203,10 @@ class Event extends Component {
                                 <div className="btn-group-vertical" align="right" role="group">
                                     <button className="btn btn-primary" onClick={this.toggle}>
                                         {" "}
-                                        Opis
+                                        Krótki opis
+                                    </button>
+                                    <button className="btn btn-info" onClick={this.onClickEventDetails}>
+                                        Szczegóły
                                     </button>
                                     <button className="btn btn-success" onClick={this.openModal}>
                                         Zadaj pytanie

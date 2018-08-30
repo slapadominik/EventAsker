@@ -4,7 +4,7 @@ import Event from "./Event";
 
 const EventList = ({events, onDeleteEvent}) => (
     <div className="container">
-        <div className="events-group">
+        <div className="page">
             <h2 className="txt-center">Wydarzenia</h2>
             {events.map(event => (<Event
                 key={event.eventId}

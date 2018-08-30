@@ -64,3 +64,12 @@ img{
 .btn-horizontal{
   margin-left: 5px !important;
 }
+
+.photo {
+  max-width: 550px;
+  max-height: 550px;
+}
+
+.container-details {
+  margin-top: 30px;
+}
